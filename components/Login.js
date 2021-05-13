@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { Button, TextInput} from 'react-native-paper';
 
 
-export default function Login() {
+export default function Login({ navigation: { navigate } }) {
     const [email, setEmail] = useState('');
     return (
         <View style={styles.container}>
@@ -37,12 +37,18 @@ export default function Login() {
                 value={email}
                 onChangeText={email => setEmail(email)}
                 style={styles.input}
+                theme={{
+                    colors: {
+                    primary:'#abb4bd', }}}
             />
             <TextInput
                 label="Password"
                 mode="flat"
                 secureTextEntry={true}
                 style={styles.input}
+                theme={{
+                    colors: {
+                    primary:'#abb4bd', }}}
                
 
             />
@@ -55,7 +61,7 @@ export default function Login() {
                 color={'#179de3'} uppercase={false}>
                 <Text style={styles.loginText}>Login</Text>
          </Button>
-            <Button style={styles.register}  color={'#179de3'} uppercase={false}  onPress={()=>props.navigation.replace("signup")}>
+            <Button style={styles.register}  color={'#179de3'} uppercase={false}  onPress={() => navigate('Register')} >
                 Don't have an account? Register Now
             </Button>
 
@@ -68,8 +74,8 @@ const styles = StyleSheet.create({
         paddingTop: 50
     },
     logo: {
-        height: '137px',
-        width: '137px',
+        height: 137,
+        width: 137,
         marginLeft: 'auto',
         marginRight: 'auto',
         marginBottom: 10,
@@ -77,8 +83,8 @@ const styles = StyleSheet.create({
     },
     logoText:{
         marginTop:1,
-        width: '139px',
-        height: '34px',
+        width: 139,
+        height: 34,
         color: '#179de3',
         fontFamily: 'Poppins',
         fontSize: 21,
@@ -93,8 +99,8 @@ const styles = StyleSheet.create({
 
     },
     orText:{
-            width: '14px',
-            height: '20px',
+            width: 14,
+            height: 20,
             color: '#abb4bd',
             fontFamily: 'Poppins',
             fontSize: 15,
@@ -138,15 +144,15 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 7,
         margin: 15,
-        width: '145px',
-        height: '45px',
-        borderRadius: '4px',
+        width: 145,
+        height: 45,
+        borderRadius: 4,
         
     },
     
      socialText:{
-         width: '39px',
-         height: '12px',
+         width: 39,
+         height: 12,
          color: '#1d2029',
          fontFamily: 'Poppins',
          fontSize: 13,
@@ -159,13 +165,13 @@ const styles = StyleSheet.create({
         marginLeft: 'auto',
         marginRight: 'auto',
         marginTop: 18,
-        width: '315px',
-        height: '46px',
-        borderRadius:'4px',
+        width: 315,
+        height: 46,
+        borderRadius:4,
     },
     loginText:{ 
-        width: '37px',
-        height: '21px',
+        width: 37,
+        height: 21,
         color: '#ffffff',
         fontFamily: 'Poppins',
         fontSize: 12,
