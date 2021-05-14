@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
 import { Button, TextInput } from "react-native-paper";
 import MySocialButton from "../components/MySocialButton";
 export default function LoginScreen(props) {
@@ -60,7 +59,9 @@ export default function LoginScreen(props) {
           },
         }}
       />
-      <Button style={styles.forgot} uppercase={false} color={"#179de3"}>
+      <Button style={styles.forgot} uppercase={false} color={"#179de3"}
+      onPress={() => props.navigation.navigate({ routeName: "ForgotPassword" })}
+      >
         Forgot Password?
       </Button>
       <Button

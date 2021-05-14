@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Button, TextInput} from 'react-native-paper';
 
-export default function RegisterScreen() {
+export default function RegisterScreen(props) {
         const [email, setEmail] = useState('');
     const hasErrors = () => {
         return !email.includes('@');
@@ -64,7 +64,7 @@ export default function RegisterScreen() {
             <Button
                 mode="contained"
                 style={styles.register}
-                color={'#179de3'} uppercase={false} onPress={() => {}}>
+                color={'#179de3'} uppercase={false} onPress={() => props.navigation.navigate({ routeName: "OTPVerify" })}>
                 Register
             </Button>
             <Text></Text>
@@ -75,6 +75,16 @@ export default function RegisterScreen() {
         </View>
     )
 }
+
+RegisterScreen.navigationOptions = (navOpt) => {
+    return {
+      headerTitle: "Register",
+      headeStyle: {
+        textAlign: "center",
+      },
+      headerTitleAlign: "center",
+    };
+  };
 
 
 

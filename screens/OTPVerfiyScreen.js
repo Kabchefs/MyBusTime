@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
 
 import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell, } from 'react-native-confirmation-code-field';
@@ -9,7 +9,7 @@ import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell, } from 'react
 const CELL_COUNT = 4;
 
 
-export default function OTPVerify() {
+export default function OTPVerifyScreen() {
     const [value, setValue] = useState('');
     const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
     const [props, getCellOnLayoutHandler] = useClearByFocusCell({
