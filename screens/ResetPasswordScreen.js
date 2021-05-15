@@ -5,7 +5,7 @@ import { Button, TextInput} from 'react-native-paper';
 
 
 
-export default function ResetPassword() {
+export default function ResetPasswordScreen() {
     const [email, setEmail] = useState('');
     return (
         <View style={styles.container}>
@@ -34,8 +34,10 @@ export default function ResetPassword() {
             <Button
                 mode="contained"
                 style={styles.button}
-                color={'#179de3'} uppercase={false} onPress={() => navigate('Check Email')}>
-                Update
+                color={'#179de3'} uppercase={false}
+                disabled={true}
+                >
+               <Text style={{color: '#ffffff',fontFamily:'Poppins-Medium'}}> Update</Text>
             </Button>
            
         
@@ -45,7 +47,7 @@ export default function ResetPassword() {
     );
 }
 
-ResetPassword.navigationOptions = (navOpt) => {
+ResetPasswordScreen.navigationOptions = (navOpt) => {
     return {
       headerTitle: "Reset Password",
       headeStyle: {
@@ -70,7 +72,7 @@ const styles = StyleSheet.create({
     },
     detailText:{
         fontSize:14,
-        fontFamily:"Poppins-Regular",
+        fontFamily:"Poppins",
         fontWeight:'400',
         color:'#abb4bd',
         marginTop:20,
@@ -79,13 +81,10 @@ const styles = StyleSheet.create({
   
    
     input: {
-        marginLeft: 25,
-        marginRight: 25,
-        marginTop: 30,
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 18,
         backgroundColor: 'transparent',
-        width: 315, 
-        fontSize:12,
-        fontFamily:'Poppins-Regular',
     },
     
     button: {

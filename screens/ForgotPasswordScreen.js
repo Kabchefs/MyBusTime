@@ -10,10 +10,10 @@ export default function ForgotPasswordScreen(props) {
     return (
         <View style={styles.container}>
             <Text style={styles.headText}>Forgot Password</Text>         
-            <Text style={styles.detailText}>{`Please enter your registered email or mobile\n to reset your password`}</Text>
+            <Text style={styles.detailText}>{`Please enter your registered email \n to reset your password`}</Text>
 
             <TextInput
-                label="Email / Mobile Number"
+                label="Email"
                 mode="flat"               
                 style={styles.input}
                 theme={{
@@ -25,9 +25,9 @@ export default function ForgotPasswordScreen(props) {
                 mode="contained"
                 style={styles.button}
                 color={'#179de3'} uppercase={false}
-                onPress={() => props.navigation.navigate({ routeName: "CheckMail" })
-                }>
-                Recover Password
+                onPress={() => props.navigation.navigate({ routeName: "CheckMail" })}
+                >
+               <Text style={{ color: '#ffffff'}}>Recover Password </Text>
             </Button>
             <Image
                 style={styles.image}
