@@ -10,7 +10,7 @@ export default function ResetPasswordScreen() {
     return (
         <View style={styles.container}>
             <Text style={styles.headText}>Reset Password</Text>         
-            <Text style={styles.detailText}>{`Please enter your the new password and confirm\n the password`}</Text>
+            <Text style={styles.detailText}>Please enter your the new password and confirm the password</Text>
 
             <TextInput
                 label="New Password"
@@ -33,11 +33,11 @@ export default function ResetPasswordScreen() {
             />
             <Button
                 mode="contained"
-                style={styles.button}
+                style={styles.updateButton}
                 color={'#179de3'} uppercase={false}
-                disabled={true}
+                
                 >
-               <Text style={{color: '#ffffff',fontFamily:'Poppins-Medium'}}> Update</Text>
+               <Text style={{color: '#ffffff'}}> Update</Text>
             </Button>
            
         
@@ -59,14 +59,15 @@ ResetPasswordScreen.navigationOptions = (navOpt) => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 50
+        paddingTop: 10,
     },
     headText:{
         color:'#1d2029',
-        fontFamily:'Poppins-Bold',
+        fontFamily:'Poppins',
         fontSize:24,
         marginLeft:30,
-        marginTop:30,
+        fontWeight:'400',
+
    
 
     },
@@ -76,20 +77,22 @@ const styles = StyleSheet.create({
         fontWeight:'400',
         color:'#abb4bd',
         marginTop:20,
-        marginLeft:30,       
+        marginLeft:30,  
+        lineHeight:19,     
     },
   
    
     input: {
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 18,
+        alignSelf:'center',
+        marginTop: 20,
         backgroundColor: 'transparent',
+        width: 315, 
+        fontSize:14,
+        fontFamily:'Poppins',
     },
     
-    button: {
-        marginLeft: 'auto',
-        marginRight: 'auto',
+    updateButton: {
+        alignSelf:'center',
         marginTop: 60,
         width: 315,
         height: 55,
@@ -98,6 +101,11 @@ const styles = StyleSheet.create({
         fontSize: 14,
         justifyContent:'center',
         textAlign:'center',
+        shadowColor: 'rgba(255, 22, 84, 0.25)',
+        shadowOpacity: 0.8,
+        elevation: 6,
+        shadowRadius: 15 ,
+        shadowOffset : { width: 1, height: 13},
     },
    
     

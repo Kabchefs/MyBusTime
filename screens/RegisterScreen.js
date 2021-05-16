@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View,ScrollView } from 'react-native';
 import { Button, TextInput} from 'react-native-paper';
 
 export default function RegisterScreen(props) {
@@ -8,7 +8,7 @@ export default function RegisterScreen(props) {
         return !email.includes('@');
       };
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.headText}>Register to MBT</Text>         
 
             <TextInput
@@ -63,16 +63,11 @@ export default function RegisterScreen(props) {
         
             <Button
                 mode="contained"
-                style={styles.register}
+                style={styles.registerButton}
                 color={'#179de3'} uppercase={false} onPress={() => props.navigation.navigate({ routeName: "OTPVerify" })}>
-                Register
+                <Text style={{color: '#ffffff'}}>Register</Text>
             </Button>
-            <Text></Text>
-
-        
-            
-
-        </View>
+            </ScrollView>
     )
 }
 
@@ -95,10 +90,10 @@ const styles = StyleSheet.create({
     },
     headText:{
         color:'#1d2029',
-        fontFamily:'Poppins-Bold',
-        fontSize:22,
-        fontWeight:'bold',
+        fontSize:24,
+        fontWeight:'400',
         marginLeft:30,
+        fontFamily:'Poppins',
     },
   
     button: {
@@ -107,20 +102,28 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap'
     },
     input: {
-        marginLeft: 25,
-        marginRight: 25,
+        alignSelf:'center',
         marginTop: 10,
         backgroundColor: 'transparent',
-        width: 315,
+        width: 315, 
+        fontSize:14,
+        fontFamily:'Poppins',
     },
-    register: {
-        marginLeft: 'auto',
-        marginRight: 'auto',
+    registerButton: {
+        alignSelf:'center',
         marginTop: 30,
+        marginBottom:30,
         width: 315,
-        height: 46,
+        height: 55,
         borderRadius:5,
+        fontFamily: 'Poppins-Medium',
+        fontSize: 14,
+        justifyContent:'center',
         textAlign:'center',
-        fontFamily:'Poppins'
+        shadowColor: 'rgba(255, 22, 84, 0.25)',
+        shadowOpacity: 0.8,
+        elevation: 6,
+        shadowRadius: 15 ,
+        shadowOffset : { width: 1, height: 13},
     }
 });

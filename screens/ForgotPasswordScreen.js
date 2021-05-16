@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image,ScrollView} from 'react-native';
 import { Button, TextInput} from 'react-native-paper';
 
 
@@ -27,7 +27,7 @@ export default function ForgotPasswordScreen(props) {
                 color={'#179de3'} uppercase={false}
                 onPress={() => props.navigation.navigate({ routeName: "CheckMail" })}
                 >
-               <Text style={{ color: '#ffffff'}}>Recover Password </Text>
+               <Text style={{color: '#ffffff'}}>Recover Password </Text>
             </Button>
             <Image
                 style={styles.image}
@@ -46,9 +46,11 @@ export default function ForgotPasswordScreen(props) {
 
 ForgotPasswordScreen.navigationOptions = (navOpt) => {
     return {
+
       headerTitle: "Forgot Password",
       headeStyle: {
         textAlign: "center",
+        
       },
       headerTitleAlign: "center",
     };
@@ -56,40 +58,44 @@ ForgotPasswordScreen.navigationOptions = (navOpt) => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 50
+        flex:1,
+        paddingTop:10,
     },
     headText:{
         color:'#1d2029',
-        fontFamily:'Poppins-Bold',
+        fontFamily:'Poppins',
         fontSize:24,
         marginLeft:30,
-        marginTop:30,
+        fontWeight:'400',
+
    
 
     },
     detailText:{
         fontSize:14,
-        fontFamily:"Poppins-Regular",
+        fontFamily:"Poppins",
         fontWeight:'400',
         color:'#abb4bd',
-        marginTop:20,
-        marginLeft:30,       
+        marginTop:10,
+        marginLeft:30,  
+        lineHeight:19,     
     },
   
    
     input: {
-        marginLeft: 25,
-        marginRight: 25,
+       // marginLeft: 25,
+        //marginRight: 25,
+        alignSelf:'center',
         marginTop: 30,
         backgroundColor: 'transparent',
         width: 315, 
-        fontSize:12,
-        fontFamily:'Poppins-Regular',
+        fontSize:14,
+        fontFamily:'Poppins',
+        
     },
     
     button: {
-        marginLeft: 'auto',
-        marginRight: 'auto',
+        alignSelf:'center',
         marginTop: 60,
         width: 315,
         height: 55,
@@ -98,6 +104,13 @@ const styles = StyleSheet.create({
         fontSize: 14,
         justifyContent:'center',
         textAlign:'center',
+        shadowColor: 'rgba(255, 22, 84, 0.25)',
+        shadowOpacity: 0.8,
+        elevation: 6,
+        shadowRadius: 15 ,
+        shadowOffset : { width: 1, height: 13},
+    
+        
     },
    
     image:{
@@ -105,21 +118,18 @@ const styles = StyleSheet.create({
         width: 150,
         marginLeft: 'auto',
         marginRight: 'auto',
-        marginTop:50,
-
     },
     imageText:{
         marginTop:-30,
         width: 139,
         height: 34,
         color: '#179de3',
-        fontFamily: 'Poppins-SemiBold',
+        fontFamily: "Montserrat-Regular",
         fontSize: 22,
-        fontWeight: '400',
-        lineHeight: 29,
         textAlign: 'center',
         marginLeft:'auto',
         marginRight:'auto',
+        
     }
 
 });

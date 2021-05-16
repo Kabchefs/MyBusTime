@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, Image } from "react-native";
+import { View, StyleSheet, Text, Image, ScrollView } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import MySocialButton from "../components/MySocialButton";
+import { SocialIcon } from 'react-native-elements';
 export default function LoginScreen(props) {
   const [email, setEmail] = useState("");
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.image}>
         <Image
           style={styles.logo}
@@ -15,8 +16,24 @@ export default function LoginScreen(props) {
       <View style={styles.logoView}>
         <Text style={styles.logoText}>MyBusTime</Text>
       </View>
-      <View style={styles.button}>
-        <MySocialButton
+      <View style={styles.socialButton}>
+      <SocialIcon
+        title="Facebook"
+        button
+        light
+        type='facebook'
+        style={styles.socialBt}
+      />
+      
+      <SocialIcon
+        title="Google"
+        button
+        light
+        type='google'
+        style={styles.socialBt}
+      />
+
+        {/* <MySocialButton
           name="facebook"
           backgroundColor="#3b5998"
           mode="outlined"
@@ -30,7 +47,7 @@ export default function LoginScreen(props) {
           mode="outlined"
           title="Google"
           onPress={() => console.log("gl")}
-        />
+        /> */}
       </View>
       <View style={styles.orView}>
         <Text style={styles.orText}>or</Text>
@@ -59,37 +76,35 @@ export default function LoginScreen(props) {
           },
         }}
       />
-      <Button style={styles.forgot} uppercase={false} color={"#179de3"}
-      onPress={() => props.navigation.navigate({ routeName: "ForgotPassword" })}
+      <Text style={styles.forgot} uppercase={false}
+        onPress={() => props.navigation.navigate({ routeName: "ForgotPassword" })}
       >
         Forgot Password?
-      </Button>
+      </Text>
       <Button
         mode="contained"
-        style={styles.login}
+        style={styles.loginButton}
         color={"#179de3"}
         uppercase={false}
-        disabled={true}
+      //  disabled={true} 
       >
-        Login
+        <Text style={{ color: '#ffffff' }}>Login</Text>
       </Button>
       <Text
         style={styles.register}
-        color={"#179de3"}
         uppercase={false}
         onPress={() => props.navigation.navigate({ routeName: "Register" })}
       >
-        Don't have an account?{" "}
-        <View style={styles.registerNow}>
-          <Text style={{ color: "#179de3" }}>Register Now</Text>
-        </View>
+        Don't have an account?{" "}Register Now
       </Text>
-    </View>
+    </ScrollView>
   );
 }
 
 LoginScreen.navigationOptions = (navOpt) => {
+
   return {
+    headerShown: false,
     headerTitle: "My Bus Time",
     headeStyle: {
       textAlign: "center",
@@ -100,7 +115,8 @@ LoginScreen.navigationOptions = (navOpt) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
+    flex: 1,
+    paddingTop:10,
   },
   logo: {
     height: 137,
@@ -109,11 +125,12 @@ const styles = StyleSheet.create({
     marginRight: "auto",
   },
   logoText: {
+    marginTop: -60,
     width: 139,
     height: 34,
     color: "#179de3",
-    fontFamily: "Poppins",
-    fontSize: 21,
+    fontFamily: "Montserrat-Regular",
+    fontSize: 22,
     textAlign: "center",
   },
   image: {
@@ -134,39 +151,51 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   forgot: {
-    marginTop: 10,
-    marginLeft: 150,
+    marginTop: 20,
+    marginLeft: 200,
     fontFamily: "Poppins",
-    fontSize: 10,
+    fontSize: 12,
+    color: "#179de3",
     fontWeight: "400",
-    lineHeight: 2,
   },
   register: {
-    marginTop: 10,
-    marginTop: 12,
+    marginTop: 25,
+    marginBottom: 30,
     textAlign: "center",
-    fontSize: 14,
+    fontSize: 12,
     color: "#179de3",
     fontFamily: "Poppins",
     fontWeight: "400",
-    justifyContent: "space-evenly",
   },
   registerNow: {
     fontFamily: "Poppins",
     fontSize: 14,
     fontWeight: "400",
-    marginTop: 12,
-    paddingTop: 10,
+    marginTop: 15,
+    paddingTop: 20,
   },
-  button: {
+  socialButton: {
     flexDirection: "row",
-    justifyContent: "space-around",
+  },
+  socialBt:{
+    fontFamily:"Poppins",
+    color:'#1d2029',
+    flex: 1,
+    padding: 7,
+    margin: 15,
+    width: 100,
+    height: 45,
+    borderRadius: 5,
+
+
   },
   input: {
-    marginLeft: 18,
-    marginRight: 18,
-    marginTop: 18,
-    backgroundColor: "transparent",
+    alignSelf: 'center',
+    marginTop: 10,
+    backgroundColor: 'transparent',
+    width: 315,
+    fontSize: 14,
+    fontFamily: 'Poppins',
   },
   socialText: {
     width: 39,
@@ -178,13 +207,22 @@ const styles = StyleSheet.create({
     lineHeight: 2,
   },
 
-  login: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: 18,
+  loginButton: {
+    alignSelf: 'center',
+    marginTop: 23,
     width: 315,
-    height: 46,
-    borderRadius: 4,
+    height: 55,
+    borderRadius: 5,
+    fontFamily: 'Poppins-Medium',
+    fontSize: 14,
+    justifyContent: 'center',
+    textAlign: 'center',
+    shadowColor: 'rgba(255, 22, 84, 0.25)',
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 15,
+    shadowOffset: { width: 1, height: 13 },
+
   },
   loginText: {
     marginLeft: "auto",
