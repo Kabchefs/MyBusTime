@@ -25,7 +25,7 @@ export default function ForgotPasswordScreen(props) {
                 mode="contained"
                 style={styles.button}
                 color={'#179de3'} uppercase={false}
-                onPress={() => props.navigation.navigate({ routeName: "CheckMail" })}
+                onPress={() => props.navigation.navigate({ routeName: "OTPVerify" })}
                 >
                <Text style={{color: '#ffffff'}}>Recover Password </Text>
             </Button>
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         paddingTop:10,
+        backgroundColor:'#ffffff'
     },
     headText:{
         color:'#1d2029',
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
         width: 139,
         height: 34,
         color: '#179de3',
-        fontFamily: "Montserrat-Regular",
+        fontFamily: "Montserrat-SemiBold",
         fontSize: 22,
         textAlign: 'center',
         marginLeft:'auto',

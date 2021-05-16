@@ -64,7 +64,7 @@ export default function RegisterScreen(props) {
             <Button
                 mode="contained"
                 style={styles.registerButton}
-                color={'#179de3'} uppercase={false} onPress={() => props.navigation.navigate({ routeName: "OTPVerify" })}>
+                color={'#179de3'} uppercase={false} onPress={() => props.navigation.navigate({ routeName: "CheckMail" })}>
                 <Text style={{color: '#ffffff'}}>Register</Text>
             </Button>
             </ScrollView>
@@ -86,7 +86,8 @@ RegisterScreen.navigationOptions = (navOpt) => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 10
+        paddingTop: 10,
+        backgroundColor:'#ffffff'
     },
     headText:{
         color:'#1d2029',

@@ -60,6 +60,7 @@ ResetPasswordScreen.navigationOptions = (navOpt) => {
 const styles = StyleSheet.create({
     container: {
         paddingTop: 10,
+        backgroundColor:'#ffffff'
     },
     headText:{
         color:'#1d2029',

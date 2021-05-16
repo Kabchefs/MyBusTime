@@ -33,21 +33,6 @@ export default function LoginScreen(props) {
         style={styles.socialBt}
       />
 
-        {/* <MySocialButton
-          name="facebook"
-          backgroundColor="#3b5998"
-          mode="outlined"
-          title="Facebook"
-          onPress={() => console.log("fb")}
-        />
-
-        <MySocialButton
-          name="google"
-          backgroundColor="#1d2029"
-          mode="outlined"
-          title="Google"
-          onPress={() => console.log("gl")}
-        /> */}
       </View>
       <View style={styles.orView}>
         <Text style={styles.orText}>or</Text>
@@ -86,7 +71,6 @@ export default function LoginScreen(props) {
         style={styles.loginButton}
         color={"#179de3"}
         uppercase={false}
-      //  disabled={true} 
       >
         <Text style={{ color: '#ffffff' }}>Login</Text>
       </Button>
@@ -117,6 +101,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop:10,
+    backgroundColor:'#ffffff'
   },
   logo: {
     height: 137,
@@ -129,7 +114,7 @@ const styles = StyleSheet.create({
     width: 139,
     height: 34,
     color: "#179de3",
-    fontFamily: "Montserrat-Regular",
+    fontFamily: "Montserrat-SemiBold",
     fontSize: 22,
     textAlign: "center",
   },
@@ -179,9 +164,7 @@ const styles = StyleSheet.create({
   },
   socialBt:{
     fontFamily:"Poppins",
-    color:'#1d2029',
     flex: 1,
-    padding: 7,
     margin: 15,
     width: 100,
     height: 45,

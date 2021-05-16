@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View,ScrollView} from 'react-native';
 import { Button } from 'react-native-paper';
 
 import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell, } from 'react-native-confirmation-code-field';
@@ -17,7 +17,7 @@ export default function OTPVerifyScreen() {
         setValue,
     });
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.headText}>{`Enter 4 digit code sent\n to you at 9878437467`}</Text>
             <CodeField
                 ref={ref}
@@ -49,20 +49,21 @@ export default function OTPVerifyScreen() {
             </Button>
             <Text style={styles.verifyTxt}>Didn't recieve a verification code</Text>
             <View style={styles.buttonView}> 
-            <Button style={{ marginTop:10,flex:1,marginLeft:30,marginRight:-70,fontFamily:'Poppins'}}  color={'#179de3'} uppercase={false}   >
-               Resend Code | {"   "}
+            <Button style={{ marginTop:10,flex:1,marginLeft:30,marginRight:-65,fontFamily:'Poppins'}}  color={'#179de3'} uppercase={false}   >
+               Resend Code{` |`}
             </Button>
-            <Button style={{ marginTop:10,flex:1,marginRight:50,fontFamily:'Poppins'}}  color={'#179de3'} uppercase={false}  >
+            <Button style={{ marginTop:10,flex:1,marginRight:40,fontFamily:'Poppins'}}  color={'#179de3'} uppercase={false}  >
                Change Number
             </Button>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 50
+        paddingTop: 10,
+        backgroundColor:'#ffffff'
     },
     headText: {
         color: '#1d2029',

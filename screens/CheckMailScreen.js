@@ -16,7 +16,7 @@ export default function CheckMailScreen(props) {
                 }
             />
             <Text style={styles.headText}>Check Your Email</Text> 
-            <Text style={styles.detailText}>{`We have sent you a reset password link\n on your registered email address.`}</Text>        
+            <Text style={styles.detailText}>{`We have sent you a verify link\n on your registered email address.`}</Text>        
 
             <Button
                 mode="contained"
@@ -34,6 +34,7 @@ export default function CheckMailScreen(props) {
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor:'#ffffff'
       
     },
     headText:{
