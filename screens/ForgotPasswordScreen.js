@@ -13,7 +13,7 @@ export default function ForgotPasswordScreen(props) {
             <Text style={styles.detailText}>{`Please enter your registered email \n to reset your password`}</Text>
 
             <TextInput
-                label="Email"
+                label="Email / Mobile Number"
                 mode="flat"               
                 style={styles.input}
                 theme={{
