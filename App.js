@@ -7,6 +7,7 @@ import LoginScreen from './screens/LoginScreen';
 import MbtNavigator from './navigation/MbtNavigator';
 
 const fetchFonts=()=>{
+  console.ignoredYellowBox = ['Warning:'];
   return Font.loadAsync({
      'Poppins':require('./assets/fonts/Poppins-Regular.ttf'),
      'Poppins-Bold':require('./assets/fonts/Poppins-Bold.ttf'),

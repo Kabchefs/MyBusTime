@@ -1,8 +1,7 @@
 
 import React from 'react';
-import { StyleSheet, Text, View, Image,ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image,ScrollView,Linking } from 'react-native';
 import { Button} from 'react-native-paper';
-
 
 
 export default function CheckMailScreen(props) {
@@ -22,7 +21,7 @@ export default function CheckMailScreen(props) {
                 mode="contained"
                 style={styles.button}
                 color={'#179de3'} uppercase={false} 
-                onPress={() => props.navigation.navigate({ routeName: "ResetPassword" })}
+                onPress={()=>Linking.openURL('https://mail.google.com/mail/')}
                 >
             <Text style={{color: '#ffffff'}}>Go to Email</Text>
             
@@ -32,6 +31,11 @@ export default function CheckMailScreen(props) {
     );
 }
 
+CheckMailScreen.navigationOptions={
+    headerTitleStyle:{
+        display:'none'
+      }
+}
 const styles = StyleSheet.create({
     container: {
         backgroundColor:'#ffffff'

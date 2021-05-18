@@ -1,27 +1,58 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View,ScrollView} from 'react-native';
+import { StyleSheet, Text, View,ScrollView,ToastAndroid} from 'react-native';
 import { Button } from 'react-native-paper';
 
 import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell, } from 'react-native-confirmation-code-field';
+import { instance } from '../utils/axiosConfig';
 
 
 const CELL_COUNT = 4;
 
 
-export default function OTPVerifyScreen() {
+export default function OTPVerifyScreen(props) {
     const [value, setValue] = useState('');
     const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
-    const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+    const [propss, getCellOnLayoutHandler] = useClearByFocusCell({
         value,
         setValue,
     });
+    const Verify=()=>{
+        console.log(value);
+        let obj=props.navigation.getParam('data');
+        console.log(obj);
+        if(value){
+            obj.otp=value;
+           instance.post('users/otp',obj).then(res=>{
+               if(res.status==200){
+                   if(res.data.result==true){
+                       props.navigation.navigate({routeName:'ResetPassword',params:{'data':res.data.user}})
+                   }
+                   console.log(res.data)
+               }else{
+                ToastAndroid.show(res.data.message, ToastAndroid.LONG);
+               }
+           })
+        }
+        
+    }
+
+    const resendOtp=()=>{
+        let obj=props.navigation.getParam('data');
+        instance.get('/users/reset',{params:obj}).then(res=>{
+            if(res.status==200){
+                ToastAndroid.show('Otp resent! Check Mail', ToastAndroid.LONG);
+            }else if(res.status==201){
+                ToastAndroid.show(res.data.message, ToastAndroid.LONG);
+            }
+        }) 
+    }
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.headText}>{`Enter 4 digit code sent\n to you at 9878437467`}</Text>
+            <Text style={styles.headText}>{`Enter 4 digit code sent\n to you at mail`}</Text>
             <CodeField
                 ref={ref}
-                {...props}
+                {...propss}
                 value={value}
                 onChangeText={setValue}
                 cellCount={CELL_COUNT}
@@ -44,12 +75,13 @@ export default function OTPVerifyScreen() {
             <Button
                 mode="contained"
                 style={styles.verifyButton}
+                onPress={Verify}
                 color={'#179de3'} uppercase={false}>
                 <Text style={{color: '#ffffff'}}>Verify</Text>
             </Button>
             <Text style={styles.verifyTxt}>Didn't recieve a verification code</Text>
             <View style={styles.buttonView}> 
-            <Button style={{ marginTop:10,flex:1,marginLeft:30,marginRight:-65,fontFamily:'Poppins'}}  color={'#179de3'} uppercase={false}   >
+            <Button style={{ marginTop:10,flex:1,marginLeft:30,marginRight:-65,fontFamily:'Poppins'}} onPress={resendOtp}  color={'#179de3'} uppercase={false}   >
                Resend Code{` |`}
             </Button>
             <Button style={{ marginTop:10,flex:1,marginRight:40,fontFamily:'Poppins'}}  color={'#179de3'} uppercase={false}  >

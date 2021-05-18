@@ -8,6 +8,7 @@ import OTPVerifyScreen from '../screens/OTPVerfiyScreen';
 import CheckMailScreen from '../screens/CheckMailScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
+import HomeScreen from '../screens/HomeScreen';
 
 const MbtNavigator=createStackNavigator({
     Login:LoginScreen,
@@ -15,8 +16,9 @@ const MbtNavigator=createStackNavigator({
     OTPVerify:OTPVerifyScreen,
     CheckMail:CheckMailScreen,
     ForgotPassword:ForgotPasswordScreen,
-    ResetPassword:ResetPasswordScreen
-
+    ResetPassword:ResetPasswordScreen,
+    Home:HomeScreen
 })
+
 
 export default createAppContainer(MbtNavigator);

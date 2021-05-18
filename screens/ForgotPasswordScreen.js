@@ -1,12 +1,33 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image,ScrollView} from 'react-native';
+import { StyleSheet, Text, View, Image,ScrollView,ToastAndroid} from 'react-native';
 import { Button, TextInput} from 'react-native-paper';
+import { instance } from '../utils/axiosConfig';
 
 
 
 export default function ForgotPasswordScreen(props) {
-    const [email, setEmail] = useState('');
+    const [input, setInput] = useState('');
+    
+
+    const handleInput=(e)=>{
+        let obj={};
+        const re =
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(re.test(input)){
+            obj.email=input;
+        }else if(input.length ==10){
+            obj.phone=input
+        }
+        instance.get('/users/reset',{params:obj}).then(res=>{
+            if(res.status==200){
+                props.navigation.navigate({routeName:'OTPVerify',params:{'data':obj}})
+            }else if(res.status==201){
+                ToastAndroid.show(res.data.message, ToastAndroid.LONG);
+            }
+        })
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.headText}>Forgot Password</Text>         
@@ -16,6 +37,7 @@ export default function ForgotPasswordScreen(props) {
                 label="Email / Mobile Number"
                 mode="flat"               
                 style={styles.input}
+                onChangeText={setInput}
                 theme={{
                     colors: {
                     primary:'#abb4bd', }}}
@@ -25,7 +47,7 @@ export default function ForgotPasswordScreen(props) {
                 mode="contained"
                 style={styles.button}
                 color={'#179de3'} uppercase={false}
-                onPress={() => props.navigation.navigate({ routeName: "OTPVerify" })}
+                onPress={handleInput}
                 >
                <Text style={{color: '#ffffff'}}>Recover Password </Text>
             </Button>
@@ -45,6 +67,7 @@ export default function ForgotPasswordScreen(props) {
 }
 
 ForgotPasswordScreen.navigationOptions = (navOpt) => {
+    
     return {
 
       headerTitle: "Forgot Password",
@@ -53,6 +76,9 @@ ForgotPasswordScreen.navigationOptions = (navOpt) => {
         
       },
       headerTitleAlign: "center",
+      headerTitleStyle:{
+        display:'none'
+      }
     };
   };
 
