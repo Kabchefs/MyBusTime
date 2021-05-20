@@ -41,9 +41,22 @@ export default function LoginScreen(props) {
       });
 
       if (result.type === 'success') {
-        console.log(result)
+        console.log(result.user);
+        let data={
+          email:result.user.email,
+          name:result.user.name,
+          photo:result.user.photoUrl,
+          googleId:result.user.id,
+          via:'google'
+        }
+        let a=await instance.get('/users',{params:{gid:result.user.id}});
+        console.log("a is",a);
+        props.navigation.navigate({ routeName: "Register",params:{
+          data:data
+        } });
         return result.accessToken;
       } else {
+        ToastAndroid.show('Something Went Wrong! Try Again...', ToastAndroid.LONG);
         return { cancelled: true };
       }
     } catch (e) {
@@ -71,6 +84,15 @@ Facebook.initializeAsync({
           .then(response => response.json())
           .then(data => {
             console.log(data);
+            let user={
+              name:data.name,
+              facebookId:data.id,
+              photo:data.picture.data.url,
+              via:'facebook'
+            }
+            props.navigation.navigate({ routeName: "Register",params:{
+              data:user
+            } });
           })
           .catch(e => console.log(e))
       } else {

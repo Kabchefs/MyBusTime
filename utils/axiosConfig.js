@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 export const instance = axios.create({
-    baseURL: 'http://c76e55b028fc.ngrok.io/',
+    baseURL: 'https://mybustime.herokuapp.com/',
   //  timeout: 4000,  https://hubx2.herokuapp.com/
   //  method: 'POST',
 //  headers: {'reqcomingfrom': 'web','Content-Type': 'application/json','lang':'en','accept':'json'}//,'apikey':'ABCD123'}  'Content-Type': 'application/json',  method: 'POST',

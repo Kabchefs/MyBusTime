@@ -11,15 +11,17 @@ export default function RegisterScreen(props) {
   const [password, setPassword] = useState("");
   const [cpassword, setcPassword] = useState("");
 
+  const user=props.navigation.getParam('data');
+
   const hasErrors = () => {
     const re =
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!name) {
+    if (!user.name && !name) {
       Alert.alert("Invalid Input!", "Name must not be empty", [
         { text: "Okay", style: "destructive" },
       ]);
       return false;
-    } else if (!re.test(email)) {
+    } else if (!user.email &&!re.test(email)) {
       Alert.alert("Invalid Input!", "Plase enter valid email", [
         { text: "Okay", style: "destructive" },
       ]);
@@ -29,14 +31,14 @@ export default function RegisterScreen(props) {
         { text: "Okay", style: "destructive" },
       ]);
       return false;
-    } else if (cpassword != password) {
+    } else if (!user && (cpassword != password)) {
       Alert.alert(
         "Invalid Input!",
         "Password and Confirm password must be same!",
         [{ text: "Okay", style: "destructive" }]
       );
       return false;
-    } else if (cpassword == "" || password == "") {
+    } else if (!user && (cpassword == "" || password == "")) {
       Alert.alert("Invalid Input!", "Password can't be empty!", [
         { text: "Okay", style: "destructive" },
       ]);
@@ -48,22 +50,38 @@ export default function RegisterScreen(props) {
 
   const register = () => {
     if (hasErrors()) {
-        let obj={
+      let obj={};
+      if(!user){
+         obj={
             name:name,
             email:email,
             phone:phone,
             password:password
         }
-        console.log("I am here!")
+      }else{
+        obj={
+          name:user.name,
+          email:user.email || email,
+          phone:phone,
+          image:user.photo,
+          googleId:user.googleId,
+          fbid:user.facebookId,
+          status:true,
+          via:user.via
+        }
+      }
+        console.log("I am here!",obj)
         instance.post('users/signup',obj).then(res=>{
-            console.log(res);
+            console.log(res.data);
             if(res.status==200){
                 ToastAndroid.show("Signup Success !", ToastAndroid.SHORT);
+                if(res.data.social){
+                  props.navigation.navigate({ routeName: "Home" });
+                }else{
                 props.navigation.navigate({ routeName: "CheckMail" });
+                }
             }else{
-                Alert.alert("Oops!", "Something Went wrong! Try Again...", [
-                    { text: "Okay", style: "destructive" },
-                  ]);
+              ToastAndroid.show(res.data.message, ToastAndroid.LONG);
             }
         })
       
@@ -79,6 +97,8 @@ export default function RegisterScreen(props) {
         mode="flat"
         onChangeText={(email) => setName(email)}
         style={styles.input}
+        value={user?.name}
+        disabled={user?.name}
         theme={{
           colors: {
             primary: "#abb4bd",
@@ -90,7 +110,9 @@ export default function RegisterScreen(props) {
         mode="flat"
         keyboardType="email-address"
         style={styles.input}
-        value={email}
+        
+        value={user?.email}
+        disabled={user?.email}
         onChangeText={(email) => setEmail(email)}
         theme={{
           colors: {
@@ -111,9 +133,10 @@ export default function RegisterScreen(props) {
         }}
         style={styles.input}
       />
-      <TextInput
+     {!user && <TextInput
         label="Password"
         mode="flat"
+        hidden={user}
         secureTextEntry={true}
         onChangeText={(email) => setPassword(email)}
         style={styles.input}
@@ -122,8 +145,8 @@ export default function RegisterScreen(props) {
             primary: "#abb4bd",
           },
         }}
-      />
-      <TextInput
+      />}
+     {!user && <TextInput
         label="Confirm Password"
         mode="flat"
         secureTextEntry={true}
@@ -134,7 +157,7 @@ export default function RegisterScreen(props) {
             primary: "#abb4bd",
           },
         }}
-      />
+      />}
 
       <Button
         mode="contained"
