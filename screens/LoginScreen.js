@@ -51,9 +51,14 @@ export default function LoginScreen(props) {
         }
         let a=await instance.get('/users',{params:{gid:result.user.id}});
         console.log("a is",a);
-        props.navigation.navigate({ routeName: "Register",params:{
-          data:data
-        } });
+        if(a.status==200){
+          props.navigation.navigate({routeName:'Home'})
+        }else{
+          props.navigation.navigate({ routeName: "Register",params:{
+            data:data
+          } });
+        }
+        
         return result.accessToken;
       } else {
         ToastAndroid.show('Something Went Wrong! Try Again...', ToastAndroid.LONG);
@@ -90,9 +95,15 @@ Facebook.initializeAsync({
               photo:data.picture.data.url,
               via:'facebook'
             }
-            props.navigation.navigate({ routeName: "Register",params:{
-              data:user
-            } });
+            instance.get('/users',{params:{fbid:data.id}}).then(res=>{
+              if(res.status==200){
+                props.navigation.navigate({routeName:'Home'})
+              }else{
+                props.navigation.navigate({ routeName: "Register",params:{
+                  data:user
+                } });
+              }
+            })
           })
           .catch(e => console.log(e))
       } else {
