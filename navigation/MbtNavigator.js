@@ -9,6 +9,7 @@ import CheckMailScreen from '../screens/CheckMailScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import HomeScreen from '../screens/HomeScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const MbtNavigator=createStackNavigator({
     Login:LoginScreen,
@@ -17,7 +18,9 @@ const MbtNavigator=createStackNavigator({
     CheckMail:CheckMailScreen,
     ForgotPassword:ForgotPasswordScreen,
     ResetPassword:ResetPasswordScreen,
-    Home:HomeScreen
+    Home:HomeScreen,
+    Profile:ProfileScreen,
+
 })
 
 
