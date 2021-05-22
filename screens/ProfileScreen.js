@@ -53,7 +53,6 @@ export default function ProfileScreen(props) {
             <View style={styles.firstCard}>
                 <Button style={styles.editIcon} color={'#179de3'} icon="pencil"  onPress={pickImage}> </Button>
                 {/* {image && <Image  style={styles.profileImage} source={{ uri: image }} />} */}
-                
                 <Image
                     style={styles.profileImage}
                     source={require("../assets/images/profile.png")}
@@ -79,22 +78,26 @@ export default function ProfileScreen(props) {
 
             <View style={styles.secondCard}>
                 <Text style={styles.share}>Share Us</Text>
-                <View style={styles.socialButtonView}>
-                    <SocialIcon
-                        style={styles.socialButton}
-                        type='facebook'
-                    />
-
+                <View  style={styles.socialButtonView}>
+                    <View style={styles.badge}>
+                        <SocialIcon
+                            style={styles.socialButton}
+                            type='facebook'
+                        />
+                    </View>
+                    <View style={styles.badge}>
                     <SocialIcon
                         style={styles.socialButton}
                         type='twitter'
                     />
+
+                    </View>
+                    <View style={styles.badge}>
                     <SocialIcon
                         style={styles.socialButton}
                         type='instagram'
-                    //iconColor={'#4c68d7'}
                     />
-
+                    </View>
                 </View>
             </View>
 
@@ -102,24 +105,24 @@ export default function ProfileScreen(props) {
             <View style={styles.thirdCard}>
                 <Text style={styles.general}>GENERAL</Text>
                 <View style={styles.generalSetting}>
-                    <Button style={styles.generalIcon} color={'#179de3'}  size={40} icon="security" >
+                    <Button style={styles.generalIcon} color={'#179de3'} size={40} icon="security" >
                     </Button>
                     <View style={{ flex: 1, flexDirection: 'column' }}>
                         <Text style={styles.generalText}>Privacy</Text>
                         <Text style={styles.generalText2}>Change Your Password</Text>
                     </View>
-                    <Button  style={styles.greaterIcon} color={'#dddddd'}   icon="greater-than" onPress={() => props.navigation.navigate({ routeName: "ResetPassword" })} />
+                    <Button style={styles.greaterIcon} color={'#dddddd'} icon="greater-than" onPress={() => props.navigation.navigate({ routeName: "ResetPassword" })} />
 
 
                 </View>
                 <View style={styles.generalSetting}>
-                    <Button style={styles.generalIcon}  color={'#179de3'} icon="information-outline">
+                    <Button style={styles.generalIcon} color={'#179de3'} icon="information-outline">
                     </Button>
                     <View style={{ flex: 1, flexDirection: 'column' }}>
                         <Text style={styles.generalText}>About Us</Text>
                         <Text style={styles.generalText2}> Click to know more about us</Text>
                     </View>
-                    <Button  style={styles.greaterIcon} color={'#dddddd'} icon="greater-than" />
+                    <Button style={styles.greaterIcon} color={'#dddddd'} icon="greater-than" />
 
 
                 </View>
@@ -130,16 +133,12 @@ export default function ProfileScreen(props) {
                         <Text style={styles.generalText}>Rate</Text>
                         <Text style={styles.generalText2}>Rate Us</Text>
                     </View>
-                    <Button  style={styles.greaterIcon}  color={'#dddddd'}  icon="greater-than" />
+                    <Button style={styles.greaterIcon} color={'#dddddd'} icon="greater-than" />
 
 
                 </View>
 
             </View>
-           
-           
-
-
         </ScrollView>
     );
 }
@@ -236,8 +235,9 @@ const styles = StyleSheet.create({
 
     },
     socialButton: {
-        marginLeft: 35,
-        marginTop: 20,
+        alignSelf:'center',
+        justifyContent:'center',
+
     },
     secondCard: {
         width: '90%',
@@ -265,12 +265,15 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     badge: {
-        marginTop: 5,
+       
         width: 69,
         height: 75,
         borderRadius: 12,
         backgroundColor: '#f8f9f9',
         marginLeft: 30,
+        justifyContent:'center',
+     
+
 
     },
     update: {
@@ -329,14 +332,14 @@ const styles = StyleSheet.create({
     },
     generalIcon: {
 
-       height: 45,
+        height: 45,
         borderRadius: 8,
         backgroundColor: '#dfe7f5',
         alignSelf: 'center',
         marginRight: 10,
         marginLeft: 10,
-        paddingLeft:10,
-       justifyContent:'center',
+        paddingLeft: 10,
+        justifyContent: 'center',
 
     },
     generalText: {
@@ -355,10 +358,9 @@ const styles = StyleSheet.create({
 
     },
     greaterIcon:{
-       
-        alignItems:'center',
-        justifyContent:'center',
-        
+        alignItems: 'center',
+        justifyContent: 'center',
+
 
     }
 
