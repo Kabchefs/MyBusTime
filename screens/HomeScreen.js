@@ -1,8 +1,13 @@
-import * as React from 'react';
-import { Platform, View, StyleSheet, ScrollView } from "react-native";
-import {Button,DataTable, TextInput, Paragraph,Avatar, Surface,Appbar,StatusBar, BottomNavigation, Text } from 'react-native-paper';
+
+import React ,{useState,useEffect}from 'react';
+
+
+
+import { Platform, View, StyleSheet, ScrollView ,FlatList} from "react-native";
+import {Button,DataTable, TextInput, Paragraph,Avatar, Surface,Appbar,StatusBar, BottomNavigation, Text ,Card} from 'react-native-paper';
 import { Dimensions } from 'react-native';
 import ProfileScreen from './ProfileScreen';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -15,7 +20,7 @@ const _handleMore = () => console.log('Shown more');
     <Appbar.Header
     style={{ backgroundColor: 'rgb(23, 157, 227)' }}
     >
-    <Appbar.Action icon="format-align-left" onPress={_handleMore } />
+    <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24} />}  onPress={_handleMore } />
 
        <Appbar.Content title="MyBusTime" />
      </Appbar.Header>
@@ -24,14 +29,56 @@ const _handleMore = () => console.log('Shown more');
   );
 };
 
-const HomeRoute = () =>
+export default function HomeRoute (props) 
 {
 
-const [source, setSource] = React.useState('');
-const [destination, setDestination] = React.useState('');
+const [source, setSource] = useState('');
+const [destination, setDestination] = useState('');
+const [city,setCity] = useState('');
+const [cities,setCities] = useState([]);
+const [show,setShow]=useState(false);
+const [dshow,dsetShow]=useState(false);
+
+// useEffect(() => {
+// if(source.length==0){
+//   console.log("called");
+//   setShow(false);
+  
+// }else if(source.length>0){
+//   setShow(true);
+// }
+  
+// }, [source,destination])
+
+const fetchCities = (text,action)=>{
+  if(action=='s'){
+    setSource(text)
+    setShow(true);
+  }else if(action=='d'){
+    setDestination(text);
+    dsetShow(true);
+  }
+  
+  fetch("https://mybustime.herokuapp.com/delhi?query="+text)
+  .then(item=>item.json())
+  .then(cityData=>{
+    console.log(cityData.slice(0,9));
+      setCities(cityData.slice(0,9))
+  })
+}
+const listClick =  (cityname)=>{
+  setSource(cityname)
+  setShow(false);
+}
+
+const dlistClick =  (cityname)=>{
+  console.log("destination to",cityname);
+  setDestination(cityname)
+  dsetShow(false);
+}
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView keyboardShouldPersistTaps='always' keyboardDismissMode='on-drag' style={styles.container}>
       <TopNavBar />
     <View style={styles.dev}>
         <Surface style={styles.surface}>
@@ -39,7 +86,7 @@ const [destination, setDestination] = React.useState('');
 
            <View style={styles.routesHeader}>
              <Paragraph>
-              <Avatar.Icon size={30} color="#F73D84" icon="map-marker" style={{ backgroundColor: 'rgb(255, 255, 255)' }} />
+              <Avatar.Icon size={30} color="#F73D84" icon={() => <MaterialCommunityIcons name="map-marker" size={24} />} style={{ backgroundColor: 'rgb(255, 255, 255)' }} />
               <Paragraph style={{color:'#5ab7e6'}}>  Route Details </Paragraph>
             </Paragraph>
            </View>
@@ -48,26 +95,57 @@ const [destination, setDestination] = React.useState('');
              <TextInput
                    label="From:"
                    value={source}
-                   onChangeText={source => setSource(source)}
+                   onChangeText={(text)=>fetchCities(text,'s')}
+                  //  onChangeText={source => setSource(source)}
                    underlineColor='#5ab7e6'
                    theme={{colors: {text: 'black', primary: 'rgb(23, 157, 227)'}}}
                    style={{ backgroundColor: '#f6f6f6',width:'90%' }}
                />
-
+    {show && <FlatList style={{zIndex:100,width:'90%'}}
+        data={cities}
+        keyboardShouldPersistTaps = "always"
+        renderItem={({item})=>{
+            return(
+                <Card 
+                 style={{margin:2,padding:12}}
+                 onPress={()=>listClick(item.stop_name)}
+                >
+                    <Text>{item.stop_name}</Text>
+                </Card>
+            )
+        }}
+        keyExtractor={item=>item.stop_id}
+        />}
                <TextInput
                      label="To:"
                     value={destination}
-                     onChangeText={destination => setDestination(destination)}
+                    onChangeText={(text)=>fetchCities(text,'d')}
+                    //  onChangeText={destination => setDestination(destination)}
                      underlineColor='#5ab7e6'
                      theme={{colors: {text: 'black', primary: 'rgb(23, 157, 227)'}}}
                      style={{ backgroundColor:'#f6f6f6', marginTop:20,width:'90%' }}
                />
+               {dshow  && <FlatList style={{elevation:100,width:'90%'}}
+        data={cities}
+        keyboardShouldPersistTaps = "always"
+        renderItem={({item})=>{
+            return(
+                <Card 
+                 style={{margin:2,padding:12}}
+                 onPress={()=>dlistClick(item.stop_name)}
+                >
+                    <Text>{item.stop_name}</Text>
+                </Card>
+            )
+        }}
+        keyExtractor={item=>item.stop_id}
+        />}
            </View>
 
            <View style={styles.routesFooter}>
              <Button
                mode="contained"
-               onPress={() => console.log('Pressed')}
+               onPress={() => console.log(source,destination)}
                style={{backgroundColor:'rgb(23, 157, 227)' }}
                >
                 Search
@@ -83,7 +161,7 @@ const [destination, setDestination] = React.useState('');
           <View style={styles.routesContainer} >
            <View style={styles.routesHeader}>
              <Paragraph>
-              <Avatar.Icon size={30} color="rgb(23, 157, 227)" icon="flag" style={{ backgroundColor: 'rgb(255, 255, 255)' }} />
+              <Avatar.Icon size={30} color="rgb(23, 157, 227)" icon={() => <MaterialCommunityIcons name="flag" size={24} />} style={{ backgroundColor: 'rgb(255, 255, 255)' }} />
             <Paragraph style={{color:'#5ab7e6'}}> Recently Visited Routes </Paragraph>
             </Paragraph>
            </View>
@@ -123,44 +201,39 @@ const [destination, setDestination] = React.useState('');
 
 
 
-const ConnectRoute = () => <Text>Connect</Text>;
+// const ConnectRoute = () => <Text>Connect</Text>;
 
-export default function HomeScreen(props)
-{
+// export default function HomeScreen(props)
+// {
 
-    const [index, setIndex] = React.useState(0);
-    const [routes] = React.useState([
-      { key: 'home', title: 'Home', icon: 'home' },
-      { key: 'connect', title: 'Connect', icon: 'magnify' },
-      { key: 'profile', title: 'Profile', icon: 'account' },
-    ]);
-
-
-    const renderScene = BottomNavigation.SceneMap({
-      home: HomeRoute,
-      connect: ConnectRoute,
-      profile: ProfileScreen,
-    });
-
-  return(
-
-    <BottomNavigation
-     navigationState={{ index, routes }}
-     onIndexChange={setIndex}
-     renderScene={renderScene}
-     barStyle={{ backgroundColor: 'rgb(23, 157, 227)', padding: 4 }}
-   />
+//     // const [index, setIndex] = React.useState(0);
+//     // const [routes] = React.useState([
+//     //   { key: 'home', title: 'Home', icon: 'home' },
+//     //   { key: 'connect', title: 'Connect', icon: 'magnify' },
+//     //   { key: 'profile', title: 'Profile', icon: 'account' },
+//     // ]);
 
 
-  )
-}
+//     // const renderScene = BottomNavigation.SceneMap({
+//     //   home: HomeRoute,
+//     //   connect: ConnectRoute,
+//     //   profile: ProfileScreen,
+//     // });
 
-HomeScreen.navigationOptions = (navOpt) => {
+//   return(
 
-  return {
-    headerShown: false,
-  };
-};
+//     <BottomNavigation
+//      navigationState={{ index, routes }}
+//      onIndexChange={setIndex}
+//      renderScene={renderScene}
+//      barStyle={{ backgroundColor: 'rgb(23, 157, 227)', padding: 4 }}
+//    />
+
+
+//   )
+// }
+
+
 
 
 

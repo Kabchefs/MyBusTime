@@ -16,12 +16,12 @@ export default function RegisterScreen(props) {
   const hasErrors = () => {
     const re =
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!user.name && !name) {
+    if (!user?.name && !name) {
       Alert.alert("Invalid Input!", "Name must not be empty", [
         { text: "Okay", style: "destructive" },
       ]);
       return false;
-    } else if (!user.email &&!re.test(email)) {
+    } else if (!user?.email &&!re.test(email)) {
       Alert.alert("Invalid Input!", "Plase enter valid email", [
         { text: "Okay", style: "destructive" },
       ]);

@@ -1,10 +1,14 @@
 {
   "expo": {
-    "name": "mbt",
-    "slug": "mbt",
+    "name": "My BusTime",
+    "slug": "mybustime",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icons/icon.png",
+    "icon": "./assets/images/busLogo.png",
+    "platforms":[
+      "android",
+      "ios"
+    ],
     "splash": {
       "image": "./assets/images/busLogo.png",
       "resizeMode": "contain",
@@ -23,7 +27,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package":"com.mbt.bus",
+      "versionCode":1
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

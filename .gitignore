@@ -11,3 +11,5 @@ web-build/
 .env
 # macOS
 .DS_Store
+*key
+key*

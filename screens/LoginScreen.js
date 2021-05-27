@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AND_CLIENT_ID ,FB_APP_ID} from '@env';
+import { AND_CLIENT_ID ,FB_APP_ID,WEB_CLIENT_ID} from '@env';
 import { View, StyleSheet, Text, Image, ScrollView,ToastAndroid } from "react-native";
 import * as Google from 'expo-google-app-auth';
 import * as Facebook from 'expo-facebook';
@@ -7,6 +7,7 @@ import { Button, TextInput } from "react-native-paper";
 import MySocialButton from "../components/MySocialButton";
 import { SocialIcon } from 'react-native-elements';
 import { instance } from '../utils/axiosConfig';
+import {Ionicons} from '@expo/vector-icons';
 console.disableYellowBox = true;
 export default function LoginScreen(props) {
   const [email, setEmail] = useState("");
@@ -35,6 +36,7 @@ export default function LoginScreen(props) {
     try {
       const result = await Google.logInAsync({
         behavior: 'web',
+        webClientId:`${WEB_CLIENT_ID}`,
         // iosClientId: IOS_CLIENT_ID,
         androidClientId: `${AND_CLIENT_ID}`,
         scopes: ['profile', 'email'],
@@ -50,7 +52,6 @@ export default function LoginScreen(props) {
           via:'google'
         }
         let a=await instance.get('/users',{params:{gid:result.user.id}});
-        console.log("a is",a);
         if(a.status==200){
           props.navigation.navigate({routeName:'Home'})
         }else{
