@@ -4,10 +4,10 @@ import React ,{useState,useEffect}from 'react';
 
 
 import { Platform, View, StyleSheet, ScrollView ,FlatList} from "react-native";
-import {Button,DataTable, TextInput, Paragraph,Avatar, Surface,Appbar,StatusBar, BottomNavigation, Text ,Card} from 'react-native-paper';
+import {Button,DataTable, TextInput, Paragraph,Avatar, Surface,Appbar,StatusBar, BottomNavigation, Text ,Card,Drawer} from 'react-native-paper';
 import { Dimensions } from 'react-native';
-import ProfileScreen from './ProfileScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -15,12 +15,12 @@ const windowHeight = Dimensions.get('window').height;
 const TopNavBar = () =>
 {
 
-const _handleMore = () => console.log('Shown more');
   return (
     <Appbar.Header
     style={{ backgroundColor: 'rgb(23, 157, 227)' }}
     >
-    <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24} />}  onPress={_handleMore } />
+
+    <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24}  color="white"/>} />
 
        <Appbar.Content title="MyBusTime" />
      </Appbar.Header>
@@ -86,8 +86,8 @@ const dlistClick =  (cityname)=>{
 
            <View style={styles.routesHeader}>
              <Paragraph>
-              <Avatar.Icon size={30} color="#F73D84" icon={() => <MaterialCommunityIcons name="map-marker" size={24} />} style={{ backgroundColor: 'rgb(255, 255, 255)' }} />
-              <Paragraph style={{color:'#5ab7e6'}}>  Route Details </Paragraph>
+              <Avatar.Icon size={30} color="#F73D84" icon={() => <MaterialCommunityIcons name="map-marker" size={24} color="#F73D84" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:20 }} />
+              <Paragraph style={{color:'#5ab7e6',paddingTop:8}}>  Route Details </Paragraph>
             </Paragraph>
            </View>
 
@@ -99,7 +99,7 @@ const dlistClick =  (cityname)=>{
                   //  onChangeText={source => setSource(source)}
                    underlineColor='#5ab7e6'
                    theme={{colors: {text: 'black', primary: 'rgb(23, 157, 227)'}}}
-                   style={{ backgroundColor: '#f6f6f6',width:'90%' }}
+                   style={{ backgroundColor: '#f6f6f6',width:'90%',borderRadius:12,borderTopRightRadius:12,borderTopLeftRadius:12}}
                />
     {show && <FlatList style={{zIndex:100,width:'90%'}}
         data={cities}
@@ -123,7 +123,7 @@ const dlistClick =  (cityname)=>{
                     //  onChangeText={destination => setDestination(destination)}
                      underlineColor='#5ab7e6'
                      theme={{colors: {text: 'black', primary: 'rgb(23, 157, 227)'}}}
-                     style={{ backgroundColor:'#f6f6f6', marginTop:20,width:'90%' }}
+                     style={{ backgroundColor:'#f6f6f6', marginTop:20,width:'90%',borderRadius:12,borderTopRightRadius:12,borderTopLeftRadius:12 }}
                />
                {dshow  && <FlatList style={{elevation:100,width:'90%'}}
         data={cities}
@@ -146,7 +146,7 @@ const dlistClick =  (cityname)=>{
              <Button
                mode="contained"
                onPress={() => console.log(source,destination)}
-               style={{backgroundColor:'rgb(23, 157, 227)' }}
+               style={{backgroundColor:'rgb(23, 157, 227)' ,marginBottom:10 , borderRadius:12}}
                >
                 Search
              </Button>
@@ -161,34 +161,34 @@ const dlistClick =  (cityname)=>{
           <View style={styles.routesContainer} >
            <View style={styles.routesHeader}>
              <Paragraph>
-              <Avatar.Icon size={30} color="rgb(23, 157, 227)" icon={() => <MaterialCommunityIcons name="flag" size={24} />} style={{ backgroundColor: 'rgb(255, 255, 255)' }} />
-            <Paragraph style={{color:'#5ab7e6'}}> Recently Visited Routes </Paragraph>
+              <Avatar.Icon size={30} color="rgb(23, 157, 227)" icon={() => <MaterialCommunityIcons name="flag" size={24}  color="#45ade3"/>} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:20 }} />
+            <Paragraph style={{color:'#5ab7e6',paddingTop:10}}> Recently Visited Routes </Paragraph>
             </Paragraph>
            </View>
 
            <View style={[styles.routesBody, {marginTop:5}]}>
-             <DataTable  style={{width:'90%', backgroundColor:'#f6f6f6'}} >
-               <DataTable.Header >
-                 <DataTable.Title style={{ marginLeft:'auto'}}>
-                  To Demo - From Demo
+             <DataTable  style={{width:'90%',height:'auto', backgroundColor:'#f6f6f6',borderRadius:12}} >
+               <DataTable.Header style={{height:60,justifyContent:'center',alignItems:'center'}} >
+                 <DataTable.Title style={{ marginLeft:'12%'}}>
+                 To Demo         - 
                  </DataTable.Title>
+                <DataTable.Title style={{ marginRight:'5%'}}>From Demo</DataTable.Title >
+               </DataTable.Header >
 
-               <DataTable.Title   >Time 12:00 am - 1:00 am </DataTable.Title >
-               </DataTable.Header>
-               <DataTable.Header >
-                 <DataTable.Title style={{ marginLeft:'auto'}}>
-                  To Demo - From Demo
+               <DataTable.Header  style={{height:60,justifyContent:'center',alignItems:'center'}} >
+                 <DataTable.Title style={{ marginLeft:'12%'}}>
+                 To Demo         - 
                  </DataTable.Title>
-
-               <DataTable.Title   >Time 12:00 am - 1:00 am </DataTable.Title >
+              <DataTable.Title style={{ marginRight:'5%'}}>From Demo</DataTable.Title > 
                </DataTable.Header>
-               <DataTable.Header >
-                 <DataTable.Title style={{ marginLeft:'auto'}}>
-                  To Demo - From Demo
+
+               <DataTable.Header style={{height:60,justifyContent:'center',alignItems:'center'}} >
+                 <DataTable.Title style={{ marginLeft:'12%'}}>
+                  To Demo         - 
                  </DataTable.Title>
-
-               <DataTable.Title   >Time 12:00 am - 1:00 am </DataTable.Title >
+               <DataTable.Title style={{ marginRight:'5%'}}>From Demo</DataTable.Title >
                </DataTable.Header>
+
              </DataTable>
           </View>
          </View>
@@ -199,39 +199,6 @@ const dlistClick =  (cityname)=>{
   );
 };
 
-
-
-// const ConnectRoute = () => <Text>Connect</Text>;
-
-// export default function HomeScreen(props)
-// {
-
-//     // const [index, setIndex] = React.useState(0);
-//     // const [routes] = React.useState([
-//     //   { key: 'home', title: 'Home', icon: 'home' },
-//     //   { key: 'connect', title: 'Connect', icon: 'magnify' },
-//     //   { key: 'profile', title: 'Profile', icon: 'account' },
-//     // ]);
-
-
-//     // const renderScene = BottomNavigation.SceneMap({
-//     //   home: HomeRoute,
-//     //   connect: ConnectRoute,
-//     //   profile: ProfileScreen,
-//     // });
-
-//   return(
-
-//     <BottomNavigation
-//      navigationState={{ index, routes }}
-//      onIndexChange={setIndex}
-//      renderScene={renderScene}
-//      barStyle={{ backgroundColor: 'rgb(23, 157, 227)', padding: 4 }}
-//    />
-
-
-//   )
-// }
 
 
 
@@ -255,24 +222,27 @@ const styles = StyleSheet.create({
     height: 260,
     borderRadius: 8,
     width: '99%',
-    elevation: 4,
+   elevation: 2,
   },
   surface1: {
     height: 'auto',
     borderRadius: 8,
     width: '99%',
-    elevation: 4,
+    elevation: 1,
   },
   routesContainer:{
    paddingTop: 15,
    padding:5,
+   paddingBottom:20,
   },
   routesHeader:{
    paddingLeft: '5%',
+   
 
   },
   routesBody:{
    alignItems: "center",
+   paddingTop:5,
   },
   routesFooter:{
     paddingTop: 15,
