@@ -12,6 +12,7 @@ import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import HomeRoute from '../screens/HomeScreen';
 import {Ionicons} from '@expo/vector-icons';
 import ProfileScreen from '../screens/ProfileScreen';
+import StartupScreen from '../screens/StartupScreen';
 
 const HomePage= createMaterialBottomTabNavigator({
     Main:{screen:HomeRoute,navigationOptions:{
@@ -34,6 +35,7 @@ const HomePage= createMaterialBottomTabNavigator({
 })
 
 const MbtNavigator=createStackNavigator({
+    Startup:StartupScreen,
     Login:LoginScreen,
     Register:RegisterScreen,
     OTPVerify:OTPVerifyScreen,

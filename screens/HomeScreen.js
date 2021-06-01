@@ -20,7 +20,7 @@ const _handleMore = () => console.log('Shown more');
     <Appbar.Header
     style={{ backgroundColor: 'rgb(23, 157, 227)' }}
     >
-    <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24} />}  onPress={_handleMore } />
+    <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" color="white" size={24} />}  onPress={_handleMore } />
 
        <Appbar.Content title="MyBusTime" />
      </Appbar.Header>
@@ -86,7 +86,7 @@ const dlistClick =  (cityname)=>{
 
            <View style={styles.routesHeader}>
              <Paragraph>
-              <Avatar.Icon size={30} color="#F73D84" icon={() => <MaterialCommunityIcons name="map-marker" size={24} />} style={{ backgroundColor: 'rgb(255, 255, 255)' }} />
+              <Avatar.Icon size={30} color="#F73D84" icon={() => <MaterialCommunityIcons color="pink" name="map-marker" size={24} />} style={{ backgroundColor: 'rgb(255, 255, 255)' }} />
               <Paragraph style={{color:'#5ab7e6'}}>  Route Details </Paragraph>
             </Paragraph>
            </View>
@@ -161,7 +161,7 @@ const dlistClick =  (cityname)=>{
           <View style={styles.routesContainer} >
            <View style={styles.routesHeader}>
              <Paragraph>
-              <Avatar.Icon size={30} color="rgb(23, 157, 227)" icon={() => <MaterialCommunityIcons name="flag" size={24} />} style={{ backgroundColor: 'rgb(255, 255, 255)' }} />
+              <Avatar.Icon size={30} color="rgb(23, 157, 227)" icon={() => <MaterialCommunityIcons color='rgb(23, 157, 227)' name="flag" size={24} />} style={{ backgroundColor: 'rgb(255, 255, 255)' }} />
             <Paragraph style={{color:'#5ab7e6'}}> Recently Visited Routes </Paragraph>
             </Paragraph>
            </View>

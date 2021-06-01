@@ -5,6 +5,7 @@ import * as Google from 'expo-google-app-auth';
 import * as Facebook from 'expo-facebook';
 import { Button, TextInput } from "react-native-paper";
 import MySocialButton from "../components/MySocialButton";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SocialIcon } from 'react-native-elements';
 import { instance } from '../utils/axiosConfig';
 import {Ionicons} from '@expo/vector-icons';
@@ -20,8 +21,10 @@ export default function LoginScreen(props) {
         password:password
       }
       instance.post('/users/signin',obj).then(res=>{
-        console.log("jii",res);
+        console.log("jii",res.data.user);
+        let data=res.data.user;
         if(res.status==200){
+          AsyncStorage.setItem('user',JSON.stringify({_id:data._id,email:data.email,name:data.name}))
           ToastAndroid.show("Signup Success !", ToastAndroid.SHORT);
           props.navigation.navigate({ routeName: "Home" });
         }else if(res.status==201){
