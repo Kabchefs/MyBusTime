@@ -4,6 +4,8 @@ import { Platform, View, StyleSheet, ScrollView ,FlatList} from "react-native";
 import {Button,DataTable, TextInput, Paragraph,Avatar, Surface,Appbar,StatusBar, BottomNavigation, Text ,Card,Drawer} from 'react-native-paper';
 import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { instance } from '../utils/axiosConfig';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
@@ -25,8 +27,25 @@ const TopNavBar = () =>
 };
 
 export default function RouteDetailsScreen (props) 
-{
-
+{const [buses,setBuse]=useState([]);
+  const [from,setFrom]=useState('');
+  const [to,setTO]=useState('');
+  useEffect(() => {
+    let user=props.navigation.getParam('user');
+    var to=props.navigation.getParam('to');
+    var from=props.navigation.getParam('from');
+setFrom(from);
+setTO(to);
+    // console.log(u);
+    instance.post('/delhi',{to:to,from:from,user:user._id}).then(res=>{
+      console.log(res.data.result);
+      if(res.status==200){
+        setBuse(res.data.result);
+      }
+      
+    })
+  
+  }, [])
 
   return (
     <ScrollView >
@@ -51,35 +70,37 @@ export default function RouteDetailsScreen (props)
           <Paragraph style={{color:'#5ab7e6',fontSize:16,paddingTop:10}}>  Route Details </Paragraph>
           </View>
           <View style={styles.cityNames} >
-            <Text style={styles.fromCityName}>FROM CITY NAME</Text>
+            <Text style={styles.fromCityName}>{from}</Text>
             <View style={{flex:1,flexDirection:'column'}}>
             <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: "rgb(23, 157, 227)",paddingTop:18,marginLeft:25, }}  />
-              <Text style={{fontSize:12,color:'#ffffff'}}>-------------------------</Text>
+              <Text style={{fontSize:12,color:'#ffffff'}}>------------</Text>
 
             </View>
 
-            <Text style={styles.toCityName}>TO CITY NAME</Text>
+            <Text style={styles.toCityName}>{to}</Text>
           </View>
 
           <View  style={styles.routeDetails}>
+            <TouchableOpacity  onPress={()=>props.navigation.navigate({routeName:'StopDetails',params:{data:buses,from:from,to:to}})}>
             <View style={styles.route}>
             <Avatar.Icon size={60} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus" size={60} color="rgb(23, 157, 227)" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginTop:15,marginLeft:5 }}  />
               <View style={{flex:1,flexDirection:'column', marginLeft:10}}>
                   <View style={{flex:1,flexDirection:'row',paddingTop:5}}>
-              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>10:00AM-</Text>
-              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>10:50AM</Text>
+              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>{buses[0]?.arrival_time}-</Text>
+              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>{buses[buses.length-1]?.departure_time}</Text>
               </View>
-              <Text style={{}}>Via-Demo,Demo</Text>
+              <Text style={{}}>Via-{buses[(buses.length)-5]?.stop_id}</Text>
              
               </View>
-              <View style={{flex:1,flexDirection:'column'}}>
+              {/* <View style={{flex:1,flexDirection:'column'}}>
               <Text style={{fontSize:16,marginLeft:50,marginTop:15}}>Fair</Text>
               <Text style={{marginRight:5,fontSize:16,marginLeft:48,marginTop:20}}>90RS</Text>
-              </View>
+              </View> */}
               
             </View>
+            </TouchableOpacity>
 
-            <View style={styles.route}>
+            {/* <View style={styles.route}>
             <Avatar.Icon size={60} color="rgb(23, 157, 227)" icon={() => <MaterialCommunityIcons name="bus" size={60} color="rgb(23, 157, 227)" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginTop:15,marginLeft:5 }}  />
               <View style={{flex:1,flexDirection:'column', marginLeft:10}}>
                   <View style={{flex:1,flexDirection:'row',paddingTop:5}}>
@@ -94,7 +115,7 @@ export default function RouteDetailsScreen (props)
               <Text style={{marginRight:5,fontSize:16,marginLeft:48,marginTop:20}}>90RS</Text>
               </View>
               
-            </View>
+            </View> */}
            
             
 

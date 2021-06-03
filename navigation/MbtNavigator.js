@@ -16,6 +16,8 @@ import StartupScreen from '../screens/StartupScreen';
 import ConnectScreen from '../screens/ConnectScreen';
 import StopDetailsScreen from '../screens/StopDetailsScreen';
 import RouteDetailsScreen from '../screens/RouteDetailsScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 const HomePage= createMaterialBottomTabNavigator({
     Main:{screen:HomeRoute,navigationOptions:{
@@ -50,7 +52,6 @@ const HomePage= createMaterialBottomTabNavigator({
 
 const MbtNavigator=createStackNavigator({
     Startup:StartupScreen,
-        
     Login:LoginScreen,
     Register:RegisterScreen,
     OTPVerify:OTPVerifyScreen,
@@ -62,11 +63,20 @@ const MbtNavigator=createStackNavigator({
     StopDetails:StopDetailsScreen,
     RouteDetails:RouteDetailsScreen,    
     Connect:ConnectScreen,
-
-
 })
 
+// const Logoff=()=>{
+//     AsyncStorage.removeItem('user');
+//     return(
+//         <LoginScreen/>
+//     )
+// }
+
+const MainNavigtor=createDrawerNavigator(
+    {
+        Main:MbtNavigator
+    }
+);
 
 
-
-export default createAppContainer(MbtNavigator);
+export default createAppContainer(MainNavigtor);

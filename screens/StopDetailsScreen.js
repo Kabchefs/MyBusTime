@@ -29,6 +29,17 @@ export default function StopDetailsScreen (props)
   const [isSwitchOn, setIsSwitchOn] = useState(false);
 
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+  const [routes,setRoutes]=useState([]);
+  const [from,setFrom]=useState('');
+  const [to,setTO]=useState('');
+  useEffect(() => {
+    let routes=props.navigation.getParam('data');
+    var to=props.navigation.getParam('to');
+    var from=props.navigation.getParam('from');
+setFrom(from);
+setTO(to);
+setRoutes(routes);
+  }, [])
 
 
   return (
@@ -45,28 +56,28 @@ export default function StopDetailsScreen (props)
           <Switch color={'#5ab7e6'} style={{marginTop:10,paddingLeft:5}} value={isSwitchOn} onValueChange={onToggleSwitch} />
           </View>
           <View style={styles.cityNames} >
-            <Text style={styles.fromCityName}>FROM CITY NAME</Text>
+            <Text style={styles.fromCityName}>{from}</Text>
             <View style={{flex:1,flexDirection:'column'}}>
-              <Text style={{fontSize:12,color:'#ffffff',marginTop:5}}>9:00AM-10:00AM</Text>
+              <Text style={{fontSize:12,color:'#ffffff',marginTop:5}}>{routes[0]?.arrival_time}-{routes[routes.length-1]?.departure_time}</Text>
               <Text style={{fontSize:12,color:'#ffffff'}}>--------------------------</Text>
 
             </View>
 
-            <Text style={styles.toCityName}>TO CITY NAME</Text>
+            <Text style={styles.toCityName}>{to}</Text>
           </View>
 
           <View  style={styles.stopDetails}>
-            <View style={styles.stop}>
-              <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>Stop Name</Text>
+            {routes.map((route,i)=>( <View style={styles.stop}>
+              <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>{route.stop_id}</Text>
               <View style={{flex:1,flexDirection:'column'}}>
               <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15,marginLeft:15 }}  />
               <Text style={{marginLeft:10,paddingBottom:4,marginTop:-5}}>........</Text>
               </View>
-              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>10:00AM-</Text>
-              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>10:50AM</Text>
+              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>{route.arrival_time}-</Text>
+              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>{route.departure_time}</Text>
               <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="calendar" size={24} color="#ffa22d" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />
-            </View>
-            <View style={styles.stop}>
+            </View>))}
+            {/* <View style={styles.stop}>
               <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>Stop Name</Text>
               <View style={{flex:1,flexDirection:'column'}}>
               <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15,marginLeft:15 }}  />
@@ -75,9 +86,9 @@ export default function StopDetailsScreen (props)
               <Text style={{marginRight:20,marginTop:10,fontSize:16}}>10:00AM-</Text>
               <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>10:50AM</Text>
               <Avatar.Icon size={24}  icon={() => <MaterialCommunityIcons name="check" size={24} color="#000000" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />
-            </View>
+            </View> */}
 
-            <View style={styles.stop}>
+            {/* <View style={styles.stop}>
               <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>Stop Name</Text>
               <View style={{flex:1,flexDirection:'column'}}>
               <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:5,marginLeft:15 }}  />
@@ -86,9 +97,9 @@ export default function StopDetailsScreen (props)
               <Text style={{marginRight:20,marginTop:10,fontSize:16}}>10:00AM-</Text>
               <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>10:50AM</Text>
               <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="check" size={24} color="#000000" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />
-            </View>
+            </View> */}
 
-            <View style={styles.stop}>
+            {/* <View style={styles.stop}>
               <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>Stop Name</Text>
               <View style={{flex:1,flexDirection:'column'}}>
               <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15,marginLeft:15 }}  />
@@ -97,9 +108,9 @@ export default function StopDetailsScreen (props)
               <Text style={{marginRight:20,marginTop:10,fontSize:16}}>10:00AM-</Text>
               <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>10:50AM</Text>
               <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="check" size={24} color="#000000" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />
-            </View>
+            </View> */}
 
-            <View style={styles.stop}>
+            {/* <View style={styles.stop}>
               <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>Stop Name</Text>
               <View style={{flex:1,flexDirection:'column'}}>
               <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15,marginLeft:15 }}  />
@@ -108,9 +119,9 @@ export default function StopDetailsScreen (props)
               <Text style={{marginRight:20,marginTop:10,fontSize:16}}>10:00AM-</Text>
               <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>10:50AM</Text>
               <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="cached" size={24} color="#000000" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />
-            </View>
+            </View> */}
 
-            <View style={styles.stop}>
+            {/* <View style={styles.stop}>
               <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>Stop Name</Text>
               <View style={{flex:1,flexDirection:'column'}}>
               <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15,marginLeft:15 }}  />
@@ -119,7 +130,7 @@ export default function StopDetailsScreen (props)
               <Text style={{marginRight:20,marginTop:10,fontSize:16}}>10:00AM-</Text>
               <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>10:50AM</Text>
               <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="calendar" size={24} color="#ffa22d" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />
-            </View>
+            </View> */}
 
             
 
