@@ -18,6 +18,7 @@ import StopDetailsScreen from '../screens/StopDetailsScreen';
 import RouteDetailsScreen from '../screens/RouteDetailsScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from 'react-navigation-drawer';
+import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
 
 const HomePage= createMaterialBottomTabNavigator({
     Main:{screen:HomeRoute,navigationOptions:{
@@ -62,6 +63,7 @@ const MbtNavigator=createStackNavigator({
     Profile:ProfileScreen,
     StopDetails:StopDetailsScreen,
     RouteDetails:RouteDetailsScreen,    
+    PrivacyPolicy:PrivacyPolicyScreen,
     Connect:ConnectScreen,
 })
 

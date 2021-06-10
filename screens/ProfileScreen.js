@@ -59,7 +59,7 @@ export default function ProfileScreen(props) {
 
             </View>
             <View style={styles.firstCard}>
-                <Button style={styles.editIcon} color={'#179de3'} onPress={pickImage}>  <MaterialCommunityIcons name="pencil"  /> </Button>
+                <Button style={styles.editIcon} color={'#179de3'} icon={() => <MaterialCommunityIcons name="pencil" size={22} color="#179de3" />} onPress={pickImage}> </Button>
                 {/* {image && <Image  style={styles.profileImage} source={{ uri: image }} />} */}
                 <Image
                     style={styles.profileImage}
@@ -116,7 +116,7 @@ export default function ProfileScreen(props) {
             <View style={styles.thirdCard}>
                 <Text style={styles.general}>GENERAL</Text>
                 <View style={styles.generalSetting}>
-                    <Button style={styles.generalIcon} color={'#179de3'} size={40}><MaterialCommunityIcons name="security"  />
+                    <Button style={styles.generalIcon} color={'#179de3'} size={40} icon={() => <MaterialCommunityIcons name="security" size={22} color="#179de3" />}  >
                     </Button>
                     <View style={{ flex: 1, flexDirection: 'column' }}>
                         <Text style={styles.generalText}>Privacy</Text>
@@ -127,20 +127,18 @@ export default function ProfileScreen(props) {
 
                 </View>
                 <View style={styles.generalSetting}>
-                    <Button style={styles.generalIcon} color={'#179de3'} >
-                    <MaterialCommunityIcons name="information-outline"  />
+                    <Button style={styles.generalIcon} color={'#179de3'} icon={() => <MaterialCommunityIcons name="information-outline" size={22} color="#179de3" />} color={'#179de3'} >
                     </Button>
                     <View style={{ flex: 1, flexDirection: 'column' }}>
                         <Text style={styles.generalText}>About Us</Text>
-                        <Text style={styles.generalText2}> Click to know more about us</Text>
+                        <Text style={styles.generalText2}>Terms of Use & Privacy Policy</Text>
                     </View>
-                    <Button style={styles.greaterIcon} color={'#dddddd'} >
-                    <MaterialCommunityIcons name="greater-than"  /></Button>
+                    <Button style={styles.greaterIcon} color={'#dddddd'} icon={() => <MaterialCommunityIcons name="greater-than" size={20} color="#dddddd" />} onPress={() => props.navigation.navigate({ routeName: "PrivacyPolicy" })} />
+
 
                 </View>
                 <View style={styles.generalSetting}>
-                    <Button style={styles.generalIcon} color={'#179de3'}>
-                    <MaterialCommunityIcons name="star-outline"  />
+                    <Button style={styles.generalIcon} icon={() => <MaterialCommunityIcons name="star-outline" size={22} color="#179de3" />} color={'#179de3'}>
                     </Button>
                     <View style={{ flex: 1, flexDirection: 'column' }}>
                         <Text style={styles.generalText}>Rate</Text>
@@ -248,8 +246,8 @@ const styles = StyleSheet.create({
 
     },
     socialButton: {
-        alignSelf:'center',
-        justifyContent:'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
 
     },
     secondCard: {
@@ -278,14 +276,13 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     badge: {
-       
+
         width: 69,
         height: 75,
         borderRadius: 12,
         backgroundColor: '#f8f9f9',
         marginLeft: 30,
-        justifyContent:'center',
-     
+        justifyContent: 'center',
 
 
     },
@@ -328,7 +325,6 @@ const styles = StyleSheet.create({
         fontSize: 13,
         fontWeight: '400',
         lineHeight: 17,
-        letterSpacing: 0.625,
         marginLeft: 25,
         marginTop: 10,
         marginBottom: 10,
@@ -370,7 +366,7 @@ const styles = StyleSheet.create({
         fontSize: 11,
 
     },
-    greaterIcon:{
+    greaterIcon: {
         alignItems: 'center',
         justifyContent: 'center',
 
