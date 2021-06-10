@@ -40,6 +40,7 @@ setTO(to);
     instance.post('/delhi',{to:to,from:from,user:user._id}).then(res=>{
       console.log(res.data.result);
       if(res.status==200){
+        console.log(res.data.result)
         setBuse(res.data.result);
       }
       
@@ -81,15 +82,15 @@ setTO(to);
           </View>
 
           <View  style={styles.routeDetails}>
-            <TouchableOpacity  onPress={()=>props.navigation.navigate({routeName:'StopDetails',params:{data:buses,from:from,to:to}})}>
+            {buses?.map((bus,i)=>( <TouchableOpacity key={i}  onPress={()=>props.navigation.navigate({routeName:'StopDetails',params:{data:bus,from:from,to:to}})}>
             <View style={styles.route}>
             <Avatar.Icon size={60} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus" size={60} color="rgb(23, 157, 227)" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginTop:15,marginLeft:5 }}  />
               <View style={{flex:1,flexDirection:'column', marginLeft:10}}>
                   <View style={{flex:1,flexDirection:'row',paddingTop:5}}>
-              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>{buses[0]?.arrival_time}-</Text>
-              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>{buses[buses.length-1]?.departure_time}</Text>
+              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>{bus.from.arrival_time}-</Text>
+              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>{bus.to.departure_time}</Text>
               </View>
-              <Text style={{}}>Via-{buses[(buses.length)-5]?.stop_id}</Text>
+              {/* <Text style={{}}>Via-{buses[(buses.length)-5]?.stop_id}</Text> */}
              
               </View>
               {/* <View style={{flex:1,flexDirection:'column'}}>
@@ -98,7 +99,9 @@ setTO(to);
               </View> */}
               
             </View>
-            </TouchableOpacity>
+            </TouchableOpacity>))}
+
+            {!buses.length && <Text>No Direct Route Found, Try Again...</Text>}
 
             {/* <View style={styles.route}>
             <Avatar.Icon size={60} color="rgb(23, 157, 227)" icon={() => <MaterialCommunityIcons name="bus" size={60} color="rgb(23, 157, 227)" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginTop:15,marginLeft:5 }}  />

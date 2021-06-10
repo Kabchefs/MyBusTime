@@ -9,6 +9,7 @@ import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { instance } from '../utils/axiosConfig';
 import { Keyboard } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -179,8 +180,8 @@ const dlistClick =  (cityname)=>{
 
            <View style={[styles.routesBody, {marginTop:5}]}>
              <DataTable  style={{width:'90%',height:'auto', backgroundColor:'#f6f6f6',borderRadius:12}} >
-              {recents?.map((rec,i)=>( <DataTable.Header style={{height:60,justifyContent:'center',alignItems:'center'}} >
-                 <DataTable.Title style={{ marginLeft:'12%'}}>
+              {recents?.map((rec,i)=>( <DataTable.Header  key={i} style={{height:60,justifyContent:'center',alignItems:'center'}} >
+                 <DataTable.Title onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec.to_stop_name,from:rec.from_stop_name,user:user}})} style={{ marginLeft:'12%'}}>
                  {rec.from_stop_name}         - 
                  </DataTable.Title>
                 <DataTable.Title style={{ marginRight:'5%'}}>{rec.to_stop_name}</DataTable.Title >

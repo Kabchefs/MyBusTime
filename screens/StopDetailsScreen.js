@@ -4,6 +4,7 @@ import { Platform, View, StyleSheet, ScrollView ,FlatList} from "react-native";
 import {Button,DataTable, TextInput, Paragraph,Avatar, Surface,Appbar,StatusBar, BottomNavigation, Text ,Switch} from 'react-native-paper';
 import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { instance } from '../utils/axiosConfig';
 
 
 
@@ -36,9 +37,17 @@ export default function StopDetailsScreen (props)
     let routes=props.navigation.getParam('data');
     var to=props.navigation.getParam('to');
     var from=props.navigation.getParam('from');
+    let obj={
+      trip_id:routes.from.trip_id,
+      from_stop_sequence:routes.from.stop_sequence,
+to_stop_sequence:routes.to.stop_sequence
+    }
+    instance.post('/delhi/route',obj).then(res=>{
+      setRoutes(res.data.result);
+    })
 setFrom(from);
 setTO(to);
-setRoutes(routes);
+
   }, [])
 
 

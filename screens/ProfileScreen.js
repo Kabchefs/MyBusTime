@@ -1,16 +1,17 @@
 
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Platform } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, Platform,Linking } from 'react-native';
 import {Button} from 'react-native-paper';
 import { SocialIcon } from 'react-native-elements';
 import * as ImagePicker from 'expo-image-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-
-
+import { Ionicons } from '@expo/vector-icons';
 
 export default function ProfileScreen(props) {
     const [image, setImage] = useState(null);
-
+    const [user,setUser]=useState({});
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -22,12 +23,19 @@ export default function ProfileScreen(props) {
         })();
     }, []);
 
+    useEffect(() => {
+  AsyncStorage.getItem('user').then(data=>JSON.parse(data)).then(res=>{
+      console.log(res)
+      setUser(res);
+  });
+}, [])
+
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 3],
-            quality: 1,
+            quality: 0,
         });
 
         console.log(result);
@@ -51,15 +59,15 @@ export default function ProfileScreen(props) {
 
             </View>
             <View style={styles.firstCard}>
-                <Button style={styles.editIcon} color={'#179de3'} icon="pencil"  onPress={pickImage}> </Button>
+                <Button style={styles.editIcon} color={'#179de3'} onPress={pickImage}>  <MaterialCommunityIcons name="pencil"  /> </Button>
                 {/* {image && <Image  style={styles.profileImage} source={{ uri: image }} />} */}
                 <Image
                     style={styles.profileImage}
-                    source={require("../assets/images/profile.png")}
+                    source={{uri:image} || require("../assets/images/profile.png")}
                 />
 
-                <Text style={styles.name}>Ricardo Joseph</Text>
-                <Text style={styles.name}>ricardojoseph@gmail.com</Text>
+                <Text style={styles.name}>{user?.name}</Text>
+                <Text style={styles.name}>{user?.email}</Text>
 
                 <Text style={styles.rank}>RANK</Text>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -81,12 +89,14 @@ export default function ProfileScreen(props) {
                 <View  style={styles.socialButtonView}>
                     <View style={styles.badge}>
                         <SocialIcon
+                        onPress={()=>Linking.openURL(`https://www.facebook.com/sharer/sharer.php?quote=download mybus time`)}
                             style={styles.socialButton}
                             type='facebook'
                         />
                     </View>
                     <View style={styles.badge}>
                     <SocialIcon
+                    onPress={()=>Linking.openURL(`https://twitter.com/intent/tweet?text=download mybus time`)}
                         style={styles.socialButton}
                         type='twitter'
                     />
@@ -94,6 +104,7 @@ export default function ProfileScreen(props) {
                     </View>
                     <View style={styles.badge}>
                     <SocialIcon
+                    onPress={()=>Linking.openURL(`whatsapp://send?text=Welcome to My Bus Time. Download it!`)}
                         style={styles.socialButton}
                         type='instagram'
                     />
@@ -105,36 +116,38 @@ export default function ProfileScreen(props) {
             <View style={styles.thirdCard}>
                 <Text style={styles.general}>GENERAL</Text>
                 <View style={styles.generalSetting}>
-                    <Button style={styles.generalIcon} color={'#179de3'} size={40} icon="security" >
+                    <Button style={styles.generalIcon} color={'#179de3'} size={40}><MaterialCommunityIcons name="security"  />
                     </Button>
                     <View style={{ flex: 1, flexDirection: 'column' }}>
                         <Text style={styles.generalText}>Privacy</Text>
                         <Text style={styles.generalText2}>Change Your Password</Text>
                     </View>
-                    <Button style={styles.greaterIcon} color={'#dddddd'} icon="greater-than" onPress={() => props.navigation.navigate({ routeName: "ResetPassword" })} />
+                    <Button style={styles.greaterIcon} color={'#dddddd'} onPress={() => props.navigation.navigate({ routeName: "ResetPassword" })} > <MaterialCommunityIcons name="greater-than"  /></Button>
 
 
                 </View>
                 <View style={styles.generalSetting}>
-                    <Button style={styles.generalIcon} color={'#179de3'} icon="information-outline">
+                    <Button style={styles.generalIcon} color={'#179de3'} >
+                    <MaterialCommunityIcons name="information-outline"  />
                     </Button>
                     <View style={{ flex: 1, flexDirection: 'column' }}>
                         <Text style={styles.generalText}>About Us</Text>
                         <Text style={styles.generalText2}> Click to know more about us</Text>
                     </View>
-                    <Button style={styles.greaterIcon} color={'#dddddd'} icon="greater-than" />
-
+                    <Button style={styles.greaterIcon} color={'#dddddd'} >
+                    <MaterialCommunityIcons name="greater-than"  /></Button>
 
                 </View>
                 <View style={styles.generalSetting}>
-                    <Button style={styles.generalIcon} icon="star-outline" color={'#179de3'}>
+                    <Button style={styles.generalIcon} color={'#179de3'}>
+                    <MaterialCommunityIcons name="star-outline"  />
                     </Button>
                     <View style={{ flex: 1, flexDirection: 'column' }}>
                         <Text style={styles.generalText}>Rate</Text>
                         <Text style={styles.generalText2}>Rate Us</Text>
                     </View>
-                    <Button style={styles.greaterIcon} color={'#dddddd'} icon="greater-than" />
-
+                    <Button style={styles.greaterIcon} color={'#dddddd'} onPress={()=>Linking.openURL('market://details?id=com.whereismytrain.android')} >
+                    <MaterialCommunityIcons name="greater-than" type='evilicon'  /></Button>
 
                 </View>
 
