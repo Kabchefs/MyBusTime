@@ -44,6 +44,7 @@ to_stop_sequence:routes.to.stop_sequence
     }
     instance.post('/delhi/route',obj).then(res=>{
       setRoutes(res.data.result);
+      console.log(res.data.result);
     })
 setFrom(from);
 setTO(to);
@@ -67,7 +68,7 @@ setTO(to);
           <View style={styles.cityNames} >
             <Text style={styles.fromCityName}>{from}</Text>
             <View style={{flex:1,flexDirection:'column'}}>
-              <Text style={{fontSize:12,color:'#ffffff',marginTop:5}}>{routes[0]?.arrival_time}-{routes[routes.length-1]?.departure_time}</Text>
+              <Text style={{fontSize:12,color:'#ffffff',marginTop:5}}>{routes[0]?.arrival_time.slice(0,5)}-{routes[routes.length-1]?.departure_time.slice(0,5)}</Text>
               <Text style={{fontSize:12,color:'#ffffff'}}>--------------------------</Text>
 
             </View>
@@ -77,13 +78,13 @@ setTO(to);
 
           <View  style={styles.stopDetails}>
             {routes.map((route,i)=>( <View style={styles.stop}>
-              <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>{route.stop_id}</Text>
+              <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>{route.city.stop_name}</Text>
               <View style={{flex:1,flexDirection:'column'}}>
               <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15,marginLeft:15 }}  />
               <Text style={{marginLeft:10,paddingBottom:4,marginTop:-5}}>........</Text>
               </View>
-              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>{route.arrival_time}-</Text>
-              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>{route.departure_time}</Text>
+              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>{route.arrival_time.slice(0,5)}-</Text>
+              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>{route.departure_time.slice(0,5)}</Text>
               <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="calendar" size={24} color="#ffa22d" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />
             </View>))}
             {/* <View style={styles.stop}>

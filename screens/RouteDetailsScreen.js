@@ -87,10 +87,10 @@ setTO(to);
             <Avatar.Icon size={60} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus" size={60} color="rgb(23, 157, 227)" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginTop:15,marginLeft:5 }}  />
               <View style={{flex:1,flexDirection:'column', marginLeft:10}}>
                   <View style={{flex:1,flexDirection:'row',paddingTop:5}}>
-              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>{bus.from.arrival_time}-</Text>
-              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>{bus.to.departure_time}</Text>
+              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>{bus.from.arrival_time.slice(0,5)}-</Text>
+              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>{bus.to.departure_time.slice(0,5)}</Text>
               </View>
-              {/* <Text style={{}}>Via-{buses[(buses.length)-5]?.stop_id}</Text> */}
+              <Text style={{}}>Via-{bus.via.city.stop_name}</Text>
              
               </View>
               {/* <View style={{flex:1,flexDirection:'column'}}>
