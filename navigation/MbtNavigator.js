@@ -19,6 +19,7 @@ import RouteDetailsScreen from '../screens/RouteDetailsScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const HomePage= createMaterialBottomTabNavigator({
     Main:{screen:HomeRoute,navigationOptions:{
@@ -74,11 +75,100 @@ const MbtNavigator=createStackNavigator({
 //     )
 // }
 
-const MainNavigtor=createDrawerNavigator(
-    {
-        Main:MbtNavigator
-    }
-);
+const MainNavigator=createDrawerNavigator({
+    Home: {
+        screen:HomePage,
+        navigationOptions :{
+            itemStyle:{marginTop:30},
+            drawerLabel: 'Home',
+            drawerIcon: ({ tintColor }) => (
+              <MaterialCommunityIcons name="home" size={24}  color='rgb(23, 157, 227)' style={{marginRight:-10}}/>
+            ),
+          },
+          contentOptions: {
+            activeTintColor: '#e91e63',
+            itemsContainerStyle: {
+              marginTop:50,
+            },
+            iconContainerStyle: {
+              opacity: 1
+            },
+            itemStyle:{
+                marginTop:100,
+                paddingTop:30,
+            }
+          },
+         
+        
+      },
+      Profile: {
+        screen: ProfileScreen,
+        navigationOptions: {
+    
+            drawerLabel: 'Profile',
+            drawerIcon: ({ tintColor }) => (
+              <MaterialCommunityIcons name="account" size={22} color="rgb(23, 157, 227)"  style={{marginRight:-10}} />
+            ),
+          }
+        
+      },
+      Connect:{
+        screen: ConnectScreen,
+        navigationOptions: {
+    
+            drawerLabel: 'Connect',
+            drawerIcon: ({ tintColor }) => (
+              <Ionicons name="search" size={22} color="rgb(23, 157, 227)" style={{marginRight:-10}} />
+            ),
+          }
+        
 
 
-export default createAppContainer(MainNavigtor);
+      },
+
+      PrivacyPolicy: {
+        screen: PrivacyPolicyScreen,
+        navigationOptions: {
+    
+            drawerLabel: 'Privacy Policy',
+            drawerIcon: ({ tintColor }) => (
+              <MaterialCommunityIcons name="information" size={24} color="rgb(23, 157, 227)"  style={{marginRight:-10}} />
+            ),
+          }
+      },
+      ResetPassword: {
+        screen:ResetPasswordScreen,
+        navigationOptions: {
+    
+            drawerLabel: 'Reset Password',
+            drawerIcon: ({ tintColor }) => (
+              <MaterialCommunityIcons name="security" size={22} color="rgb(23, 157, 227)"  style={{marginRight:-10}}/>
+            ),
+          }
+       
+      },
+   
+    })
+
+// const MainNavigtor=createDrawerNavigator(
+//     {
+       
+
+//     //   Main:MbtNavigator,
+//     //   PrivacyPolicy:PrivacyPolicyScreen,
+//     //   ResetPassword:ResetPasswordScreen,
+//     // //   }
+//     // //   ,{
+//     // //   contentOptions: {
+//     // //      // paddingTop:80,
+//     // //     activeTintColor: 'rgb(23, 157, 227)',
+//     // //     itemStyle:{
+//     // //         marginTop:20
+//     // //     }
+//     // //   },
+
+        
+//     });
+
+
+export default createAppContainer(MainNavigator);
