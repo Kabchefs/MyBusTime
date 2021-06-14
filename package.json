@@ -8,7 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^1.13.0",
+    "@react-native-async-storage/async-storage": "^1.15.5",
     "@react-native-google-signin/google-signin": "^6.0.0",
     "axios": "^0.21.1",
     "dotenv": "^9.0.2",
@@ -35,6 +35,8 @@
     "react-native-paper": "^4.8.1",
     "react-native-reanimated": "~2.1.0",
     "react-native-screens": "~3.0.0",
+    "react-native-searchbar": "^1.16.0",
+    "react-native-text-ticker": "^1.12.0",
     "react-native-textinput-material-autocomplete": "^1.0.6",
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
