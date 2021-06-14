@@ -17,7 +17,7 @@ const TopNavBar = () =>
     style={{ backgroundColor: 'rgb(23, 157, 227)' }}
     >
 
-    <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24}  color="white"/>}  onPress={()=>sideDrawer()}  />
+    <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24}  color="white"/>}  />
 
        <Appbar.Content title="MyBusTime" />
      </Appbar.Header>
