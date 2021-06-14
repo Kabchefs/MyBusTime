@@ -1,11 +1,11 @@
 
 import React ,{useState,useEffect}from 'react';
-import { Platform, View, StyleSheet, ScrollView ,FlatList} from "react-native";
+import { Platform, View, StyleSheet, ScrollView ,FlatList,Alert} from "react-native";
 import {Button,DataTable, TextInput, Paragraph,Avatar, Surface,Appbar,StatusBar, BottomNavigation, Text ,Switch} from 'react-native-paper';
 import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { instance } from '../utils/axiosConfig';
-
+import * as Location from 'expo-location';
 
 
 const TopNavBar = () =>
@@ -29,10 +29,67 @@ export default function StopDetailsScreen (props)
 {
   const [isSwitchOn, setIsSwitchOn] = useState(false);
 
-  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+  
   const [routes,setRoutes]=useState([]);
   const [from,setFrom]=useState('');
   const [to,setTO]=useState('');
+const [loc,setloc]=useState({});
+const [usrloc,setusrloc]=useState();
+
+  useEffect(() => {
+    
+   // let d=[];
+    if(routes.length && loc.coords){
+      console.log("chala ji");
+   for(let a of routes){
+    let dis=getDistanceFromLatLonInKm(loc.coords.latitude,loc.coords.longitude,parseFloat(a.city.stop_lat),parseFloat(a.city.stop_lon));
+    console.log(dis);
+    if(dis<0.1){
+     setusrloc(a);
+     // d.push(a);
+    }
+   }
+  }
+   //console.log(d);
+  }, [loc,routes]);
+
+  const onToggleSwitch = async() => {
+    setIsSwitchOn(!isSwitchOn);
+    console.log(isSwitchOn);
+    if(!isSwitchOn){
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        // Alert.alert('Permission','Permission to access location was denied',[{text: "OK"}]);
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setloc(location);
+      console.log(location);
+    }
+    
+  }
+
+  function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+    var dLon = deg2rad(lon2-lon1); 
+    var a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2)
+      ; 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c; // Distance in km
+    return d;
+  }
+  
+  function deg2rad(deg) {
+    return deg * (Math.PI/180)
+  }
+
+
+
   useEffect(() => {
     let routes=props.navigation.getParam('data');
     var to=props.navigation.getParam('to');
@@ -85,7 +142,7 @@ setTO(to);
               </View>
               <Text style={{marginRight:20,marginTop:10,fontSize:16}}>{route.arrival_time.slice(0,5)}-</Text>
               <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>{route.departure_time.slice(0,5)}</Text>
-              <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="calendar" size={24} color="#ffa22d" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />
+             {route.stop_sequence==usrloc?.stop_sequence && <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="map-marker-outline" size={24} color="#ffa22d" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />}
             </View>))}
             {/* <View style={styles.stop}>
               <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>Stop Name</Text>

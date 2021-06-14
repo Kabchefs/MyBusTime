@@ -23,6 +23,10 @@ export default function ProfileScreen(props) {
         })();
     }, []);
 
+
+
+
+    
     useEffect(() => {
   AsyncStorage.getItem('user').then(data=>JSON.parse(data)).then(res=>{
       console.log(res)
