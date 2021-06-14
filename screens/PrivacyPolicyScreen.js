@@ -7,6 +7,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 
+export default function PrivacyPolicyScreen (props) 
+{
+ 
 const TopNavBar = () =>
 {
 
@@ -15,7 +18,7 @@ const TopNavBar = () =>
     style={{ backgroundColor: 'rgb(23, 157, 227)' }}
     >
 
-    <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24}  color="white"/>}  onPress={()=>sideDrawer()}  />
+    <Appbar.Action onPress={()=>props.navigation.toggleDrawer()} icon={() => <MaterialCommunityIcons name="format-align-left" size={24}  color="white"/>}/>
 
        <Appbar.Content title="MyBusTime" />
      </Appbar.Header>
@@ -23,9 +26,6 @@ const TopNavBar = () =>
 
   );
 };
-
-export default function PrivacyPolicyScreen (props) 
-{
 
 
   return (
