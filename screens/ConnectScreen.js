@@ -1,11 +1,11 @@
 
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import { Button, TextInput, Appbar, Surface, Avatar } from 'react-native-paper';
+import React, { useState ,useEffect} from 'react';
+import { StyleSheet, Text, View, ScrollView,FlatList } from 'react-native';
+import { Button, TextInput, Appbar, Surface, Avatar ,Card} from 'react-native-paper';
 import { instance } from '../utils/axiosConfig';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import SearchBar from 'react-native-searchbar';
-
+import * as Contacts from 'expo-contacts';
 
 
 
@@ -20,6 +20,8 @@ export default function ConnectScreen(props) {
     const _handleMore = () => console.log('Shown more');
     const [search, setSearch] = useState('');
     const [isVisible, setIsVisible] = useState(false);
+    const [contacts,setContacts]=useState([]);
+    const [cshow,setShow]=useState(false);
     const items = [
         1337,
         'janeway',
@@ -44,7 +46,22 @@ export default function ConnectScreen(props) {
         [4, 2, 'tree'],
     ];
 
-
+  const  getContact= async() => {
+        
+          const { status } = await Contacts.requestPermissionsAsync();
+          if (status === 'granted') {
+            const { data } = await Contacts.getContactsAsync({
+              fields: [Contacts.Fields.Emails],
+            });
+    
+            if (data.length > 0) {
+              const contact = data[0];
+              console.log(data);
+              setContacts(data);
+              setShow(true);
+            }
+          }
+        };
 
 
     const inputSearch = () => {
@@ -64,6 +81,10 @@ export default function ConnectScreen(props) {
 
 
     }
+    const ContactsSearch=()=>{
+        setIsVisible(!isVisible);
+        getContact();
+    }
 
     return (
 
@@ -75,11 +96,34 @@ export default function ConnectScreen(props) {
                 {isVisible ? <SearchBar
                     data={items}
                     showOnLoad
-                    onBack={() => setIsVisible(!isVisible)}
+                    onBack={() => {setIsVisible(!isVisible);setShow(false)}}
                 /> : null
                 }
                  <Appbar.Content title="MyBusTime" /> 
-                <Appbar.Action icon={() => <Ionicons name="search" size={22} color="white" />} onPress={() => setIsVisible(!isVisible)} />
+                <Appbar.Action icon={() => <Ionicons name="search" size={22} color="white" />} onPress={() => ContactsSearch()} />
+
+{/* Show COntacts card */}
+
+{ cshow  && <FlatList style={{elevation:100,width:'90%'}}
+        data={contacts}
+        keyboardShouldPersistTaps = "always"
+        renderItem={({item})=>{
+            return(
+                <Card 
+                 style={{margin:2,padding:12}}
+                //  onPress={()=>dlistClick(item.firstName)}
+                >
+                    <Text>{item.firstName}</Text>
+                </Card>
+            )
+        }}
+        keyExtractor={item=>item.id}
+        />}
+
+
+{/* End Contact card  */}
+
+
 
             </Appbar.Header>
             <View style={styles.surface}>

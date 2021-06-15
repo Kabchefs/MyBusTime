@@ -77,7 +77,7 @@ const MbtNavigator=createStackNavigator({
 
 const MainNavigator=createDrawerNavigator({
     Home: {
-        screen:HomePage,
+        screen:MbtNavigator,
         navigationOptions :{
             itemStyle:{marginTop:30},
             drawerLabel: 'Home',
