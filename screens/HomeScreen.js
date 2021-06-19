@@ -3,13 +3,14 @@ import React ,{useState,useEffect}from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-import { Platform, View, StyleSheet, ScrollView ,FlatList} from "react-native";
-import {Button,DataTable, TextInput, Paragraph,Avatar, Surface,Appbar,StatusBar, BottomNavigation, Text ,Card,Drawer} from 'react-native-paper';
+import { Platform, View, StyleSheet, ScrollView ,FlatList,StatusBar} from "react-native";
+import {Button,DataTable, TextInput, Paragraph,Avatar, Surface,Appbar, BottomNavigation, Text ,Card,Drawer} from 'react-native-paper';
 import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { instance } from '../utils/axiosConfig';
 import { Keyboard } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import {Ionicons} from '@expo/vector-icons';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -98,7 +99,7 @@ const dlistClick =  (cityname)=>{
            <View style={styles.routesHeader}>
              <Paragraph>
               <Avatar.Icon size={30} color="#F73D84" icon={() => <MaterialCommunityIcons name="map-marker" size={24} color="#F73D84" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:20 }} />
-              <Paragraph style={{color:'#5ab7e6',paddingTop:8}}>  Route Details </Paragraph>
+              <Paragraph style={{color:'#5ab7e6',paddingTop:8, fontFamily:'Montserrat-SemiBold',fontSize:15}}>  Route Details </Paragraph>
             </Paragraph>
            </View>
 
@@ -109,7 +110,7 @@ const dlistClick =  (cityname)=>{
                    onChangeText={(text)=>fetchCities(text,'s')}
                   //  onChangeText={source => setSource(source)}
                    underlineColor='#5ab7e6'
-                   theme={{colors: {text: 'black', primary: 'rgb(23, 157, 227)'}}}
+                   theme={{colors: {text: 'black', primary: 'rgb(23, 157, 227)',fontFamily:'Poppins'}}}
                    style={{ backgroundColor: '#f6f6f6',width:'90%',borderRadius:12,borderTopRightRadius:12,borderTopLeftRadius:12}}
                />
     {show &&  <FlatList style={{zIndex:100,width:'90%'}}
@@ -133,7 +134,7 @@ const dlistClick =  (cityname)=>{
                     onChangeText={(text)=>fetchCities(text,'d')}
                     //  onChangeText={destination => setDestination(destination)}
                      underlineColor='#5ab7e6'
-                     theme={{colors: {text: 'black', primary: 'rgb(23, 157, 227)'}}}
+                     theme={{colors: {text: 'black', primary: 'rgb(23, 157, 227)',fontFamily:'Poppins'}}}
                      style={{ backgroundColor:'#f6f6f6', marginTop:20,width:'90%',borderRadius:12,borderTopRightRadius:12,borderTopLeftRadius:12 }}
                />
                {dshow  && <FlatList style={{elevation:100,width:'90%'}}
@@ -174,19 +175,31 @@ const dlistClick =  (cityname)=>{
            <View style={styles.routesHeader}>
              <Paragraph>
               <Avatar.Icon size={30} color="rgb(23, 157, 227)" icon={() => <MaterialCommunityIcons name="flag" size={24}  color="#45ade3"/>} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:20 }} />
-            <Paragraph style={{color:'#5ab7e6',paddingTop:10}}> Recently Visited Routes </Paragraph>
+            <Paragraph style={{color:'#5ab7e6',paddingTop:10,fontFamily:'Montserrat-SemiBold',fontSize:15}}> Recently Visited Routes </Paragraph>
             </Paragraph>
            </View>
 
            <View style={[styles.routesBody, {marginTop:5}]}>
-             <DataTable  style={{width:'90%',height:'auto', backgroundColor:'#f6f6f6',borderRadius:12}} >
+             {/* <DataTable  style={{width:'90%',height:'auto', backgroundColor:'#f6f6f6',borderRadius:12}} >
               {recents?.map((rec,i)=>( <DataTable.Header  key={i} style={{height:60,justifyContent:'center',alignItems:'center'}} >
-                 <DataTable.Title onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec.to_stop_name,from:rec.from_stop_name,user:user}})} style={{ marginLeft:'12%'}}>
-                 {rec.from_stop_name}         - 
+                 <DataTable.Title   theme={{colors: {text: 'black', primary: 'rgb(23, 157, 227)',fontFamily:'Montserrat-Bold'}}} onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec.to_stop_name,from:rec.from_stop_name,user:user}})} style={{width:'40%',marginLeft:-5,fontFamily:'Poppins'}}>
+                 {rec.from_stop_name}      - 
                  </DataTable.Title>
-                <DataTable.Title style={{ marginRight:'5%'}}>{rec.to_stop_name}</DataTable.Title >
+                <DataTable.Title style={{ width:'40%',marginRight:'-5%',fontFamily:'Poppins'}}>{rec.to_stop_name}</DataTable.Title >
                </DataTable.Header >))}
-             </DataTable>
+             </DataTable> */}
+
+             <View style={{backgroundColor: '#f6f6f6',width:'99%',flex:1,flexDirection:'column',borderRadius:10,height:'auto'}}>
+             {recents?.map((rec,i)=>(
+               <View style={{borderBottomWidth:1,borderBottomColor:"rgb(23, 157, 227)",width:'90%',flex:1,flexDirection:'row',alignSelf:'center',marginBottom:12,paddingTop:10}}>
+             <Text style={{ width:'50%',alignSelf:"center",fontFamily:'Montserrat-Regular',marginLeft:-5,fontSize:13}} onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec.to_stop_name,from:rec.from_stop_name,user:user}})}>  {rec.from_stop_name} </Text>
+             <Ionicons name="swap-horizontal-outline" size={22} color='rgb(23, 157, 227)'  style={{alignSelf:'center',paddingLeft:2,paddingRight:5}}/>
+
+             <Text style={{width:'45%',alignSelf:'center',fontFamily:'Montserrat-Regular',marginRight:10,fontSize:13}}>{rec.to_stop_name}</Text>
+             </View>))}
+
+             </View>
+             
           </View>
          </View>
         </Surface>
