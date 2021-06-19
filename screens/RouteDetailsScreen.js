@@ -72,9 +72,9 @@ setTO(to);
           </View>
           <View style={styles.cityNames} >
             <Text style={styles.fromCityName}>{from}</Text>
-            <View style={{flex:1,flexDirection:'column'}}>
-            <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: "rgb(23, 157, 227)",paddingTop:18,marginLeft:25, }}  />
-              <Text style={{fontSize:12,color:'#ffffff'}}>------------</Text>
+            <View style={{flex:1,flexDirection:'column',width:'10%'}}>
+            <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: "rgb(23, 157, 227)",paddingTop:18,marginLeft:2, }}  />
+              <Text style={{fontSize:12,color:'#ffffff',marginLeft:-10}}>------------</Text>
 
             </View>
 
@@ -84,13 +84,13 @@ setTO(to);
           <View  style={styles.routeDetails}>
             {buses?.map((bus,i)=>( <TouchableOpacity key={i}  onPress={()=>props.navigation.navigate({routeName:'StopDetails',params:{data:bus,from:from,to:to}})}>
             <View style={styles.route}>
-            <Avatar.Icon size={60} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus" size={60} color="rgb(23, 157, 227)" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginTop:15,marginLeft:5 }}  />
+            <Avatar.Icon size={60} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus" size={60} color="rgb(23, 157, 227)" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginTop:15,marginLeft:15 }}  />
               <View style={{flex:1,flexDirection:'column', marginLeft:10}}>
                   <View style={{flex:1,flexDirection:'row',paddingTop:5}}>
-              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>{bus.from.arrival_time.slice(0,5)}-</Text>
-              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>{bus.to.departure_time.slice(0,5)}</Text>
+              <Text style={{marginRight:10,marginLeft:60,marginTop:10,fontSize:16,alignSelf:'center'}}>{bus.from.arrival_time.slice(0,5)}-</Text>
+              <Text style={{marginLeft:-5,marginTop:10,marginRight:5,fontSize:16,alignSelf:'center'}}>{bus.to.departure_time.slice(0,5)}</Text>
               </View>
-              <Text style={{}}>Via-{bus.via.city.stop_name}</Text>
+              <Text style={{marginLeft:60}}>Via-{bus.via.city.stop_name}</Text>
              
               </View>
               {/* <View style={{flex:1,flexDirection:'column'}}>
@@ -171,18 +171,19 @@ const styles = StyleSheet.create({
   },
   fromCityName:{
     fontSize:14,
-    marginRight:13,
-    color:'#ffffff',
+    marginRight:10,
     marginLeft:10,
+    color:'#ffffff',
+    width:'45%',
     margin:'auto',
     alignSelf:'center',
 
   },
   toCityName:{
     color:'#ffffff',
-    marginLeft:-30,
-    marginRight:10,
+   width:'42%',
     alignSelf:'center',
+    marginRight:-10
   }, 
   routeDetails:{
     flex:1,
