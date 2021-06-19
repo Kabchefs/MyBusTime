@@ -127,85 +127,122 @@ export default function ConnectScreen(props) {
 
             </Appbar.Header>
             <View style={styles.surface}>
-                <View style={styles.surfaceBox}>
-                    <Text style={{ justifyContent: 'center', alignSelf: 'center' }}>1</Text>
+                <View style={{flex:1, flexDirection:'row'}}>
+                <Text style={{padding:15,color:'#ffffff',fontSize:15}}>Ranking</Text>
+                    <Text style={{padding:15,paddingLeft:'58%',color:'#ffffff',fontSize:15}}
+                    onPress={()=>props.navigation.navigate({routeName:'LeaderBoard'})}
+                    > See All</Text>
 
                 </View>
+               <View style={{flex:1,flexDirection:'row'}}>
                 <View style={styles.surfaceBox}>
-                    <Text style={{ justifyContent: 'center', alignSelf: 'center' }}>2</Text>
-
+                    <Text style={{color:'#ffffff',paddingLeft:30}}>2</Text>
+                    <Avatar.Image size={70} source={require('../assets/images/userRank.png')} />
+                    <Text style={{color:'#ffffff',paddingLeft:10}}>Robert</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:10}}>1000</Text>
                 </View>
-                <View style={styles.surfaceBox}>
-                    <Text style={{ justifyContent: 'center', alignSelf: 'center' }}>3</Text>
 
+                <View style={[styles.surfaceBox,{marginTop:-60}]}>
+                <Avatar.Image size={40} source={require('../assets/images/winner.png')} backgroundColor='rgb(23, 157, 227)' style={{paddingLeft:15}}/>
+                    <Avatar.Image size={80} source={require('../assets/images/userRank.png')} />
+                    <Text style={{color:'#ffffff',paddingLeft:15}}>Robert</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:15}}>1000</Text>
+                </View>
+
+                <View style={styles.surfaceBox}>
+                <Text style={{color:'#ffffff',paddingLeft:30}}>3</Text>
+                    <Avatar.Image size={70} source={require('../assets/images/userRank.png')} />
+                    <Text style={{color:'#ffffff',paddingLeft:10}}>Robert</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:10}}>1000</Text>
+                </View>
+                
                 </View>
 
             </View>
 
             <View style={styles.chat}>
-                <Text style={styles.chatButton}>Chat With Annonymous</Text>
-                <Text style={{ alignSelf: 'center', fontSize: 15 }}>Search</Text>
-                <Avatar.Icon size={60} color='rgb(23, 157, 227)' icon={() => <Ionicons name="search" size={60} color='rgb(23, 157, 227)' />} style={{ backgroundColor: '#f1f1f3', alignSelf: 'center' }} />
+                
+                <View style={{flex:1,flexDirection:'row'}}>
+                <Ionicons name="chatbubbles-sharp" size={22} color='rgb(23, 157, 227)' style={{paddingTop:10,paddingLeft:10,paddingRight:5}} />
+                <Text style={styles.chatButton}>Chat/Call</Text>
+                <Text style={{paddingTop:18,fontFamily:'Poppins',fontSize:11,color:'rgb(23, 157, 227)'}}>(With Annonmous MyBusTime User)</Text>
+                </View>
+                <View style={{borderBottomWidth:1,borderBottomColor:'#f4f8f9',marginTop:-50}}></View>
 
+                <View style={{flex:1,flexDirection:'row', alignSelf: 'center'}}>
+                <Avatar.Image size={90} source={require('../assets/images/search.png')} style={{ backgroundColor: '#ffffff', alignSelf: 'center' }}  />
+                </View>
+               
             </View>
 
             <View style={styles.requestBox}>
-                <Text style={{ color: 'rgb(23, 157, 227)', marginLeft: 10, marginTop: 10, fontSize: 20, }}>Friend Requests</Text>
+            <View style={{flex:1,flexDirection:'row',paddingTop:10}}>
+                <Ionicons name="people-sharp" size={22} color='rgb(23, 157, 227)' style={{paddingTop:10,paddingLeft:10,paddingRight:5}} />
+                <Text style={{ fontSize: 15, fontFamily: 'Montserrat-SemiBold', paddingTop:10,color:'rgb(23, 157, 227)'}}>Friend Request</Text>
+                <Text style={{paddingTop:18,fontFamily:'Poppins',fontSize:11,color:'rgb(23, 157, 227)'}}>(Share Your Rank With Friends)</Text>
+            </View>
+
+            <View style={{borderBottomWidth:2,borderBottomColor:'#f4f8f9',width:'95%',alignSelf:'center'}}></View>
+
+                
                 <View style={styles.request}>
-                    <View style={{ flex: 1, flexDirection: 'column' }}>
-                        <Text style={{ margin: 10 }}>Name :</Text>
-                        <Text style={{ margin: 10, marginTop: -5 }}>Mobile Number:</Text>
+                    <View style={{backgroundColor:'#f4f8f9',height:55,width:80,borderRadius:20}}>
 
                     </View>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <Text style={{ margin: 25, marginLeft: 90 }}>Active</Text>
+                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins'}}> Name</Text>
+                    <Ionicons name="checkmark-circle-sharp" size={35} color='rgb(23, 157, 227)' style={{paddingTop:15,paddingLeft:40}} />
+                    <Ionicons name="close-circle-sharp" size={35} color='red' style={{paddingTop:15,paddingLeft:20}} />
+                
+                    
+                </View>
+
+                <View style={styles.request}>
+                    <View style={{backgroundColor:'#f4f8f9',height:55,width:80,borderRadius:20}}>
 
                     </View>
-
-
-
-
+                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins'}}> Name</Text>
+                    <Ionicons name="checkmark-circle-sharp" size={35} color='rgb(23, 157, 227)' style={{paddingTop:15,paddingLeft:40}} />
+                    <Ionicons name="close-circle-sharp" size={35} color='red' style={{paddingTop:15,paddingLeft:20}} />
+                
+                    
                 </View>
                 <View style={styles.request}>
-                    <View style={{ flex: 1, flexDirection: 'column' }}>
-                        <Text style={{ margin: 10 }}>Name :</Text>
-                        <Text style={{ margin: 10, marginTop: -5 }}>Mobile Number:</Text>
+                    <View style={{backgroundColor:'#f4f8f9',height:55,width:80,borderRadius:20}}>
 
                     </View>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
-
-                        <Text style={{ margin: 25, marginLeft: 90 }}>Active</Text>
-
-                    </View>
-
-
+                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins'}}> Name</Text>
+                    <Ionicons name="checkmark-circle-sharp" size={35} color='rgb(23, 157, 227)' style={{paddingTop:15,paddingLeft:40}} />
+                    <Ionicons name="close-circle-sharp" size={35} color='red' style={{paddingTop:15,paddingLeft:20}} />
+                
+                    
                 </View>
+
                 <View style={styles.request}>
-                    <View style={{ flex: 1, flexDirection: 'column' }}>
-                        <Text style={{ margin: 10 }}>Name :</Text>
-                        <Text style={{ margin: 10, marginTop: -5 }}>Mobile Number:</Text>
+                    <View style={{backgroundColor:'#f4f8f9',height:55,width:80,borderRadius:20}}>
 
                     </View>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <Text style={{ margin: 25, marginLeft: 90 }}>Active</Text>
-
-                    </View>
-
-
+                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins'}}> Name</Text>
+                    <Ionicons name="checkmark-circle-sharp" size={35} color='rgb(23, 157, 227)' style={{paddingTop:15,paddingLeft:40}} />
+                    <Ionicons name="close-circle-sharp" size={35} color='red' style={{paddingTop:15,paddingLeft:20}} />
+                
+                    
                 </View>
+
                 <View style={styles.request}>
-                    <View style={{ flex: 1, flexDirection: 'column' }}>
-                        <Text style={{ margin: 10 }}>Name :</Text>
-                        <Text style={{ margin: 10, marginTop: -5 }}>Mobile Number:</Text>
+                    <View style={{backgroundColor:'#f4f8f9',height:55,width:80,borderRadius:20}}>
 
                     </View>
-                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                        <Text style={{ margin: 25, marginLeft: 90 }}>Active</Text>
-
-                    </View>
-
-
+                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins'}}> Name</Text>
+                    <Ionicons name="checkmark-circle-sharp" size={35} color='rgb(23, 157, 227)' style={{paddingTop:15,paddingLeft:40}} />
+                    <Ionicons name="close-circle-sharp" size={35} color='red' style={{paddingTop:15,paddingLeft:20}} />
+                
+                    
                 </View>
+
+
+                
+
+               
 
             </View>
 
@@ -223,72 +260,77 @@ ConnectScreen.navigationOptions = (navOpt) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#ffffff',
+        backgroundColor: '#f4f8f9'
     },
     surface: {
-
         alignSelf: 'center',
         marginTop: 10,
         elevation: 4,
         flex: 1,
-        flexDirection: 'row',
-        backgroundColor: '#ffffff',
-        height: 170,
+        flexDirection: 'column',
+        backgroundColor: 'rgb(23, 157, 227)',
+        height: 200,
         width: '95%',
+        borderRadius:10,
     },
     surfaceBox: {
         width: '30%',
         height: 110,
         borderRadius: 12,
-        backgroundColor: '#f1f1f3',
-        marginLeft: 10,
+        marginLeft: 20,
         justifyContent: 'center',
-
-        marginTop: 10,
+        marginTop:-40,
         marginBottom: 10,
+        flex:1,
+        flexDirection:'column',
+      
 
     }
     ,
     chat: {
-        backgroundColor: '#f1f1f3',
+        backgroundColor: '#ffffff',
         alignSelf: 'center',
         width: '95%',
-        height: 120,
+        height: 150,
         marginTop: 10,
         borderRadius: 10,
         flex: 1,
+        flexDirection:'column',
+        
     },
     chatButton: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 25,
-        fontWeight: '400',
+    
+        fontSize: 15,
         fontFamily: 'Montserrat-SemiBold',
-        alignSelf: 'center',
-        //  marginTop:37,
+        paddingTop:10,
+        color:'rgb(23, 157, 227)',
+       
+       
 
     },
     requestBox: {
-        backgroundColor: '#f1f1f3',
+        backgroundColor: '#ffffff',
         alignSelf: 'center',
         width: '95%',
-        height: 400,
+        height: 'auto',
         marginTop: 10,
         borderRadius: 10,
         flex: 1,
         flexDirection: 'column',
+
 
     },
     request: {
         flex: 1,
         flexDirection: 'row',
         backgroundColor: '#ffffff',
-        width: '90%',
-        height: 15,
+        width: '95%',
         alignSelf: 'center',
-        marginTop: 8,
+        marginTop: 10,
         marginBottom: 10,
-        borderRadius: 10,
+        borderBottomWidth:2,
+        borderBottomColor:'#f4f8f9',
+        paddingLeft:10
 
 
     }
