@@ -1,18 +1,16 @@
 
 import React, { useState ,useEffect} from 'react';
-import { StyleSheet, Text, View, ScrollView,FlatList } from 'react-native';
+import { StyleSheet, Text, View, ScrollView,FlatList,Linking } from 'react-native';
 import { Button, TextInput, Appbar, Surface, Avatar ,Card} from 'react-native-paper';
 import { instance } from '../utils/axiosConfig';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import SearchBar from 'react-native-searchbar';
 import * as Contacts from 'expo-contacts';
-
+import ListItem from "../components/ListItem";
 
 
 
 export default function ConnectScreen(props) {
-    // const [password, setPass] = useState('');
-    // const [cpass,setCpass]=useState('');
     const _goBack = () => console.log('Went back');
 
     const _handleSearch = () => console.log('Searching');
@@ -21,47 +19,28 @@ export default function ConnectScreen(props) {
     const [search, setSearch] = useState('');
     const [isVisible, setIsVisible] = useState(false);
     const [contacts,setContacts]=useState([]);
-    const [cshow,setShow]=useState(false);
-    const items = [
-        1337,
-        'janeway',
-        {
-            lots: 'of',
-            different: {
-                types: 0,
-                data: false,
-                that: {
-                    can: {
-                        be: {
-                            quite: {
-                                complex: {
-                                    hidden: ['gold!'],
-                                },
-                            },
-                        },
-                    },
-                },
-            },
-        },
-        [4, 2, 'tree'],
-    ];
+    const [cshow,setShow]=useState(true);
+    const [number,setNumber]=useState([]);
 
-  const  getContact= async() => {
-        
-          const { status } = await Contacts.requestPermissionsAsync();
-          if (status === 'granted') {
-            const { data } = await Contacts.getContactsAsync({
-              fields: [Contacts.Fields.Emails],
-            });
-    
-            if (data.length > 0) {
-              const contact = data[0];
-              console.log(data);
-              setContacts(data);
-              setShow(true);
-            }
-          }
-        };
+useEffect(()=>{
+  fetchContacts();
+},[])
+
+const fetchContacts=async()=>{
+    const { status } = await Contacts.requestPermissionsAsync();
+    if (status === 'granted') {
+      const { data } = await Contacts.getContactsAsync({
+        fields: [Contacts.Fields.PhoneNumbers],
+      });
+
+      if (data.length > 0) {
+        const contact = data[0];
+        console.log(data);
+        setContacts(data);
+        // setNumber(data);
+      }
+    }
+}
 
 
     const inputSearch = () => {
@@ -83,7 +62,42 @@ export default function ConnectScreen(props) {
     }
     const ContactsSearch=()=>{
         setIsVisible(!isVisible);
-        getContact();
+        setShow(true);
+        // getContact();
+    }
+
+    const getNumberInformat=async(str)=>{
+        let len=10;
+        let nstr;
+        for( let i=str.length;i>=0;i--){
+            if(str[i]==' '||str[i]=='-' || str[i]=='+'){
+        continue;
+            }
+        if(len>=0){
+            nstr+=str[i];
+        len--;
+        }
+        }
+        let a=nstr.slice(3);
+        return parseInt([...a].reverse().join(''));
+    }
+
+    const onResult=async (results)=>{
+        console.log(results);
+        setNumber(results);
+        for(let a of results){
+            let userno=await getNumberInformat(a.phoneNumbers[0].number);
+            console.log("number in mubee",userno);
+         let user=  await instance.get(`/friend?number=${userno}`);
+         console.log("user matched", user.data.result);
+         if(user.status==200){
+             a.friend=true;
+             a.user=user.data.result._id
+         }
+        
+        }
+        setNumber(results);
+       
     }
 
     return (
@@ -94,38 +108,44 @@ export default function ConnectScreen(props) {
                 <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24} color="white" />} />
 
                 {isVisible ? <SearchBar
-                    data={items}
+                    data={contacts}
                     showOnLoad
+                    handleResults={onResult}
+                    
                     onBack={() => {setIsVisible(!isVisible);setShow(false)}}
                 /> : null
                 }
                  <Appbar.Content title="MyBusTime" /> 
                 <Appbar.Action icon={() => <Ionicons name="search" size={22} color="white" />} onPress={() => ContactsSearch()} />
 
-{/* Show COntacts card */}
 
-{ cshow  && <FlatList style={{elevation:100,width:'90%'}}
-        data={contacts}
-        keyboardShouldPersistTaps = "always"
-        renderItem={({item})=>{
-            return(
-                <Card 
-                 style={{margin:2,padding:12}}
-                //  onPress={()=>dlistClick(item.firstName)}
-                >
-                    <Text>{item.firstName}</Text>
-                </Card>
-            )
-        }}
-        keyExtractor={item=>item.id}
-        />}
-
-
-{/* End Contact card  */}
 
 
 
             </Appbar.Header>
+
+        {/* {cshow &&  <ContactShow/>} */}
+ {1 && <ScrollView style={{ flex: 1 ,zIndex:9999}}>
+                 {number?.map(contact => {
+                     console.log(contact?.name,contact?.id)
+                   return (
+                     <ListItem
+                     keyboardShouldPersistTaps = "always"
+                    //  rightText={contact?.phoneNumbers[0].number}
+                    rightText={contact.friend?'Send Request':'Invite'}
+                       key={contact?.id}
+                       title={`${contact?.name}`}
+                       data={contact.user}
+                       onPress={() => Linking.openURL(`whatsapp://send?text=Welcome to My Bus Time. Download it!&phone=${contact?.phoneNumbers[0].number}`)}
+                       onDelete={() =>console.log("delere")}
+                    //    rightText={contact?.phoneNumbers[0].number}
+                     />
+                   );
+                 })}
+               </ScrollView>} 
+
+               {/* end */}
+
             <View style={styles.surface}>
                 <View style={styles.surfaceBox}>
                     <Text style={{ justifyContent: 'center', alignSelf: 'center' }}>1</Text>

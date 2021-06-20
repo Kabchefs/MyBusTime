@@ -52,21 +52,7 @@ const HomePage= createMaterialBottomTabNavigator({
     shifting:true
 })
 
-const MbtNavigator=createStackNavigator({
-    Startup:StartupScreen,
-    Login:LoginScreen,
-    Register:RegisterScreen,
-    OTPVerify:OTPVerifyScreen,
-    CheckMail:CheckMailScreen,
-    ForgotPassword:ForgotPasswordScreen,
-    ResetPassword:ResetPasswordScreen,
-    Home:{screen:HomePage,navigationOptions:{headerShown:false}},
-    Profile:ProfileScreen,
-    StopDetails:StopDetailsScreen,
-    RouteDetails:RouteDetailsScreen,    
-    PrivacyPolicy:PrivacyPolicyScreen,
-    Connect:ConnectScreen,
-})
+
 
 // const Logoff=()=>{
 //     AsyncStorage.removeItem('user');
@@ -77,7 +63,7 @@ const MbtNavigator=createStackNavigator({
 
 const MainNavigator=createDrawerNavigator({
     Home: {
-        screen:MbtNavigator,
+        screen:HomePage,
         navigationOptions :{
             itemStyle:{marginTop:30},
             drawerLabel: 'Home',
@@ -150,25 +136,22 @@ const MainNavigator=createDrawerNavigator({
    
     })
 
-// const MainNavigtor=createDrawerNavigator(
-//     {
-       
 
-//     //   Main:MbtNavigator,
-//     //   PrivacyPolicy:PrivacyPolicyScreen,
-//     //   ResetPassword:ResetPasswordScreen,
-//     // //   }
-//     // //   ,{
-//     // //   contentOptions: {
-//     // //      // paddingTop:80,
-//     // //     activeTintColor: 'rgb(23, 157, 227)',
-//     // //     itemStyle:{
-//     // //         marginTop:20
-//     // //     }
-//     // //   },
-
-        
-//     });
+const MbtNavigator=createStackNavigator({
+  Startup:StartupScreen,
+  Login:LoginScreen,
+  Register:RegisterScreen,
+  OTPVerify:OTPVerifyScreen,
+  CheckMail:CheckMailScreen,
+  ForgotPassword:ForgotPasswordScreen,
+  ResetPassword:ResetPasswordScreen,
+  Home:{screen:MainNavigator,navigationOptions:{headerShown:false}},
+  Profile:ProfileScreen,
+  StopDetails:StopDetailsScreen,
+  RouteDetails:RouteDetailsScreen,    
+  PrivacyPolicy:PrivacyPolicyScreen,
+  Connect:ConnectScreen,
+})
 
 
-export default createAppContainer(MainNavigator);
+export default createAppContainer(MbtNavigator);
