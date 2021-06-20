@@ -5,12 +5,14 @@ import {
   Text,
   StyleSheet,
   Platform,
-  Animated
+  Animated,
+  ToastAndroid
 } from "react-native";
 import PropTypes from "prop-types";
 import { RectButton } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import { Button } from "react-native";
+import { Button,Linking } from "react-native";
+import { instance } from '../../utils/axiosConfig';
 
 class ListItem extends Component {
   static propTypes = {
@@ -23,9 +25,11 @@ class ListItem extends Component {
     onDelete: PropTypes.func,
     onLongPress: PropTypes.func,
     disabled: PropTypes.bool,
-    data:PropTypes.string
+    data:PropTypes.string,
+    from_user_id:PropTypes.string
   };
 
+  
   renderRightAction = (iconName, color, x, progress) => {
     const trans = progress.interpolate({
       inputRange: [0, 1],
@@ -82,7 +86,8 @@ class ListItem extends Component {
       onPress,
       onLongPress,
       disabled,
-      data
+      data,
+      from_user_id
     } = this.props;
 
     const Component = onPress || onLongPress ? TouchableHighlight : View;
@@ -98,11 +103,23 @@ class ListItem extends Component {
       descriptionStyle
     } = styles;
 
+
     const InviteOrRequest=()=>{
     if(rightText=='Invite'){
       console.log("Invite called ji")
+      Linking.openURL(`whatsapp://send?text=Welcome to My Bus Time. Download it!&phone=${description}`)
     }else{
       console.log("Request called ji",data)
+      let obj={
+        from_user:from_user_id,
+        to_user:data
+      }
+      instance.post('/friend/send',obj).then(res=>{
+        if(res.status==200){
+          console.log("Sent sucess fully!");
+          ToastAndroid.show('Request Sent,wait for accepting...', ToastAndroid.LONG);
+        }
+      })
     }
   }
 

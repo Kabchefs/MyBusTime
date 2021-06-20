@@ -7,7 +7,7 @@ import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import SearchBar from 'react-native-searchbar';
 import * as Contacts from 'expo-contacts';
 import ListItem from "../components/ListItem";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function ConnectScreen(props) {
@@ -21,10 +21,18 @@ export default function ConnectScreen(props) {
     const [contacts,setContacts]=useState([]);
     const [cshow,setShow]=useState(true);
     const [number,setNumber]=useState([]);
+    const [fromUserId,setfromuserid]=useState('');
 
 useEffect(()=>{
   fetchContacts();
 },[])
+
+useEffect(() => {
+    AsyncStorage.getItem('user').then(data=>JSON.parse(data)).then(res=>{
+        
+        setfromuserid(res._id);
+    });
+  }, [])
 
 const fetchContacts=async()=>{
     const { status } = await Contacts.requestPermissionsAsync();
@@ -125,7 +133,7 @@ const fetchContacts=async()=>{
             </Appbar.Header>
 
         {/* {cshow &&  <ContactShow/>} */}
- {1 && <ScrollView style={{ flex: 1 ,zIndex:9999}}>
+ {cshow && <ScrollView style={{ flex: 1 ,zIndex:9999}}>
                  {number?.map(contact => {
                      console.log(contact?.name,contact?.id)
                    return (
@@ -136,6 +144,8 @@ const fetchContacts=async()=>{
                        key={contact?.id}
                        title={`${contact?.name}`}
                        data={contact.user}
+                       from_user_id={fromUserId}
+                    //    description={contact?.phoneNumbers[0]?.number}
                        onPress={() => Linking.openURL(`whatsapp://send?text=Welcome to My Bus Time. Download it!&phone=${contact?.phoneNumbers[0].number}`)}
                        onDelete={() =>console.log("delere")}
                     //    rightText={contact?.phoneNumbers[0].number}
