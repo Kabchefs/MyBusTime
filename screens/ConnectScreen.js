@@ -135,20 +135,20 @@ const fetchContacts=async()=>{
         {/* {cshow &&  <ContactShow/>} */}
  {cshow && <ScrollView style={{ flex: 1 ,zIndex:9999}}>
                  {number?.map(contact => {
-                     console.log(contact?.name,contact?.id)
+                     console.log(contact?.name,contact?.id);
                    return (
                      <ListItem
                      keyboardShouldPersistTaps = "always"
-                    //  rightText={contact?.phoneNumbers[0].number}
                     rightText={contact.friend?'Send Request':'Invite'}
                        key={contact?.id}
                        title={`${contact?.name}`}
                        data={contact.user}
                        from_user_id={fromUserId}
-                    //    description={contact?.phoneNumbers[0]?.number}
+                       
                        onPress={() => Linking.openURL(`whatsapp://send?text=Welcome to My Bus Time. Download it!&phone=${contact?.phoneNumbers[0].number}`)}
                        onDelete={() =>console.log("delere")}
-                    //    rightText={contact?.phoneNumbers[0].number}
+                       description={contact?.phoneNumbers ? contact.phoneNumbers[0].number :'No Number'}
+                   
                      />
                    );
                  })}
