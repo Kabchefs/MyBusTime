@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, Platform,Linking } from 'react-native';
-import {Button} from 'react-native-paper';
+import {Button,Appbar} from 'react-native-paper';
 import { SocialIcon } from 'react-native-elements';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -10,6 +10,23 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function ProfileScreen(props) {
+    const TopNavBar = () =>
+    {
+    
+      return (
+        <Appbar.Header 
+        style={{ backgroundColor: 'rgb(23, 157, 227)' }}
+        >
+    
+        <Appbar.Action onPress={()=>props.navigation.toggleDrawer()} icon={() => <MaterialCommunityIcons name="format-align-left" size={24}  color="white"/>} />
+    
+           <Appbar.Content title="MyBusTime" />
+         </Appbar.Header>
+    
+    
+      );
+    };
+    
     const [image, setImage] = useState(null);
     const [user,setUser]=useState({});
     useEffect(() => {
@@ -51,6 +68,7 @@ export default function ProfileScreen(props) {
 
     return (
         <ScrollView style={styles.container}>
+            <TopNavBar/>
 
 
             <View style={styles.head}>
@@ -126,7 +144,7 @@ export default function ProfileScreen(props) {
                         <Text style={styles.generalText}>Privacy</Text>
                         <Text style={styles.generalText2}>Change Your Password</Text>
                     </View>
-                    <Button style={styles.greaterIcon} color={'#dddddd'} onPress={() => props.navigation.navigate({ routeName: "ResetPassword" })} > <MaterialCommunityIcons name="greater-than"  /></Button>
+                    <Button style={styles.greaterIcon} color={'#dddddd'} onPress={() => props.navigation.navigate({ routeName: "ResetPassword" })} > <MaterialCommunityIcons name="greater-than" size={20}  /></Button>
 
 
                 </View>
@@ -137,7 +155,7 @@ export default function ProfileScreen(props) {
                         <Text style={styles.generalText}>About Us</Text>
                         <Text style={styles.generalText2}>Terms of Use & Privacy Policy</Text>
                     </View>
-                    <Button style={styles.greaterIcon} color={'#dddddd'} icon={() => <MaterialCommunityIcons name="greater-than" size={20} color="#dddddd" />} onPress={() => props.navigation.navigate({ routeName: "PrivacyPolicy" })} />
+                    <Button style={styles.greaterIcon} color={'#dddddd'} icon={() => <MaterialCommunityIcons name="greater-than" size={20} color="#dddddd" style={{marginRight:-15}} />} onPress={() => props.navigation.navigate({ routeName: "PrivacyPolicy" })} />
 
 
                 </View>
@@ -149,7 +167,7 @@ export default function ProfileScreen(props) {
                         <Text style={styles.generalText2}>Rate Us</Text>
                     </View>
                     <Button style={styles.greaterIcon} color={'#dddddd'} onPress={()=>Linking.openURL('market://details?id=com.whereismytrain.android')} >
-                    <MaterialCommunityIcons name="greater-than" type='evilicon'  /></Button>
+                    <MaterialCommunityIcons name="greater-than"  size={20} type='evilicon'  /></Button>
 
                 </View>
 
@@ -174,8 +192,8 @@ const styles = StyleSheet.create({
     },
     head: {
         width: '100%',
-        height: 298,
-        backgroundColor: '#46b1e8',
+        height: 240,
+        backgroundColor:'rgb(23, 157, 227)',
         borderBottomRightRadius: 40,
 
     },
@@ -189,8 +207,9 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         lineHeight: 28,
         letterSpacing: 0.39,
-        marginTop: 70,
+        marginTop: 20,
         marginLeft: 30,
+        fontFamily:'Montserrat-SemiBold'
     },
     editIcon: {
         marginLeft: 130,
@@ -276,7 +295,7 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         lineHeight: 17,
         letterSpacing: 0.625,
-        marginLeft: 10,
+        marginLeft: 8,
         marginTop: 10,
     },
     badge: {

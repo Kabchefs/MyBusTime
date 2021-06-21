@@ -124,10 +124,9 @@ setTO(to);
           </View>
           <View style={styles.cityNames} >
             <Text style={styles.fromCityName}>{from}</Text>
-            <View style={{flex:1,flexDirection:'column'}}>
-              <Text style={{fontSize:12,color:'#ffffff',marginTop:5}}>{routes[0]?.arrival_time.slice(0,5)}-{routes[routes.length-1]?.departure_time.slice(0,5)}</Text>
+            <View style={{flex:1,flexDirection:'column',width:'15%'}}>
+              <Text style={{fontSize:12,color:'#ffffff',marginTop:5,alignSelf:'center',paddingRight:10}}>{routes[0]?.arrival_time.slice(0,5)}-{routes[routes.length-1]?.departure_time.slice(0,5)}</Text>
               <Text style={{fontSize:12,color:'#ffffff'}}>--------------------------</Text>
-
             </View>
 
             <Text style={styles.toCityName}>{to}</Text>
@@ -135,72 +134,15 @@ setTO(to);
 
           <View  style={styles.stopDetails}>
             {routes.map((route,i)=>( <View style={styles.stop}>
-              <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>{route.city.stop_name}</Text>
-              <View style={{flex:1,flexDirection:'column'}}>
+              <Text style={{marginLeft:10,marginRight:10,marginTop:10,fontSize:16,width:'48%'}}>{route.city.stop_name}</Text>
+              <View style={{flex:1,flexDirection:'column',marginLeft:-25}}>
               <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15,marginLeft:15 }}  />
               <Text style={{marginLeft:10,paddingBottom:4,marginTop:-5}}>........</Text>
               </View>
-              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>{route.arrival_time.slice(0,5)}-</Text>
-              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>{route.departure_time.slice(0,5)}</Text>
+              <Text style={{marginRight:20,marginTop:10,fontSize:16,marginLeft:-190 }}>{route.arrival_time.slice(0,5)} -</Text>
+              <Text style={{marginLeft:-15,marginTop:10,marginRight:35,fontSize:16}}>{route.departure_time.slice(0,5)}</Text>
              {route.stop_sequence==usrloc?.stop_sequence && <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="map-marker-outline" size={24} color="#ffa22d" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />}
             </View>))}
-            {/* <View style={styles.stop}>
-              <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>Stop Name</Text>
-              <View style={{flex:1,flexDirection:'column'}}>
-              <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15,marginLeft:15 }}  />
-              <Text style={{marginLeft:10,paddingBottom:4,marginTop:-5}}>........</Text>
-              </View>
-              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>10:00AM-</Text>
-              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>10:50AM</Text>
-              <Avatar.Icon size={24}  icon={() => <MaterialCommunityIcons name="check" size={24} color="#000000" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />
-            </View> */}
-
-            {/* <View style={styles.stop}>
-              <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>Stop Name</Text>
-              <View style={{flex:1,flexDirection:'column'}}>
-              <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:5,marginLeft:15 }}  />
-              <Text style={{marginLeft:10,paddingBottom:4,marginTop:-5}}>........</Text>
-              </View>
-              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>10:00AM-</Text>
-              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>10:50AM</Text>
-              <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="check" size={24} color="#000000" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />
-            </View> */}
-
-            {/* <View style={styles.stop}>
-              <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>Stop Name</Text>
-              <View style={{flex:1,flexDirection:'column'}}>
-              <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15,marginLeft:15 }}  />
-              <Text style={{marginLeft:10,paddingBottom:4,marginTop:-5}}>........</Text>
-              </View>
-              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>10:00AM-</Text>
-              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>10:50AM</Text>
-              <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="check" size={24} color="#000000" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />
-            </View> */}
-
-            {/* <View style={styles.stop}>
-              <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>Stop Name</Text>
-              <View style={{flex:1,flexDirection:'column'}}>
-              <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15,marginLeft:15 }}  />
-              <Text style={{marginLeft:10,paddingBottom:4,marginTop:-5}}>........</Text>
-              </View>
-              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>10:00AM-</Text>
-              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>10:50AM</Text>
-              <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="cached" size={24} color="#000000" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />
-            </View> */}
-
-            {/* <View style={styles.stop}>
-              <Text style={{marginLeft:10,marginRight:20,marginTop:10,fontSize:16}}>Stop Name</Text>
-              <View style={{flex:1,flexDirection:'column'}}>
-              <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15,marginLeft:15 }}  />
-              <Text style={{marginLeft:10,paddingBottom:4,marginTop:-5}}>........</Text>
-              </View>
-              <Text style={{marginRight:20,marginTop:10,fontSize:16}}>10:00AM-</Text>
-              <Text style={{marginLeft:-17,marginTop:10,marginRight:5,fontSize:16}}>10:50AM</Text>
-              <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="calendar" size={24} color="#ffa22d" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />
-            </View> */}
-
-            
-
           </View>
           
           </View>
@@ -250,18 +192,19 @@ const styles = StyleSheet.create({
   },
   fromCityName:{
     fontSize:14,
-    marginRight:13,
-    color:'#ffffff',
+    marginRight:10,
     marginLeft:10,
+    color:'#ffffff',
     margin:'auto',
     alignSelf:'center',
+    width:'43%'
 
   },
   toCityName:{
     color:'#ffffff',
-    marginLeft:-30,
-    marginRight:10,
+    marginRight:-15,
     alignSelf:'center',
+    width:'40%'
   }, 
   stopDetails:{
     flex:1,
