@@ -3,8 +3,16 @@ import { View, Text,SafeAreaView,ScrollView,Image,StyleSheet,TouchableOpacity,To
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {useTheme,Avatar,Title,Caption,Paragraph, Drawer, TouchableRipple,Switch} from 'react-native-paper';
 import {Ionicons} from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ContentComponent(props) {
+
+    const signout=()=>{
+       
+    AsyncStorage.removeItem('user');
+   props.navigation.navigate({routeName:'Login'})
+
+    }
 
     return (
         <TouchableOpacity activeOpacity={1} style={styles.drawerTransparent}>
@@ -63,10 +71,10 @@ export default function ContentComponent(props) {
                  </View>
              </TouchableHighlight>
 
-             <TouchableHighlight underlayColor={'rgba(0,0,0.2)'} onPress={()=>console.log("signout")}>
+             <TouchableHighlight underlayColor={'rgba(0,0,0.2)'} onPress={()=>signout()}>
                  <View style={styles.bottomSection}>
                  <MaterialCommunityIcons name="exit-to-app" size={22} color="rgb(23, 157, 227)"  />
-                 <Text style={styles.text}>Sign Out</Text>
+                 <Text style={styles.text} >Sign Out</Text>
                  </View>
              </TouchableHighlight>
 
