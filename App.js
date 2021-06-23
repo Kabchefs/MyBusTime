@@ -16,6 +16,8 @@ const fetchFonts=()=>{
      'Montserrat-Bold':require('./assets/fonts/Montserrat-Bold.ttf'),
      'Montserrat-SemiBold':require('./assets/fonts/Montserrat-SemiBold.ttf'),
      'Montserrat-Medium':require('./assets/fonts/Montserrat-Medium.ttf'),
+     'Roboto-Light':require('./assets/fonts/Roboto-Light.ttf'),
+     'Roboto-Regular':require('./assets/fonts/Roboto-Regular.ttf')
    })
  }
 

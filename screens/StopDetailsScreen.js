@@ -18,7 +18,7 @@ const TopNavBar = () =>
 
     <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24}  color="white"/>}/>
 
-       <Appbar.Content title="MyBusTime" />
+       <Appbar.Content title="MyBusTime" titleStyle={{fontFamily:'Roboto-Regular'}} />
      </Appbar.Header>
 
 
@@ -118,14 +118,14 @@ setTO(to);
 
           <View style={{flex:1,flexDirection:'row',alignSelf:'center',marginLeft:70}}>
           <Avatar.Icon size={30} color="#4e80e9" icon={() => <MaterialCommunityIcons name="map-marker" size={24} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15 }}  />
-          <Paragraph style={{color:'#5ab7e6',fontSize:16,paddingTop:10}}>  Route Details </Paragraph>
-          <Text style={{color:'#5ab7e6',fontSize:16,paddingTop:10,marginLeft:40}}>Live</Text>
+          <Paragraph style={{color:'#5ab7e6',fontSize:16,paddingTop:10,fontFamily:'Roboto-Regular'}}>  Route Details </Paragraph>
+          <Text style={{color:'#5ab7e6',fontSize:16,paddingTop:10,marginLeft:40,fontFamily:'Roboto-Regular'}}>Live</Text>
           <Switch color={'#5ab7e6'} style={{marginTop:10,paddingLeft:5}} value={isSwitchOn} onValueChange={onToggleSwitch} />
           </View>
           <View style={styles.cityNames} >
             <Text style={styles.fromCityName}>{from}</Text>
-            <View style={{flex:1,flexDirection:'column',width:'15%'}}>
-              <Text style={{fontSize:12,color:'#ffffff',marginTop:5,alignSelf:'center',paddingRight:10}}>{routes[0]?.arrival_time.slice(0,5)}-{routes[routes.length-1]?.departure_time.slice(0,5)}</Text>
+            <View style={{flex:1,flexDirection:'column',width:'25%'}}>
+              <Text style={{fontSize:12,color:'#ffffff',marginTop:5,alignSelf:'center',marginRight:5}}>{routes[0]?.arrival_time.slice(0,5)}-{routes[routes.length-1]?.departure_time.slice(0,5)}</Text>
               <Text style={{fontSize:12,color:'#ffffff'}}>--------------------------</Text>
             </View>
 
@@ -134,13 +134,13 @@ setTO(to);
 
           <View  style={styles.stopDetails}>
             {routes.map((route,i)=>( <View style={styles.stop}>
-              <Text style={{marginLeft:10,marginRight:10,marginTop:10,fontSize:16,width:'48%'}}>{route.city.stop_name}</Text>
+              <Text style={{marginLeft:10,marginRight:10,marginTop:10,fontSize:16,width:'48%',fontFamily:'Roboto-Regular'}}>{route.city.stop_name}</Text>
               <View style={{flex:1,flexDirection:'column',marginLeft:-25}}>
               <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15,marginLeft:15 }}  />
               <Text style={{marginLeft:10,paddingBottom:4,marginTop:-5}}>........</Text>
               </View>
-              <Text style={{marginRight:20,marginTop:10,fontSize:16,marginLeft:-190 }}>{route.arrival_time.slice(0,5)} -</Text>
-              <Text style={{marginLeft:-15,marginTop:10,marginRight:35,fontSize:16}}>{route.departure_time.slice(0,5)}</Text>
+              <Text style={{marginRight:20,marginTop:10,fontSize:16,marginLeft:-190,fontFamily:'Roboto-Regular'}}>{route.arrival_time.slice(0,5)} -</Text>
+              <Text style={{marginLeft:-15,marginTop:10,marginRight:35,fontSize:16,fontFamily:'Roboto-Regular'}}>{route.departure_time.slice(0,5)}</Text>
              {route.stop_sequence==usrloc?.stop_sequence && <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="map-marker-outline" size={24} color="#ffa22d" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />}
             </View>))}
           </View>
@@ -197,14 +197,16 @@ const styles = StyleSheet.create({
     color:'#ffffff',
     margin:'auto',
     alignSelf:'center',
-    width:'43%'
+    width:'43%',
+    fontFamily:'Roboto-Regular'
 
   },
   toCityName:{
     color:'#ffffff',
     marginRight:-15,
     alignSelf:'center',
-    width:'40%'
+    width:'40%',
+    fontFamily:'Roboto-Regular'
   }, 
   stopDetails:{
     flex:1,

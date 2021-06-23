@@ -9,7 +9,6 @@ import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { instance } from '../utils/axiosConfig';
 import { Keyboard } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import {Ionicons} from '@expo/vector-icons';
 
 
@@ -30,7 +29,7 @@ export default function HomeRoute (props)
 
     <Appbar.Action onPress={()=>props.navigation.toggleDrawer()} icon={() => <MaterialCommunityIcons name="format-align-left" size={24}  color="white"/>} />
 
-       <Appbar.Content title="MyBusTime" />
+       <Appbar.Content title="MyBusTime" titleStyle={{fontFamily:'Roboto-Regular'}} />
      </Appbar.Header>
 
 
@@ -90,8 +89,12 @@ const dlistClick =  (cityname)=>{
 }
 
   return (
+    <View style={{flex:1}}>
+        <TopNavBar />
+   
+
     <ScrollView keyboardShouldPersistTaps='always' keyboardDismissMode='on-drag' style={styles.container}>
-      <TopNavBar />
+    
     <View style={styles.dev}>
         <Surface style={styles.surface}>
           <View style={styles.routesContainer} >
@@ -99,7 +102,7 @@ const dlistClick =  (cityname)=>{
            <View style={styles.routesHeader}>
              <Paragraph>
               <Avatar.Icon size={30} color="#F73D84" icon={() => <MaterialCommunityIcons name="map-marker" size={24} color="#F73D84" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:20 }} />
-              <Paragraph style={{color:'#5ab7e6',paddingTop:8, fontFamily:'Montserrat-SemiBold',fontSize:15}}>  Route Details </Paragraph>
+              <Paragraph style={{color:'#5ab7e6',paddingTop:8, fontFamily:'Roboto-Regular',fontSize:15}}>  Route Details </Paragraph>
             </Paragraph>
            </View>
 
@@ -121,8 +124,9 @@ const dlistClick =  (cityname)=>{
                 <Card 
                  style={{margin:2,padding:12}}
                  onPress={()=>listClick(item.stop_name)}
-                >
+                > 
                     <Text>{item.stop_name}</Text>
+       
                 </Card>
             )
         }}
@@ -165,17 +169,15 @@ const dlistClick =  (cityname)=>{
              </Button>
            </View>
 
+        
          </View>
-        </Surface>
-
-
-
+         </Surface>
         <Surface style={[styles.surface1, {marginTop:30}]}>
           <View style={styles.routesContainer} >
            <View style={styles.routesHeader}>
              <Paragraph>
               <Avatar.Icon size={30} color="rgb(23, 157, 227)" icon={() => <MaterialCommunityIcons name="flag" size={24}  color="#45ade3"/>} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:20 }} />
-            <Paragraph style={{color:'#5ab7e6',paddingTop:10,fontFamily:'Montserrat-SemiBold',fontSize:15}}> Recently Visited Routes </Paragraph>
+            <Paragraph style={{color:'#5ab7e6',paddingTop:10,fontFamily:'Roboto-Regular',fontSize:15}}> Recently Visited Routes </Paragraph>
             </Paragraph>
            </View>
 
@@ -192,10 +194,10 @@ const dlistClick =  (cityname)=>{
              <View style={{backgroundColor: '#f6f6f6',width:'99%',flex:1,flexDirection:'column',borderRadius:10,height:'auto'}}>
              {recents?.map((rec,i)=>(
                <View style={{borderBottomWidth:1,borderBottomColor:"rgb(23, 157, 227)",width:'90%',flex:1,flexDirection:'row',alignSelf:'center',marginBottom:12,paddingTop:10}}>
-             <Text style={{ width:'50%',alignSelf:"center",fontFamily:'Montserrat-Regular',marginLeft:-5,fontSize:13}} onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec.to_stop_name,from:rec.from_stop_name,user:user}})}>  {rec.from_stop_name} </Text>
+             <Text style={{ width:'45%',alignSelf:"center",fontFamily:'Roboto-Regular',marginLeft:-5,fontSize:13}} onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec.to_stop_name,from:rec.from_stop_name,user:user}})}>  {rec.from_stop_name} </Text>
              <Ionicons name="swap-horizontal-outline" size={22} color='rgb(23, 157, 227)'  style={{alignSelf:'center',paddingLeft:2,paddingRight:5}}/>
 
-             <Text style={{width:'45%',alignSelf:'center',fontFamily:'Montserrat-Regular',marginRight:10,fontSize:13}}>{rec.to_stop_name}</Text>
+             <Text style={{width:'45%',alignSelf:'center',fontFamily:'Roboto-Regular',marginRight:10,fontSize:13,marginLeft:10}}>{rec.to_stop_name}</Text>
              </View>))}
 
              </View>
@@ -205,6 +207,7 @@ const dlistClick =  (cityname)=>{
         </Surface>
      </View>
    </ScrollView>
+   </View>
 
   );
 };

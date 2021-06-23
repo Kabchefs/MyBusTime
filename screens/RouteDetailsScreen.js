@@ -19,7 +19,7 @@ const TopNavBar = () =>
 
     <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24}  color="white"/>}  />
 
-       <Appbar.Content title="MyBusTime" />
+       <Appbar.Content title="MyBusTime"  titleStyle={{fontFamily:'Roboto-Regular'}} />
      </Appbar.Header>
 
 
@@ -68,7 +68,7 @@ setTO(to);
 
           <View style={{flex:1,flexDirection:'row',alignSelf:'center'}}>
           <Avatar.Icon size={30} color="#4e80e9" icon={() => <MaterialCommunityIcons name="map-marker" size={24} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15 }}  />
-          <Paragraph style={{color:'#5ab7e6',fontSize:16,paddingTop:10}}>  Route Details </Paragraph>
+          <Paragraph style={{color:'#5ab7e6',fontSize:16,paddingTop:10,fontFamily:'Roboto-Regular'}}>  Route Details </Paragraph>
           </View>
           <View style={styles.cityNames} >
             <Text style={styles.fromCityName}>{from}</Text>
@@ -87,10 +87,10 @@ setTO(to);
             <Avatar.Icon size={60} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus" size={60} color="rgb(23, 157, 227)" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginTop:15,marginLeft:15 }}  />
               <View style={{flex:1,flexDirection:'column', marginLeft:10}}>
                   <View style={{flex:1,flexDirection:'row',paddingTop:5}}>
-              <Text style={{marginRight:10,marginLeft:60,marginTop:10,fontSize:16,alignSelf:'center'}}>{bus.from.arrival_time.slice(0,5)}-</Text>
-              <Text style={{marginLeft:-5,marginTop:10,marginRight:5,fontSize:16,alignSelf:'center'}}>{bus.to.departure_time.slice(0,5)}</Text>
+              <Text style={{marginRight:10,marginLeft:60,marginTop:10,fontSize:16,alignSelf:'center',fontFamily:'Roboto-Regular'}}>{bus.from.arrival_time.slice(0,5)}-</Text>
+              <Text style={{marginLeft:-5,marginTop:10,marginRight:5,fontSize:16,alignSelf:'center',fontFamily:'Roboto-Regular'}}>{bus.to.departure_time.slice(0,5)}</Text>
               </View>
-              <Text style={{marginLeft:60}}>Via-{bus.via.city.stop_name}</Text>
+              <Text style={{marginLeft:60,fontFamily:'Roboto-Light'}}>Via-{bus.via.city.stop_name}</Text>
              
               </View>
               {/* <View style={{flex:1,flexDirection:'column'}}>
@@ -177,13 +177,15 @@ const styles = StyleSheet.create({
     width:'45%',
     margin:'auto',
     alignSelf:'center',
+    fontFamily:'Roboto-Regular'
 
   },
   toCityName:{
     color:'#ffffff',
    width:'42%',
     alignSelf:'center',
-    marginRight:-10
+    marginRight:-10,
+    fontFamily:'Roboto-Regular'
   }, 
   routeDetails:{
     flex:1,
