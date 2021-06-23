@@ -8,7 +8,7 @@ import { instance } from '../utils/axiosConfig';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
-
+export default function RouteDetailsScreen (props){
 const TopNavBar = () =>
 {
 
@@ -17,7 +17,7 @@ const TopNavBar = () =>
     style={{ backgroundColor: 'rgb(23, 157, 227)' }}
     >
 
-    <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24}  color="white"/>}  />
+    <Appbar.Action  onPress={()=>props.navigation.toggleDrawer()} icon={() => <MaterialCommunityIcons name="format-align-left" size={24}  color="white"/>}  />
 
        <Appbar.Content title="MyBusTime"  titleStyle={{fontFamily:'Roboto-Regular'}} />
      </Appbar.Header>
@@ -26,8 +26,8 @@ const TopNavBar = () =>
   );
 };
 
-export default function RouteDetailsScreen (props) 
-{const [buses,setBuse]=useState([]);
+
+const [buses,setBuse]=useState([]);
   const [from,setFrom]=useState('');
   const [to,setTO]=useState('');
   useEffect(() => {
@@ -49,8 +49,9 @@ setTO(to);
   }, [])
 
   return (
-    <ScrollView >
+    <View style={{flex:1}}>
       <TopNavBar />
+      <ScrollView >
       <View style={styles.routesBody}>
 
     {/* <View style={styles.dev}> */}
@@ -68,7 +69,7 @@ setTO(to);
 
           <View style={{flex:1,flexDirection:'row',alignSelf:'center'}}>
           <Avatar.Icon size={30} color="#4e80e9" icon={() => <MaterialCommunityIcons name="map-marker" size={24} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15 }}  />
-          <Paragraph style={{color:'#5ab7e6',fontSize:16,paddingTop:10,fontFamily:'Roboto-Regular'}}>  Route Details </Paragraph>
+          <Paragraph style={{color:'#5ab7e6',fontSize:15,paddingTop:10,fontFamily:'Roboto-Regular'}}>  Route Details </Paragraph>
           </View>
           <View style={styles.cityNames} >
             <Text style={styles.fromCityName}>{from}</Text>
@@ -126,6 +127,7 @@ setTO(to);
           
           </View>
 </ScrollView>
+</View>
         
   );
 };

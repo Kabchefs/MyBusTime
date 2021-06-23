@@ -16,7 +16,7 @@ const TopNavBar = () =>
     style={{ backgroundColor: 'rgb(23, 157, 227)' }}
     >
 
-    <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24}  color="white"/>}/>
+    <Appbar.Action  onPress={()=>props.navigation.toggleDrawer()} icon={() => <MaterialCommunityIcons name="format-align-left" size={24}  color="white"/>}/>
 
        <Appbar.Content title="MyBusTime" titleStyle={{fontFamily:'Roboto-Regular'}} />
      </Appbar.Header>
@@ -110,7 +110,7 @@ setTO(to);
 
 
   return (
-    
+    <View style={{flex:1}}>
     <ScrollView >
       <TopNavBar />
       <View style={styles.routesBody}>
@@ -118,35 +118,36 @@ setTO(to);
 
           <View style={{flex:1,flexDirection:'row',alignSelf:'center',marginLeft:70}}>
           <Avatar.Icon size={30} color="#4e80e9" icon={() => <MaterialCommunityIcons name="map-marker" size={24} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15 }}  />
-          <Paragraph style={{color:'#5ab7e6',fontSize:16,paddingTop:10,fontFamily:'Roboto-Regular'}}>  Route Details </Paragraph>
+          <Paragraph style={{color:'#5ab7e6',fontSize:15,paddingTop:10,fontFamily:'Roboto-Regular'}}>  Route Details </Paragraph>
           <Text style={{color:'#5ab7e6',fontSize:16,paddingTop:10,marginLeft:40,fontFamily:'Roboto-Regular'}}>Live</Text>
           <Switch color={'#5ab7e6'} style={{marginTop:10,paddingLeft:5}} value={isSwitchOn} onValueChange={onToggleSwitch} />
           </View>
           <View style={styles.cityNames} >
             <Text style={styles.fromCityName}>{from}</Text>
-            <View style={{flex:1,flexDirection:'column',width:'25%'}}>
-              <Text style={{fontSize:12,color:'#ffffff',marginTop:5,alignSelf:'center',marginRight:5}}>{routes[0]?.arrival_time.slice(0,5)}-{routes[routes.length-1]?.departure_time.slice(0,5)}</Text>
-              <Text style={{fontSize:12,color:'#ffffff'}}>--------------------------</Text>
+            <View style={{flex:1,flexDirection:'column',width:'40%'}}>
+              <Text style={{fontSize:12,color:'#ffffff',marginTop:5,alignSelf:'center',fontWeight:'bold',textAlign:'center'}}>{routes[0]?.arrival_time.slice(0,5)}-{routes[routes.length-1]?.departure_time.slice(0,5)}</Text>
+              <Text style={{fontSize:12,color:'#ffffff',paddingLeft:5}}>----------------</Text>
             </View>
-
             <Text style={styles.toCityName}>{to}</Text>
           </View>
 
           <View  style={styles.stopDetails}>
             {routes.map((route,i)=>( <View style={styles.stop}>
-              <Text style={{marginLeft:10,marginRight:10,marginTop:10,fontSize:16,width:'48%',fontFamily:'Roboto-Regular'}}>{route.city.stop_name}</Text>
+              <Text style={{marginLeft:10,marginRight:10,marginTop:10,fontSize:15,width:'48%',fontFamily:'Roboto-Regular'}}>{route.city.stop_name}</Text>
               <View style={{flex:1,flexDirection:'column',marginLeft:-25}}>
               <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:15,marginLeft:15 }}  />
               <Text style={{marginLeft:10,paddingBottom:4,marginTop:-5}}>........</Text>
               </View>
-              <Text style={{marginRight:20,marginTop:10,fontSize:16,marginLeft:-190,fontFamily:'Roboto-Regular'}}>{route.arrival_time.slice(0,5)} -</Text>
-              <Text style={{marginLeft:-15,marginTop:10,marginRight:35,fontSize:16,fontFamily:'Roboto-Regular'}}>{route.departure_time.slice(0,5)}</Text>
+              <Text style={{marginRight:20,marginTop:10,fontSize:15,marginLeft:-190,fontFamily:'Roboto-Regular'}}>{route.arrival_time.slice(0,5)} -</Text>
+              <Text style={{marginLeft:-15,marginTop:10,marginRight:35,fontSize:15,fontFamily:'Roboto-Regular'}}>{route.departure_time.slice(0,5)}</Text>
              {route.stop_sequence==usrloc?.stop_sequence && <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="map-marker-outline" size={24} color="#ffa22d" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginRight:10,marginTop:10 }}  />}
             </View>))}
           </View>
           
+          
           </View>
 </ScrollView>
+</View>
         
   );
 };
@@ -181,8 +182,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     alignSelf:'center',
     backgroundColor: "rgb(23, 157, 227)",
-    
-    height:50,
+    height:70,
   marginTop:10,
   marginBottom:10,
   width:'100%',
@@ -192,21 +192,23 @@ const styles = StyleSheet.create({
   },
   fromCityName:{
     fontSize:14,
-    marginRight:10,
-    marginLeft:10,
+    paddingLeft:10,
     color:'#ffffff',
     margin:'auto',
     alignSelf:'center',
-    width:'43%',
-    fontFamily:'Roboto-Regular'
+    width:'40%',
+    fontFamily:'Roboto-Regular',
+    textAlign:'center'
 
   },
   toCityName:{
+    fontSize:14,
     color:'#ffffff',
-    marginRight:-15,
+   paddingLeft:10,
     alignSelf:'center',
     width:'40%',
-    fontFamily:'Roboto-Regular'
+    fontFamily:'Roboto-Regular',
+    textAlign:'center'
   }, 
   stopDetails:{
     flex:1,

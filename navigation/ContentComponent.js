@@ -33,17 +33,19 @@ export default function ContentComponent(props) {
                  </View>
              </TouchableHighlight>
 
-             <TouchableHighlight underlayColor={'rgba(0,0,0.2)'} onPress={()=>props.navigation.navigate({routeName:'Profile'})}>
-                 <View style={styles.row}>
-                 <MaterialCommunityIcons name="account" size={22} color="rgb(23, 157, 227)" />
-                 <Text style={styles.text}>Profile</Text>
-                 </View>
-             </TouchableHighlight>
+
 
              <TouchableHighlight underlayColor={'rgba(0,0,0.2)'} onPress={()=>props.navigation.navigate({routeName:'Connect'})}>
                  <View style={styles.row}>
                  <Ionicons name="search" size={22} color="rgb(23, 157, 227)"  />
                  <Text style={styles.text}>Connect</Text>
+                 </View>
+             </TouchableHighlight>
+             
+             <TouchableHighlight underlayColor={'rgba(0,0,0.2)'} onPress={()=>props.navigation.navigate({routeName:'Profile'})}>
+                 <View style={styles.row}>
+                 <MaterialCommunityIcons name="account" size={22} color="rgb(23, 157, 227)" />
+                 <Text style={styles.text}>Profile</Text>
                  </View>
              </TouchableHighlight>
 

@@ -3,7 +3,7 @@ import React ,{useState,useEffect}from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-import { Platform, View, StyleSheet, ScrollView ,FlatList,StatusBar} from "react-native";
+import { Platform, View, StyleSheet, ScrollView ,FlatList,StatusBar,TouchableOpacity} from "react-native";
 import {Button,DataTable, TextInput, Paragraph,Avatar, Surface,Appbar, BottomNavigation, Text ,Card,Drawer} from 'react-native-paper';
 import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -71,8 +71,8 @@ const fetchCities = (text,action)=>{
   fetch("https://mybustime.herokuapp.com/delhi?query="+text)
   .then(item=>item.json())
   .then(cityData=>{
-    console.log(cityData.slice(0,9));
-      setCities(cityData.slice(0,9))
+    console.log(cityData.slice(0,5));
+      setCities(cityData.slice(0,5))
   })
 }
 const listClick =  (cityname)=>{
@@ -113,7 +113,7 @@ const dlistClick =  (cityname)=>{
                    onChangeText={(text)=>fetchCities(text,'s')}
                   //  onChangeText={source => setSource(source)}
                    underlineColor='#5ab7e6'
-                   theme={{colors: {text: 'black', primary: 'rgb(23, 157, 227)',fontFamily:'Poppins'}}}
+                   theme={{colors: {text: 'black', primary: 'rgb(23, 157, 227)',fontFamily:'Roboto-Regular'}}}
                    style={{ backgroundColor: '#f6f6f6',width:'90%',borderRadius:12,borderTopRightRadius:12,borderTopLeftRadius:12}}
                />
     {show &&  <FlatList style={{zIndex:100,width:'90%'}}
@@ -121,13 +121,18 @@ const dlistClick =  (cityname)=>{
         keyboardShouldPersistTaps = "always"
         renderItem={({item})=>{
             return(
+             
                 <Card 
                  style={{margin:2,padding:12}}
                  onPress={()=>listClick(item.stop_name)}
                 > 
+                 
                     <Text>{item.stop_name}</Text>
+  
+                    
        
                 </Card>
+               
             )
         }}
         keyExtractor={item=>item.stop_id}
@@ -138,10 +143,11 @@ const dlistClick =  (cityname)=>{
                     onChangeText={(text)=>fetchCities(text,'d')}
                     //  onChangeText={destination => setDestination(destination)}
                      underlineColor='#5ab7e6'
-                     theme={{colors: {text: 'black', primary: 'rgb(23, 157, 227)',fontFamily:'Poppins'}}}
+                     theme={{colors: {text: 'black', primary: 'rgb(23, 157, 227)',fontFamily:'Roboto-Regular'}}}
                      style={{ backgroundColor:'#f6f6f6', marginTop:20,width:'90%',borderRadius:12,borderTopRightRadius:12,borderTopLeftRadius:12 }}
                />
                {dshow  && <FlatList style={{elevation:100,width:'90%'}}
+               nestedScrollEnabled={true}
         data={cities}
         keyboardShouldPersistTaps = "always"
         renderItem={({item})=>{
@@ -190,15 +196,19 @@ const dlistClick =  (cityname)=>{
                 <DataTable.Title style={{ width:'40%',marginRight:'-5%',fontFamily:'Poppins'}}>{rec.to_stop_name}</DataTable.Title >
                </DataTable.Header >))}
              </DataTable> */}
+             
 
              <View style={{backgroundColor: '#f6f6f6',width:'99%',flex:1,flexDirection:'column',borderRadius:10,height:'auto'}}>
              {recents?.map((rec,i)=>(
+               <TouchableOpacity onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec.to_stop_name,from:rec.from_stop_name,user:user}})}>
                <View style={{borderBottomWidth:1,borderBottomColor:"rgb(23, 157, 227)",width:'90%',flex:1,flexDirection:'row',alignSelf:'center',marginBottom:12,paddingTop:10}}>
-             <Text style={{ width:'45%',alignSelf:"center",fontFamily:'Roboto-Regular',marginLeft:-5,fontSize:13}} onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec.to_stop_name,from:rec.from_stop_name,user:user}})}>  {rec.from_stop_name} </Text>
-             <Ionicons name="swap-horizontal-outline" size={22} color='rgb(23, 157, 227)'  style={{alignSelf:'center',paddingLeft:2,paddingRight:5}}/>
+                 
+             <Text style={{ width:'45%',alignSelf:"center",fontFamily:'Roboto-Regular',marginLeft:-5,fontSize:13, textAlign: 'center'}} onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec.to_stop_name,from:rec.from_stop_name,user:user}})}>  {rec.from_stop_name} </Text>
+             <Ionicons name="swap-horizontal-outline" size={18} color='rgb(23, 157, 227)'  style={{alignSelf:'center',paddingLeft:2,paddingRight:5}}/>
 
-             <Text style={{width:'45%',alignSelf:'center',fontFamily:'Roboto-Regular',marginRight:10,fontSize:13,marginLeft:10}}>{rec.to_stop_name}</Text>
-             </View>))}
+             <Text style={{width:'45%',alignSelf:'center',fontFamily:'Roboto-Regular',marginRight:10,fontSize:13,marginLeft:10,textAlign: 'center'}}>{rec.to_stop_name}</Text>
+             </View>
+             </TouchableOpacity>))}
 
              </View>
              
@@ -232,7 +242,7 @@ const styles = StyleSheet.create({
     height:'100%',
   },
   surface: {
-    height: 260,
+    height: 'auto',
     borderRadius: 8,
     width: '99%',
    elevation: 2,
