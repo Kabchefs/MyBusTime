@@ -22,6 +22,7 @@ export default function ConnectScreen(props) {
     const [cshow,setShow]=useState(true);
     const [number,setNumber]=useState([]);
     const [fromUserId,setfromuserid]=useState('');
+    const [requests,setRequest]=useState([]);
 
 useEffect(()=>{
   fetchContacts();
@@ -33,6 +34,14 @@ useEffect(() => {
         setfromuserid(res._id);
     });
   }, [])
+
+  useEffect(()=>{
+    instance.get(`/friend/all?user=${fromUserId}`).then(res=>{
+        if(res.status==200){
+            setRequest(res.data.result);
+        }
+    })
+  },[])
 
 const fetchContacts=async()=>{
     const { status } = await Contacts.requestPermissionsAsync();
@@ -106,6 +115,28 @@ const fetchContacts=async()=>{
         }
         setNumber(results);
        
+    }
+
+    const acceptRequest=(id)=>{
+        let user={
+            user:id
+        }
+        instance.post('/friend/accept',user).then(res=>{
+            if(res.status==200){
+                console.log("Accepted Sucessfully");
+            }
+        })
+    }
+
+    const rejectRequest=(id)=>{
+        let user={
+            user:id
+        }
+        instance.delete('/friend/',user).then(res=>{
+            if(res.status==200){
+                console.log("Accepted Sucessfully");
+            }
+        })
     }
 
     return (
@@ -215,68 +246,19 @@ const fetchContacts=async()=>{
             <View style={{borderBottomWidth:2,borderBottomColor:'#f4f8f9',width:'95%',alignSelf:'center'}}></View>
 
                 
-                <View style={styles.request}>
+             {requests?.map((req,i)=>(
+
+              <View style={styles.request}>
                     <View style={{backgroundColor:'#f4f8f9',height:55,width:80,borderRadius:20}}>
 
                     </View>
-                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins'}}> Name</Text>
-                    <Ionicons name="checkmark-circle-sharp" size={35} color='rgb(23, 157, 227)' style={{paddingTop:15,paddingLeft:40}} />
+                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins'}}> {req.from_user.name}</Text>
+                    <Ionicons onPress={()=>acceptRequest(req._id)} name="checkmark-circle-sharp" size={35} color='rgb(23, 157, 227)' style={{paddingTop:15,paddingLeft:40}} />
                     <Ionicons name="close-circle-sharp" size={35} color='red' style={{paddingTop:15,paddingLeft:20}} />
                 
                     
-                </View>
-
-                <View style={styles.request}>
-                    <View style={{backgroundColor:'#f4f8f9',height:55,width:80,borderRadius:20}}>
-
-                    </View>
-                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins'}}> Name</Text>
-                    <Ionicons name="checkmark-circle-sharp" size={35} color='rgb(23, 157, 227)' style={{paddingTop:15,paddingLeft:40}} />
-                    <Ionicons name="close-circle-sharp" size={35} color='red' style={{paddingTop:15,paddingLeft:20}} />
-                
-                    
-                </View>
-                <View style={styles.request}>
-                    <View style={{backgroundColor:'#f4f8f9',height:55,width:80,borderRadius:20}}>
-
-                    </View>
-                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins'}}> Name</Text>
-                    <Ionicons name="checkmark-circle-sharp" size={35} color='rgb(23, 157, 227)' style={{paddingTop:15,paddingLeft:40}} />
-                    <Ionicons name="close-circle-sharp" size={35} color='red' style={{paddingTop:15,paddingLeft:20}} />
-                
-                    
-                </View>
-
-                <View style={styles.request}>
-                    <View style={{backgroundColor:'#f4f8f9',height:55,width:80,borderRadius:20}}>
-
-                    </View>
-                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins'}}> Name</Text>
-                    <Ionicons name="checkmark-circle-sharp" size={35} color='rgb(23, 157, 227)' style={{paddingTop:15,paddingLeft:40}} />
-                    <Ionicons name="close-circle-sharp" size={35} color='red' style={{paddingTop:15,paddingLeft:20}} />
-                
-                    
-                </View>
-
-                <View style={styles.request}>
-                    <View style={{backgroundColor:'#f4f8f9',height:55,width:80,borderRadius:20}}>
-
-                    </View>
-                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins'}}> Name</Text>
-                    <Ionicons name="checkmark-circle-sharp" size={35} color='rgb(23, 157, 227)' style={{paddingTop:15,paddingLeft:40}} />
-                    <Ionicons name="close-circle-sharp" size={35} color='red' style={{paddingTop:15,paddingLeft:20}} />
-                
-                    
-                </View>
-
-
-                
-
-               
-
+                </View> )) }
             </View>
-
-
         </ScrollView>
     );
 }
