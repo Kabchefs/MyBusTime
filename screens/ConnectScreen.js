@@ -1,6 +1,6 @@
 
 import React, { useState ,useEffect} from 'react';
-import { StyleSheet, Text, View, ScrollView,FlatList,Linking } from 'react-native';
+import { StyleSheet, Text, View, ScrollView,FlatList,TouchableOpacity,Linking } from 'react-native';
 import { Button, TextInput, Appbar, Surface, Avatar ,Card} from 'react-native-paper';
 import { instance } from '../utils/axiosConfig';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
@@ -140,8 +140,8 @@ const fetchContacts=async()=>{
     }
 
     return (
-
-        <ScrollView style={styles.container}>
+<View style={{flex:1}}>
+        
 
             <Appbar.Header style={{ backgroundColor: 'rgb(23, 157, 227)' }}>
                 <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24} color="white" />} />
@@ -154,7 +154,7 @@ const fetchContacts=async()=>{
                     onBack={() => {setIsVisible(!isVisible);setShow(false)}}
                 /> : null
                 }
-                 <Appbar.Content title="MyBusTime" /> 
+                 <Appbar.Content title="MyBusTime"  titleStyle={{fontFamily:'Roboto-Regular'}}/> 
                 <Appbar.Action icon={() => <Ionicons name="search" size={22} color="white" />} onPress={() => ContactsSearch()} />
 
 
@@ -187,10 +187,12 @@ const fetchContacts=async()=>{
 
                {/* end */}
 
+            </Appbar.Header>
+            <ScrollView style={styles.container}>
             <View style={styles.surface}>
                 <View style={{flex:1, flexDirection:'row'}}>
-                <Text style={{padding:15,color:'#ffffff',fontSize:15}}>Ranking</Text>
-                    <Text style={{padding:15,paddingLeft:'58%',color:'#ffffff',fontSize:15}}
+                <Text style={{padding:15,color:'#ffffff',fontSize:15,fontFamily:'Roboto-Regular'}}>Ranking</Text>
+                    <Text style={{padding:15,paddingLeft:'58%',color:'#ffffff',fontSize:15,fontFamily:'Roboto-Regular'}}
                     onPress={()=>props.navigation.navigate({routeName:'LeaderBoard'})}
                     > See All</Text>
 
@@ -199,22 +201,23 @@ const fetchContacts=async()=>{
                 <View style={styles.surfaceBox}>
                     <Text style={{color:'#ffffff',paddingLeft:30}}>2</Text>
                     <Avatar.Image size={70} source={require('../assets/images/userRank.png')} />
-                    <Text style={{color:'#ffffff',paddingLeft:10}}>Robert</Text>
-                    <Text style={{color:'#ffffff',paddingLeft:10}}>1000</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:10,fontFamily:'Roboto-Regular'}}>Robert</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:10,fontFamily:'Roboto-Regular'}}>1000</Text>
                 </View>
 
                 <View style={[styles.surfaceBox,{marginTop:-60}]}>
-                <Avatar.Image size={40} source={require('../assets/images/winner.png')} backgroundColor='rgb(23, 157, 227)' style={{paddingLeft:15}}/>
+                <Avatar.Image size={40} source={require('../assets/images/winner.png')} backgroundColor='rgb(23, 157, 227)' style={{paddingLeft:20}}/>
+            
                     <Avatar.Image size={80} source={require('../assets/images/userRank.png')} />
-                    <Text style={{color:'#ffffff',paddingLeft:15}}>Robert</Text>
-                    <Text style={{color:'#ffffff',paddingLeft:15}}>1000</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:15,fontFamily:'Roboto-Regular'}}>Robert</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:15,fontFamily:'Roboto-Regular'}}>1000</Text>
                 </View>
 
                 <View style={styles.surfaceBox}>
                 <Text style={{color:'#ffffff',paddingLeft:30}}>3</Text>
                     <Avatar.Image size={70} source={require('../assets/images/userRank.png')} />
-                    <Text style={{color:'#ffffff',paddingLeft:10}}>Robert</Text>
-                    <Text style={{color:'#ffffff',paddingLeft:10}}>1000</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:10,fontFamily:'Roboto-Regular'}}>Robert</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:10,fontFamily:'Roboto-Regular'}}>1000</Text>
                 </View>
                 
                 </View>
@@ -226,21 +229,22 @@ const fetchContacts=async()=>{
                 <View style={{flex:1,flexDirection:'row'}}>
                 <Ionicons name="chatbubbles-sharp" size={22} color='rgb(23, 157, 227)' style={{paddingTop:10,paddingLeft:10,paddingRight:5}} />
                 <Text style={styles.chatButton}>Chat/Call</Text>
-                <Text style={{paddingTop:18,fontFamily:'Poppins',fontSize:11,color:'rgb(23, 157, 227)'}}>(With Annonmous MyBusTime User)</Text>
+                <Text style={{paddingTop:18,fontSize:11,color:'rgb(23, 157, 227)',fontFamily:'Roboto-Regular'}}>(With Annonmous MyBusTime User)</Text>
                 </View>
                 <View style={{borderBottomWidth:1,borderBottomColor:'#f4f8f9',marginTop:-50}}></View>
 
-                <View style={{flex:1,flexDirection:'row', alignSelf: 'center'}}>
-                <Avatar.Image size={90} source={require('../assets/images/search.png')} style={{ backgroundColor: '#ffffff', alignSelf: 'center' }}  />
-                </View>
-               
+                    <TouchableOpacity   onPress={()=>props.navigation.navigate({routeName:'Searching'})}>
+                <Avatar.Image size={90} source={require('../assets/images/search.png')} style={{ backgroundColor: '#ffffff', alignSelf: 'center' }} />
+                 </TouchableOpacity>
+                
+
             </View>
 
             <View style={styles.requestBox}>
             <View style={{flex:1,flexDirection:'row',paddingTop:10}}>
                 <Ionicons name="people-sharp" size={22} color='rgb(23, 157, 227)' style={{paddingTop:10,paddingLeft:10,paddingRight:5}} />
-                <Text style={{ fontSize: 15, fontFamily: 'Montserrat-SemiBold', paddingTop:10,color:'rgb(23, 157, 227)'}}>Friend Request</Text>
-                <Text style={{paddingTop:18,fontFamily:'Poppins',fontSize:11,color:'rgb(23, 157, 227)'}}>(Share Your Rank With Friends)</Text>
+                <Text style={{ fontSize: 15, fontFamily:'Roboto-Regular', paddingTop:10,color:'rgb(23, 157, 227)'}}>Friend Request</Text>
+                <Text style={{paddingTop:18,fontFamily:'Roboto-Regular',fontSize:11,color:'rgb(23, 157, 227)'}}>(Share Your Rank With Friends)</Text>
             </View>
 
             <View style={{borderBottomWidth:2,borderBottomColor:'#f4f8f9',width:'95%',alignSelf:'center'}}></View>
@@ -260,6 +264,7 @@ const fetchContacts=async()=>{
                 </View> )) }
             </View>
         </ScrollView>
+        </View>
     );
 }
 
@@ -313,7 +318,7 @@ const styles = StyleSheet.create({
     chatButton: {
     
         fontSize: 15,
-        fontFamily: 'Montserrat-SemiBold',
+        fontFamily:'Roboto-Regular',
         paddingTop:10,
         color:'rgb(23, 157, 227)',
        

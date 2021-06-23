@@ -23,7 +23,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Dimensions } from 'react-native';
 import ContentComponent from './ContentComponent';
 import LeaderBoardScreen from '../screens/LeaderBoardScreen';
-// import SearchingScreen from '../screens/SearchingScreen';
+import SearchingScreen from '../screens/SearchingScreen';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -79,7 +79,7 @@ const MbtNavigator=createStackNavigator({
     PrivacyPolicy:PrivacyPolicyScreen,
     Connect:ConnectScreen,
     LeaderBoard:LeaderBoardScreen,
-    // Searching:SearchingScreen
+    Searching:SearchingScreen
 })
 
 // const Logoff=()=>{

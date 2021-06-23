@@ -15,7 +15,7 @@ export default function ContentComponent(props) {
                             <Avatar.Image 
                                 source={require('../assets/images/busLogo.png')}
                                 color={'white'}
-                                size={55}
+                                size={65}
                                 backgroundColor={'white'}
                               
                             />
@@ -33,17 +33,19 @@ export default function ContentComponent(props) {
                  </View>
              </TouchableHighlight>
 
-             <TouchableHighlight underlayColor={'rgba(0,0,0.2)'} onPress={()=>props.navigation.navigate({routeName:'Profile'})}>
-                 <View style={styles.row}>
-                 <MaterialCommunityIcons name="account" size={22} color="rgb(23, 157, 227)" />
-                 <Text style={styles.text}>Profile</Text>
-                 </View>
-             </TouchableHighlight>
+
 
              <TouchableHighlight underlayColor={'rgba(0,0,0.2)'} onPress={()=>props.navigation.navigate({routeName:'Connect'})}>
                  <View style={styles.row}>
                  <Ionicons name="search" size={22} color="rgb(23, 157, 227)"  />
                  <Text style={styles.text}>Connect</Text>
+                 </View>
+             </TouchableHighlight>
+             
+             <TouchableHighlight underlayColor={'rgba(0,0,0.2)'} onPress={()=>props.navigation.navigate({routeName:'Profile'})}>
+                 <View style={styles.row}>
+                 <MaterialCommunityIcons name="account" size={22} color="rgb(23, 157, 227)" />
+                 <Text style={styles.text}>Profile</Text>
                  </View>
              </TouchableHighlight>
 
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
       title: {
         fontSize: 18,
         marginTop: 3,
-        fontFamily:'Montserrat-SemiBold',
+        fontFamily:'Roboto-Regular',
         color:'#ffffff'
       },
       line:{
@@ -116,7 +118,7 @@ const styles = StyleSheet.create({
       text:{
           fontSize:16,
           marginLeft:20,
-          fontFamily:'Poppins',
+          fontFamily:'Roboto-Regular',
         
       },
       bottomSection:{
@@ -130,7 +132,7 @@ const styles = StyleSheet.create({
       },
       droidSafeArea: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: 'transparent',
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
     },
      

@@ -20,7 +20,7 @@ export default function ProfileScreen(props) {
     
         <Appbar.Action onPress={()=>props.navigation.toggleDrawer()} icon={() => <MaterialCommunityIcons name="format-align-left" size={24}  color="white"/>} />
     
-           <Appbar.Content title="MyBusTime" />
+           <Appbar.Content title="MyBusTime"  titleStyle={{fontFamily:'Roboto-Regular'}}/>
          </Appbar.Header>
     
     
@@ -67,9 +67,10 @@ export default function ProfileScreen(props) {
     };
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={{flex:1}}>
+      
             <TopNavBar/>
-
+            <ScrollView style={styles.container}>
 
             <View style={styles.head}>
 
@@ -91,7 +92,7 @@ export default function ProfileScreen(props) {
                 <Text style={styles.name}>{user?.name}</Text>
                 <Text style={styles.name}>{user?.email}</Text>
 
-                <Text style={styles.rank}>RANK</Text>
+                <Text style={styles.rank}>Rank</Text>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
                     <View style={styles.badge}>
 
@@ -136,7 +137,7 @@ export default function ProfileScreen(props) {
 
 
             <View style={styles.thirdCard}>
-                <Text style={styles.general}>GENERAL</Text>
+                <Text style={styles.general}>General</Text>
                 <View style={styles.generalSetting}>
                     <Button style={styles.generalIcon} color={'#179de3'} size={40} icon={() => <MaterialCommunityIcons name="security" size={22} color="#179de3" />}  >
                     </Button>
@@ -173,6 +174,7 @@ export default function ProfileScreen(props) {
 
             </View>
         </ScrollView>
+        </View>
     );
 }
 
@@ -202,14 +204,14 @@ const styles = StyleSheet.create({
         width: 131,
         height: 28,
         color: '#ffffff',
-        fontFamily: 'Montserrat-SemiBold',
+        fontFamily:'Roboto-Regular',
         fontSize: 20,
         fontWeight: '400',
         lineHeight: 28,
         letterSpacing: 0.39,
         marginTop: 20,
         marginLeft: 30,
-        fontFamily:'Montserrat-SemiBold'
+        
     },
     editIcon: {
         marginLeft: 130,
@@ -247,7 +249,7 @@ const styles = StyleSheet.create({
     },
     name: {
         color: '#042c5c',
-        fontFamily: 'Poppins',
+        fontFamily:'Roboto-Light',
         fontSize: 16,
         fontWeight: '400',
         lineHeight: 21,
@@ -290,7 +292,7 @@ const styles = StyleSheet.create({
         width: 36,
         height: 17,
         color: '#179de3',
-        fontFamily: "Poppins",
+        fontFamily:'Roboto-Regular',
         fontSize: 13,
         fontWeight: '400',
         lineHeight: 17,
@@ -309,23 +311,11 @@ const styles = StyleSheet.create({
 
 
     },
-    update: {
-        width: 60,
-        height: 16,
-        color: '#179de3',
-        fontFamily: 'Poppins',
-        fontSize: 13,
-        fontWeight: '500',
-        lineHeight: 16,
-        letterSpacing: 1.25,
-        marginLeft: 238,
-        marginBottom: 5,
-    },
     share: {
 
         height: 17,
         color: '#179de3',
-        fontFamily: "Poppins",
+        fontFamily:'Roboto-Regular',
         fontSize: 13,
         fontWeight: '400',
         lineHeight: 17,
@@ -344,7 +334,7 @@ const styles = StyleSheet.create({
         width: 58,
         height: 17,
         color: '#179de3',
-        fontFamily: 'Poppins',
+        fontFamily:'Roboto-Regular',
         fontSize: 13,
         fontWeight: '400',
         lineHeight: 17,
@@ -377,7 +367,7 @@ const styles = StyleSheet.create({
     generalText: {
         marginTop: 10,
         marginLeft: 12,
-        fontFamily: 'Montserrat-SemiBold',
+        fontFamily:'Roboto-Regular',
         fontSize: 14,
 
 
@@ -385,7 +375,7 @@ const styles = StyleSheet.create({
     generalText2: {
         marginTop: 3,
         marginLeft: 10,
-        fontFamily: 'Montserrat-Regular',
+        fontFamily:'Roboto-Light',
         fontSize: 11,
 
     },

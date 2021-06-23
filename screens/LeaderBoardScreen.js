@@ -87,8 +87,9 @@ export default function LeaderBoardScreen(props) {
     }
 
     return (
+        <View style={{flex:1}}>
 
-        <ScrollView style={styles.container}>
+        
 
             <Appbar.Header style={{ backgroundColor: 'rgb(23, 157, 227)' }}>
                 <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24} color="white" />} />
@@ -126,9 +127,10 @@ export default function LeaderBoardScreen(props) {
 
 
             </Appbar.Header>
+            <ScrollView style={styles.container}>
             <View style={styles.surface}>
                 <View style={{flex:1, flexDirection:'row'}}>
-                <Text style={{padding:15,color:'#ffffff',fontSize:15}}>Leader Ship Board</Text>
+                <Text style={{padding:15,color:'#ffffff',fontSize:15}}>Leadership Board</Text>
                    
 
                 </View>
@@ -201,6 +203,7 @@ export default function LeaderBoardScreen(props) {
 
 
         </ScrollView>
+        </View>
     );
 }
 
