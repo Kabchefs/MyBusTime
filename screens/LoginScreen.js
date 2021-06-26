@@ -25,7 +25,7 @@ export default function LoginScreen(props) {
         let data=res.data.user;
         if(res.status==200){
           AsyncStorage.setItem('user',JSON.stringify({_id:data._id,email:data.email,name:data.name}))
-          ToastAndroid.show("Signup Success !", ToastAndroid.SHORT);
+          ToastAndroid.show("Login Success !", ToastAndroid.SHORT);
           props.navigation.navigate({ routeName: "Home" });
         }else if(res.status==201){
           console.log(res.data);

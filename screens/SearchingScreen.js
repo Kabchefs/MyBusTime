@@ -6,7 +6,7 @@ import { instance } from '../utils/axiosConfig';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import SearchBar from 'react-native-searchbar';
 import * as Contacts from 'expo-contacts';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -24,6 +24,7 @@ export default function SearchingScreen(props) {
     const [isVisible, setIsVisible] = useState(false);
     const [contacts, setContacts] = useState([]);
     const [cshow, setShow] = useState(false);
+    const [user,setUser]=useState({});
     const items = [
         1337,
         'janeway',
@@ -65,6 +66,24 @@ export default function SearchingScreen(props) {
         }
     };
 
+    useEffect(()=>{
+        AsyncStorage.getItem('user').then(data=>JSON.parse(data)).then(res=>{
+            console.log(res)
+            setUser(res);
+        });
+
+    },[])
+
+    useEffect(()=>{
+        instance.post('/chat/join',{user:user._id}).then(res=>{
+            if(res.status==200){
+                console.log("res cameeeeeeee",res.data.result);
+                props.navigation.navigate({routeName:'Chat',params:{data:res.data.result}});
+            }
+        })
+
+    },[user])
+
 
     const inputSearch = () => {
         setInput(true);
@@ -95,18 +114,18 @@ export default function SearchingScreen(props) {
             <Appbar.Header style={{ backgroundColor: 'rgb(23, 157, 227)' }}>
                 <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24} color="white" />} />
 
-                {isVisible ? <SearchBar
+                {/* {isVisible ? <SearchBar
                     data={items}
                     showOnLoad
                     onBack={() => { setIsVisible(!isVisible); setShow(false) }}
                 /> : null
-                }
+                } */}
                 <Appbar.Content title="MyBusTime" />
-                <Appbar.Action icon={() => <Ionicons name="search" size={22} color="white" />} onPress={() => ContactsSearch()} />
+                {/* <Appbar.Action icon={() => <Ionicons name="search" size={22} color="white" />} onPress={() => ContactsSearch()} /> */}
 
                 {/* Show COntacts card */}
 
-                {cshow && <FlatList style={{ elevation: 100, width: '90%' }}
+                {/* {cshow && <FlatList style={{ elevation: 100, width: '90%' }}
                     data={contacts}
                     keyboardShouldPersistTaps="always"
                     renderItem={({ item }) => {
@@ -120,7 +139,7 @@ export default function SearchingScreen(props) {
                         )
                     }}
                     keyExtractor={item => item.id}
-                />}
+                />} */}
 
 
                 {/* End Contact card  */}
