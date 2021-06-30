@@ -92,7 +92,7 @@ export default function LeaderBoardScreen(props) {
         
 
             <Appbar.Header style={{ backgroundColor: 'rgb(23, 157, 227)' }}>
-                <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24} color="white" />} />
+                <Appbar.Action  onPress={()=>props.navigation.toggleDrawer()} icon={() => <MaterialCommunityIcons name="format-align-left" size={24} color="white" />} />
 
                 {isVisible ? <SearchBar
                     data={items}
