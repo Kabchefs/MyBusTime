@@ -25,6 +25,7 @@ import ContentComponent from './ContentComponent';
 import LeaderBoardScreen from '../screens/LeaderBoardScreen';
 import SearchingScreen from '../screens/SearchingScreen';
 import Chat from '../screens/chat/Chat';
+import ChatScreen from '../screens/ChatScreen';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -46,7 +47,7 @@ const HomePage = createMaterialBottomTabNavigator({
       tabBarLabel: 'Connect',
 
       tabBarIcon: (tabOp) => {
-        return <Ionicons name="search" size={25} color="white" />;
+        return  <MaterialCommunityIcons name="comment-search" size={25}  color="white" />
       },
       tabBarColor: 'rgb(23, 157, 227)'
     }
@@ -81,7 +82,8 @@ const MbtNavigator=createStackNavigator({
     Connect:ConnectScreen,
     LeaderBoard:LeaderBoardScreen,
     Searching:SearchingScreen,
-    Chat:Chat
+    Chat:Chat,
+    ChatScreen:ChatScreen
 })
 
 // const Logoff=()=>{

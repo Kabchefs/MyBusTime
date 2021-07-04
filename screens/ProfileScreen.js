@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Platform,Linking } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, Platform,Linking,TouchableOpacity } from 'react-native';
 import {Button,Appbar} from 'react-native-paper';
 import { SocialIcon } from 'react-native-elements';
 import * as ImagePicker from 'expo-image-picker';
@@ -82,18 +82,19 @@ export default function ProfileScreen(props) {
 
             </View>
             <View style={styles.firstCard}>
-                <Button style={styles.editIcon} color={'#179de3'} icon={() => <MaterialCommunityIcons name="pencil" size={22} color="#179de3" />} onPress={pickImage}> </Button>
-                {/* {image && <Image  style={styles.profileImage} source={{ uri: image }} />} */}
                 <Image
                     style={styles.profileImage}
-                    source={{uri:image} || require("../assets/images/profile.png")}
+                    source={image==null? require("../assets/images/profile.png"):{uri:image}}
                 />
+                
+                <MaterialCommunityIcons name="pencil" size={25} color="#179de3"  onPress={pickImage} style={styles.editIcon}/>
+               
 
                 <Text style={styles.name}>{user?.name}</Text>
                 <Text style={styles.name}>{user?.email}</Text>
 
-                <Text style={styles.rank}>Rank</Text>
-                <View style={{ flex: 1, flexDirection: 'row' }}>
+                
+                <View style={{ flex: 1, flexDirection: 'row',marginTop:10 }}>
                     <View style={styles.badge}>
 
                     </View>
@@ -111,26 +112,24 @@ export default function ProfileScreen(props) {
                 <Text style={styles.share}>Share Us</Text>
                 <View  style={styles.socialButtonView}>
                     <View style={styles.badge}>
-                        <SocialIcon
-                        onPress={()=>Linking.openURL(`https://www.facebook.com/sharer/sharer.php?quote=download mybus time`)}
-                            style={styles.socialButton}
-                            type='facebook'
-                        />
+                        <TouchableOpacity onPress={()=>Linking.openURL(`https://www.facebook.com/sharer/sharer.php?quote=download mybus time`)}>
+                        <Ionicons name="logo-facebook" size={40} color="#4267B2" style={styles.socialButton}/>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.badge}>
-                    <SocialIcon
-                    onPress={()=>Linking.openURL(`https://twitter.com/intent/tweet?text=download mybus time`)}
-                        style={styles.socialButton}
-                        type='twitter'
+                        <TouchableOpacity  onPress={()=>Linking.openURL(`https://twitter.com/intent/tweet?text=download mybus time`)}>
+                    <Ionicons name="logo-twitter" size={40} color="#00acee" style={styles.socialButton} 
+                   
                     />
+                    </TouchableOpacity>
 
                     </View>
                     <View style={styles.badge}>
-                    <SocialIcon
-                    onPress={()=>Linking.openURL(`whatsapp://send?text=Welcome to My Bus Time. Download it!`)}
-                        style={styles.socialButton}
-                        type='instagram'
-                    />
+                    <TouchableOpacity  onPress={()=>Linking.openURL(`whatsapp://send?text=Welcome to My Bus Time. Download it!`)}>
+                    <Ionicons name="logo-whatsapp" size={40} color="#075E54" style={styles.socialButton}
+                   
+                     />
+                     </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -205,7 +204,7 @@ const styles = StyleSheet.create({
         height: 28,
         color: '#ffffff',
         fontFamily:'Roboto-Regular',
-        fontSize: 20,
+        fontSize: 16,
         fontWeight: '400',
         lineHeight: 28,
         letterSpacing: 0.39,
@@ -214,17 +213,15 @@ const styles = StyleSheet.create({
         
     },
     editIcon: {
-        marginLeft: 130,
-
-
-
+        marginLeft: 190,
+        marginTop:-35
     },
 
     firstCard: {
         width: '90%',
         height: 300,
         backgroundColor: '#ffffff',
-        marginTop: -170,
+        marginTop: -180,
         alignSelf: 'center',
         borderTopLeftRadius: 15,
         shadowColor: 'rgba(0, 0, 0, 0.08)',
@@ -236,26 +233,27 @@ const styles = StyleSheet.create({
 
     },
     profileImage: {
-        marginTop: -20,
+        marginTop:10,
         height: 100,
         width: 100,
         marginLeft: "auto",
         marginRight: "auto",
         borderWidth: 1,
         borderColor: '#ffffff',
+        borderRadius:50
 
 
 
     },
     name: {
         color: '#042c5c',
-        fontFamily:'Roboto-Light',
+        fontFamily:'Roboto-Regular',
         fontSize: 16,
         fontWeight: '400',
         lineHeight: 21,
         letterSpacing: 0.4,
         alignSelf: 'center',
-        marginTop: 7,
+        marginTop:20,
 
     },
     socialButtonView: {

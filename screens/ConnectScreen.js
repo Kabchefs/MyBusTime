@@ -165,6 +165,7 @@ console.log("ranks jiiii",ranks);
     <View style={{ flex: 1 }}>
       <Appbar.Header style={{ backgroundColor: "rgb(23, 157, 227)" }}>
         <Appbar.Action
+         onPress={()=>props.navigation.toggleDrawer()}
           icon={() => (
             <MaterialCommunityIcons
               name="format-align-left"
