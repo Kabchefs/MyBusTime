@@ -36,6 +36,20 @@ export default function ConnectScreen(props) {
   const [number, setNumber] = useState([]);
   const [fromUserId, setfromuserid] = useState("");
   const [requests, setRequest] = useState([]);
+  const [ranks,setRanks]=useState([]);
+
+  useEffect(()=>{
+    instance.get(`/rank?user=${fromUserId}`).then(res=>{
+      if(res.status==200){
+        let ranks=res.data.result;
+        ranks=ranks.sort((a, b) => {
+          return a.total_count - b.total_count;
+      });
+console.log("ranks jiiii",ranks);
+        setRanks(ranks);
+      }
+    })
+  },[fromUserId])
 
   useEffect(() => {
     fetchContacts();
@@ -66,7 +80,7 @@ export default function ConnectScreen(props) {
 
       if (data.length > 0) {
         const contact = data[0];
-        console.log(data);
+        // console.log(data);
         setContacts(data);
         // setNumber(data);
       }
@@ -235,7 +249,7 @@ export default function ConnectScreen(props) {
                 fontFamily: "Roboto-Regular",
               }}
               onPress={() =>
-                props.navigation.navigate({ routeName: "LeaderBoard" })
+                props.navigation.navigate({ routeName: "LeaderBoard",params:{data:ranks}})
               }
             >
               {" "}
@@ -256,7 +270,7 @@ export default function ConnectScreen(props) {
                   fontFamily: "Roboto-Regular",
                 }}
               >
-                Robert
+                {ranks[1]?.user?.name}
               </Text>
               <Text
                 style={{
@@ -265,7 +279,7 @@ export default function ConnectScreen(props) {
                   fontFamily: "Roboto-Regular",
                 }}
               >
-                1000
+                 {ranks[1]?.total_count}
               </Text>
             </View>
 
@@ -288,7 +302,7 @@ export default function ConnectScreen(props) {
                   fontFamily: "Roboto-Regular",
                 }}
               >
-                Robert
+                {ranks[0]?.user?.name}
               </Text>
               <Text
                 style={{
@@ -297,7 +311,7 @@ export default function ConnectScreen(props) {
                   fontFamily: "Roboto-Regular",
                 }}
               >
-                1000
+                 {ranks[0]?.total_count}
               </Text>
             </View>
 
@@ -314,7 +328,7 @@ export default function ConnectScreen(props) {
                   fontFamily: "Roboto-Regular",
                 }}
               >
-                Robert
+                {ranks[2]?.user?.name}
               </Text>
               <Text
                 style={{
@@ -323,7 +337,7 @@ export default function ConnectScreen(props) {
                   fontFamily: "Roboto-Regular",
                 }}
               >
-                1000
+                {ranks[2]?.total_count}
               </Text>
             </View>
           </View>

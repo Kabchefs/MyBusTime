@@ -20,71 +20,19 @@ export default function LeaderBoardScreen(props) {
     const _handleMore = () => console.log('Shown more');
     const [search, setSearch] = useState('');
     const [isVisible, setIsVisible] = useState(false);
-    const [contacts,setContacts]=useState([]);
-    const [cshow,setShow]=useState(false);
-    const items = [
-        1337,
-        'janeway',
-        {
-            lots: 'of',
-            different: {
-                types: 0,
-                data: false,
-                that: {
-                    can: {
-                        be: {
-                            quite: {
-                                complex: {
-                                    hidden: ['gold!'],
-                                },
-                            },
-                        },
-                    },
-                },
-            },
-        },
-        [4, 2, 'tree'],
-    ];
+    const [ranks,setRanks]=useState([]);
+    const [oranks,setOranks]=useState([]);
 
-  const  getContact= async() => {
-        
-          const { status } = await Contacts.requestPermissionsAsync();
-          if (status === 'granted') {
-            const { data } = await Contacts.getContactsAsync({
-              fields: [Contacts.Fields.Emails],
-            });
-    
-            if (data.length > 0) {
-              const contact = data[0];
-              console.log(data);
-              setContacts(data);
-              setShow(true);
-            }
-          }
-        };
+    useEffect(()=>{
+        let rankss=props.navigation.getParam('data');
+        setRanks(rankss);
+        let a=[];
+        for(let i=3;i<rankss.size;i++){
+            a.push(rankss[i]);
+        }
+        setOranks(a);
 
-
-    const inputSearch = () => {
-        setInput(true);
-        return (
-            <TextInput
-                label="New Password"
-                mode="flat"
-                theme={{
-                    colors: {
-                        primary: '#abb4bd',
-                    }
-                }}
-
-            />
-        )
-
-
-    }
-    const ContactsSearch=()=>{
-        setIsVisible(!isVisible);
-        getContact();
-    }
+    },[])
 
     return (
         <View style={{flex:1}}>
@@ -94,17 +42,17 @@ export default function LeaderBoardScreen(props) {
             <Appbar.Header style={{ backgroundColor: 'rgb(23, 157, 227)' }}>
                 <Appbar.Action icon={() => <MaterialCommunityIcons name="format-align-left" size={24} color="white" />} />
 
-                {isVisible ? <SearchBar
+                {/* {isVisible ? <SearchBar
                     data={items}
                     showOnLoad
-                    onBack={() => {setIsVisible(!isVisible);setShow(false)}}
+                    // onBack={() => {setIsVisible(!isVisible);setShow(false)}}
                 /> : null
-                }
+                } */}
                  <Appbar.Content title="MyBusTime" /> 
-                <Appbar.Action icon={() => <Ionicons name="search" size={22} color="white" />} onPress={() => ContactsSearch()} />
+                {/* <Appbar.Action icon={() => <Ionicons name="search" size={22} color="white" />} onPress={() => ContactsSearch()} /> */}
 
 {/* Show COntacts card */}
-
+{/* 
 { cshow  && <FlatList style={{elevation:100,width:'90%'}}
         data={contacts}
         keyboardShouldPersistTaps = "always"
@@ -122,7 +70,7 @@ export default function LeaderBoardScreen(props) {
         />}
 
 
-{/* End Contact card  */}
+End Contact card  */}
 
 
 
@@ -138,22 +86,22 @@ export default function LeaderBoardScreen(props) {
                 <View style={styles.surfaceBox}>
                     <Text style={{color:'#ffffff',paddingLeft:30}}>2</Text>
                     <Avatar.Image size={70} source={require('../assets/images/userRank.png')} />
-                    <Text style={{color:'#ffffff',paddingLeft:10}}>Robert</Text>
-                    <Text style={{color:'#ffffff',paddingLeft:10}}>1000</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:10}}> {ranks[1]?.user?.name}</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:10}}> {ranks[1]?.total_count}</Text>
                 </View>
 
                 <View style={[styles.surfaceBox,{marginTop:-60}]}>
                 <Avatar.Image size={40} source={require('../assets/images/winner.png')} backgroundColor='rgb(23, 157, 227)' style={{paddingLeft:15}}/>
                     <Avatar.Image size={80} source={require('../assets/images/userRank.png')} />
-                    <Text style={{color:'#ffffff',paddingLeft:15}}>Robert</Text>
-                    <Text style={{color:'#ffffff',paddingLeft:15}}>1000</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:15}}> {ranks[0]?.user?.name}</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:15}}> {ranks[0]?.total_count}</Text>
                 </View>
 
                 <View style={styles.surfaceBox}>
                 <Text style={{color:'#ffffff',paddingLeft:30}}>3</Text>
                     <Avatar.Image size={70} source={require('../assets/images/userRank.png')} />
-                    <Text style={{color:'#ffffff',paddingLeft:10}}>Robert</Text>
-                    <Text style={{color:'#ffffff',paddingLeft:10}}>1000</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:10}}> {ranks[2]?.user?.name}</Text>
+                    <Text style={{color:'#ffffff',paddingLeft:10}}> {ranks[2]?.total_count}</Text>
                 </View>
                 
                 </View>
@@ -163,34 +111,17 @@ export default function LeaderBoardScreen(props) {
 
             <View style={styles.requestBox}>
                 
-                <View style={styles.request}>
-                    <Text style={{fontSize:20,padding:10}}>4</Text>
+            
+                 {oranks.map((r,i)=>(
+
+                    <View style={styles.request}>
+                    <Text style={{fontSize:20,padding:10}}>{i}</Text>
                     <View style={{backgroundColor:'#f4f8f9',height:50,width:60,borderRadius:20,paddingLeft:20}}>
                     </View>
-                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins',paddingLeft:50}}> Name</Text>
-                    <Text style={{paddingTop:15,paddingLeft:30,fontSize:18}}>1000</Text>                    
-                </View>
-                <View style={styles.request}>
-                    <Text style={{fontSize:20,padding:10}}>5</Text>
-                    <View style={{backgroundColor:'#f4f8f9',height:50,width:60,borderRadius:20,paddingLeft:20}}>
-                    </View>
-                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins',paddingLeft:50}}> Name</Text>
-                    <Text style={{paddingTop:15,paddingLeft:30,fontSize:18}}>1000</Text>                    
-                </View>
-                <View style={styles.request}>
-                    <Text style={{fontSize:20,padding:10}}>6</Text>
-                    <View style={{backgroundColor:'#f4f8f9',height:50,width:60,borderRadius:20,paddingLeft:20}}>
-                    </View>
-                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins',paddingLeft:50}}> Name</Text>
-                    <Text style={{paddingTop:15,paddingLeft:30,fontSize:18}}>1000</Text>                    
-                </View>
-                <View style={styles.request}>
-                    <Text style={{fontSize:20,padding:10}}>7</Text>
-                    <View style={{backgroundColor:'#f4f8f9',height:50,width:60,borderRadius:20,paddingLeft:20}}>
-                    </View>
-                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins',paddingLeft:50}}> Name</Text>
-                    <Text style={{paddingTop:15,paddingLeft:30,fontSize:18}}>1000</Text>                    
-                </View>
+                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins',paddingLeft:50}}> {r.user?.name}</Text>
+                    <Text style={{paddingTop:15,paddingLeft:30,fontSize:18}}>{r.total_count}</Text>                    
+                </View>))}
+            
 
                 
 

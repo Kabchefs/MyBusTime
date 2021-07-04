@@ -20,51 +20,29 @@ export default function SearchingScreen(props) {
     const _handleSearch = () => console.log('Searching');
 
     const _handleMore = () => console.log('Shown more');
-    const [search, setSearch] = useState('');
-    const [isVisible, setIsVisible] = useState(false);
-    const [contacts, setContacts] = useState([]);
-    const [cshow, setShow] = useState(false);
+    // const [search, setSearch] = useState('');
+    // const [isVisible, setIsVisible] = useState(false);
+    // const [contacts, setContacts] = useState([]);
+    // const [cshow, setShow] = useState(false);
     const [user,setUser]=useState({});
-    const items = [
-        1337,
-        'janeway',
-        {
-            lots: 'of',
-            different: {
-                types: 0,
-                data: false,
-                that: {
-                    can: {
-                        be: {
-                            quite: {
-                                complex: {
-                                    hidden: ['gold!'],
-                                },
-                            },
-                        },
-                    },
-                },
-            },
-        },
-        [4, 2, 'tree'],
-    ];
+    const [chat,setChat]=useState({});
 
-    const getContact = async () => {
+    // const getContact = async () => {
 
-        const { status } = await Contacts.requestPermissionsAsync();
-        if (status === 'granted') {
-            const { data } = await Contacts.getContactsAsync({
-                fields: [Contacts.Fields.Emails],
-            });
+    //     const { status } = await Contacts.requestPermissionsAsync();
+    //     if (status === 'granted') {
+    //         const { data } = await Contacts.getContactsAsync({
+    //             fields: [Contacts.Fields.Emails],
+    //         });
 
-            if (data.length > 0) {
-                const contact = data[0];
-                console.log(data);
-                setContacts(data);
-                setShow(true);
-            }
-        }
-    };
+    //         if (data.length > 0) {
+    //             const contact = data[0];
+    //             console.log(data);
+    //             setContacts(data);
+    //             setShow(true);
+    //         }
+    //     }
+    // };
 
     useEffect(()=>{
         AsyncStorage.getItem('user').then(data=>JSON.parse(data)).then(res=>{
@@ -78,34 +56,34 @@ export default function SearchingScreen(props) {
         instance.post('/chat/join',{user:user._id}).then(res=>{
             if(res.status==200){
                 console.log("res cameeeeeeee",res.data.result);
-                props.navigation.navigate({routeName:'Chat',params:{data:res.data.result}});
+                setChat("chat jon data",res.data.result);
+                let chati=res.data.result;
+                if(chati.status=='waiting'){
+                        joinChat(chati._id);
+                }else if(chati.status=='connected'){
+                    props.navigation.navigate({routeName:'Chat',params:{data:res.data.result}});
+                }
+               
             }
         })
 
     },[user])
 
-
-    const inputSearch = () => {
-        setInput(true);
-        return (
-            <TextInput
-                label="New Password"
-                mode="flat"
-                theme={{
-                    colors: {
-                        primary: '#abb4bd',
-                    }
-                }}
-
-            />
-        )
-
-
+    const joinChat=(id)=>{
+        console.log("inside join chat rec",id);
+       instance.get(`/chat?chat=${id}`).then(res=>{
+           if(res.status==200){
+               let data=res.data.result;
+               if(data.status=='connected'){
+                props.navigation.navigate({routeName:'Chat',params:{data:data}});
+                return;
+               }else{
+                   joinChat(id);
+               }
+           }
+       })
     }
-    const ContactsSearch = () => {
-        setIsVisible(!isVisible);
-        getContact();
-    }
+
 
     return (
 

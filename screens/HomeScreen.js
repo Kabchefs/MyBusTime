@@ -10,7 +10,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { instance } from '../utils/axiosConfig';
 import { Keyboard } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
-
+import * as Location from 'expo-location';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -58,6 +58,35 @@ useEffect(() => {
     }
   })
 }, [user])
+
+useEffect(()=>{
+  (async () => getResponse())();
+  
+},[user])
+
+const getResponse=async()=>{
+  let { status } = await Location.requestForegroundPermissionsAsync();
+  if (status !== 'granted') {
+    return;
+  }else{
+
+  let location = await Location.getCurrentPositionAsync({});
+  console.log(location);
+  if(user && location){
+  let obj={
+    user:user._id,
+    lat:location.coords.latitude,
+    long:location.coords.longitude
+  }
+  console.log(obj);
+  instance.post('/rank',obj).then(res=>{
+    if(res.status==200){
+      console.log("Rank recorded....")
+    }
+  })
+}
+  }
+}
 
 const fetchCities = (text,action)=>{
   if(action=='s'){
