@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import socketIOClient from 'socket.io-client';
 import ChatRoom from './ChatRoom.js';
+import Merge from './Merge.js';
 export default class Chat extends React.Component {
   constructor(props) {
     super(props);

@@ -25,7 +25,8 @@ import ContentComponent from './ContentComponent';
 import LeaderBoardScreen from '../screens/LeaderBoardScreen';
 import SearchingScreen from '../screens/SearchingScreen';
 import Chat from '../screens/chat/Chat';
-import ChatScreen from '../screens/ChatScreen';
+// import ChatScreen from '../screens/ChatScreen';
+import Merge from '../screens/chat/Merge';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -83,7 +84,8 @@ const MbtNavigator=createStackNavigator({
     LeaderBoard:LeaderBoardScreen,
     Searching:SearchingScreen,
     Chat:Chat,
-    ChatScreen:ChatScreen
+    // ChatScreen:ChatScreen,
+    Merge:Merge
 })
 
 // const Logoff=()=>{
