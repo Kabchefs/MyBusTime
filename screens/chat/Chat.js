@@ -14,6 +14,7 @@ export default class Chat extends React.Component {
       name: "Anonymus",
       room: "",
       isValid: false,
+      pos:''
     }
     this.socket = socketIOClient('https://mybustime.herokuapp.com', {
       transports: ['websocket'],
@@ -28,7 +29,7 @@ export default class Chat extends React.Component {
   componentDidMount() {
     let data=this.props.navigation.getParam('data');
     console.log(data);
-    this.setState({room:data.room_id})
+    this.setState({room:data.room_id,pos:data.pos})
   }
   
 
@@ -38,6 +39,7 @@ export default class Chat extends React.Component {
         name={this.state.name}
         room={this.state.room}
         socket={this.socket}
+        pos={this.state.pos}
       />
     );
   }

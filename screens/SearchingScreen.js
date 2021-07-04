@@ -27,22 +27,7 @@ export default function SearchingScreen(props) {
     const [user,setUser]=useState({});
     const [chat,setChat]=useState({});
 
-    // const getContact = async () => {
-
-    //     const { status } = await Contacts.requestPermissionsAsync();
-    //     if (status === 'granted') {
-    //         const { data } = await Contacts.getContactsAsync({
-    //             fields: [Contacts.Fields.Emails],
-    //         });
-
-    //         if (data.length > 0) {
-    //             const contact = data[0];
-    //             console.log(data);
-    //             setContacts(data);
-    //             setShow(true);
-    //         }
-    //     }
-    // };
+   
 
     useEffect(()=>{
         AsyncStorage.getItem('user').then(data=>JSON.parse(data)).then(res=>{

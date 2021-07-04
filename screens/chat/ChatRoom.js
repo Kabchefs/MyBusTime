@@ -72,7 +72,7 @@ export default class ChatRoom extends React.Component {
         >
 
           <View style={{ flex: 1, flexDirection: 'row', backgroundColor: 'rgb(23, 157, 227)', width: windowWidth, height: '100%', paddingLeft: 20, borderRadius: 5 }}>
-            <Ionicons name="chevron-back-sharp" size={25} color='#fff' style={{ alignSelf: 'center' }} onPress={() => props.navigation.goBack()} />
+            <Ionicons name="chevron-back-sharp" size={25} color='#fff' style={{ alignSelf: 'center' }} onPress={() => this.props.navigation.goBack()} />
             <Avatar.Image size={35} source={require('../../assets/images/profile.png')} style={{ alignSelf: 'center', paddingLeft: 20 }} backgroundColor={'rgb(23, 157, 227)'} />
             <View style={{ flex: 1, flexDirection: 'column', paddingLeft: 30, alignSelf: 'center' }}>
               <Text style={{ fontFamily: 'Roboto-Regular', fontSize: 13 }}>Anonymous</Text>
@@ -119,7 +119,7 @@ export default class ChatRoom extends React.Component {
             const cellStyle = {
               container: {
                 justifyContent: 'center',
-                alignItems: this.props.name === item.from ? 'flex-end' : 'flex-start',
+                alignItems: this.props.pos == 1 ? 'flex-start':'flex-end',
               },
               textContainer: {
                 maxWidth: '70%',
