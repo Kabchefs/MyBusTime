@@ -4,15 +4,15 @@
     "slug": "mybustime",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/busLogo.png",
+    "icon": "./assets/images/splash.jpeg",
     "platforms":[
       "android",
       "ios"
     ],
     "splash": {
-      "image": "./assets/images/busLogo.png",
+      "image": "./assets/images/splash.gif",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#fff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
