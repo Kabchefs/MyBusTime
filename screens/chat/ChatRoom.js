@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {Appbar,Avatar} from 'react-native-paper';
 import { MaterialCommunityIcons,Ionicons } from '@expo/vector-icons';
+import moment from 'moment';
 
 export default class ChatRoom extends React.Component {
 
@@ -142,6 +143,7 @@ export default class ChatRoom extends React.Component {
                 <View style={cellStyle.textContainer}>
                   <Text style={cellStyle.text}> {item.text} </Text>
                 </View>
+                <Text style={{fontSize:10}}>{moment().format('LT')}</Text>
               </View>
             );
           }}
