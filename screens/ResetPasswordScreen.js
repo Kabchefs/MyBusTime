@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     },
     headText:{
         color:'#1d2029',
-        fontFamily:'Poppins',
+        fontFamily:'Roboto-Regular',
         fontSize:24,
         marginLeft:30,
         fontWeight:'400',
@@ -105,12 +105,13 @@ const styles = StyleSheet.create({
     },
     detailText:{
         fontSize:14,
-        fontFamily:"Poppins",
+        fontFamily:"Roboto-Regular",
         fontWeight:'400',
         color:'#abb4bd',
         marginTop:20,
-        marginLeft:30,  
+        paddingLeft:30,  
         lineHeight:19,     
+        paddingRight:10,
     },
   
    
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         width: 315, 
         fontSize:14,
-        fontFamily:'Poppins',
+        fontFamily:'Roboto-Regular',
     },
     
     updateButton: {
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
         width: 315,
         height: 55,
         borderRadius:5,
-        fontFamily: 'Poppins-Medium',
+        fontFamily: 'Roboto-Regular',
         fontSize: 14,
         justifyContent:'center',
         textAlign:'center',
