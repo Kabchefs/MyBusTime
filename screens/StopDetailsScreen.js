@@ -7,7 +7,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { instance } from '../utils/axiosConfig';
 import * as Location from 'expo-location';
 
-
+export default function StopDetailsScreen (props) 
+{
 const TopNavBar = () =>
 {
 
@@ -25,8 +26,7 @@ const TopNavBar = () =>
   );
 };
 
-export default function StopDetailsScreen (props) 
-{
+
   const [isSwitchOn, setIsSwitchOn] = useState(false);
 
   
