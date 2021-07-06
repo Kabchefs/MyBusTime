@@ -227,8 +227,37 @@ console.log("ranks jiiii",ranks);
       )}
 
       {/* end */}
+      
 
       <ScrollView style={styles.container}>
+      {cshow && (
+        <ScrollView style={{ flex: 1, zIndex: 9999}}>
+          {number?.map((contact) => {
+            console.log(contact?.name, contact?.id);
+            return (
+              <ListItem
+                keyboardShouldPersistTaps="always"
+                rightText={contact.friend ? "Send Request" : "Invite"}
+                key={contact?.id}
+                title={`${contact?.name}`}
+                data={contact.user}
+                from_user_id={fromUserId}
+                onPress={() =>
+                  Linking.openURL(
+                    `whatsapp://send?text=Welcome to My Bus Time. Download it!&phone=${contact?.phoneNumbers[0].number}`
+                  )
+                }
+                onDelete={() => console.log("delere")}
+                description={
+                  contact?.phoneNumbers
+                    ? contact.phoneNumbers[0].number
+                    : "No Number"
+                }
+              />
+            );
+          })}
+        </ScrollView>
+      )}
         <View style={styles.surface}>
           <View style={{ flex: 1, flexDirection: "row" }}>
             <Text
@@ -385,6 +414,38 @@ console.log("ranks jiiii",ranks);
           </TouchableOpacity>
         </View>
 
+        <View style={styles.chat}>
+          <View style={{ flex: 1, flexDirection: "row" }}>
+            <Ionicons
+              name="trophy"
+              size={22}
+              color="rgb(23, 157, 227)"
+              style={{ paddingTop: 10, paddingLeft: 10, paddingRight: 5 }}
+            />
+            <Text style={styles.chatButton}>Rewards</Text>
+            <Text
+              style={{
+                paddingTop: 18,
+                fontSize: 11,
+                color: "rgb(23, 157, 227)",
+                fontFamily: "Roboto-Regular",
+              }}
+            >
+              (your rewards)
+            </Text>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderBottomColor: "#f4f8f9",
+             marginTop:10
+            }}
+          ></View>
+          <Text style={{alignSelf:'center',fontSize:30,fontFamily:'Roboto-Regular',color:"rgb(23, 157, 227)",marginTop:20,paddingBottom:40}}>Coming Soon....</Text>
+
+          
+        </View>
+
         <View style={styles.requestBox}>
           <View style={{ flex: 1, flexDirection: "row", paddingTop: 10 }}>
             <Ionicons
@@ -435,7 +496,7 @@ console.log("ranks jiiii",ranks);
                 }}
               ></View>
               <Text
-                style={{ padding: 15, fontSize: 17, fontFamily: "Poppins" }}
+                style={{ padding: 15, fontSize: 17, fontFamily: "Roboto-Regular" }}
               >
                 {" "}
                 {req.from_user.name}
