@@ -34,12 +34,12 @@ export default function ContentComponent(props) {
                         </View>
              </View>
              <View style={styles.line}></View>
-             <TouchableHighlight underlayColor={'rgba(0,0,0.2)'} onPress={()=>props.navigation.navigate({routeName:'Home'})}>
+             {/* <TouchableHighlight underlayColor={'rgba(0,0,0.2)'} onPress={()=>props.navigation.navigate({routeName:'Home'})}>
                  <View style={styles.row}>
                  <MaterialCommunityIcons name="home" size={24} color='rgb(23, 157, 227)' />
                  <Text style={styles.text}>Home</Text>
                  </View>
-             </TouchableHighlight>
+             </TouchableHighlight> */}
 
 
 
