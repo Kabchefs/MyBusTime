@@ -29,9 +29,10 @@ const TopNavBar = () =>
 
 
   return (
-    <ScrollView >
+    <View>
       <TopNavBar />
-      <View style={styles.routesBody}>
+     
+      <ScrollView style={styles.routesBody}>
           <View style={{flex:1,borderBottomWidth:1,borderBottomColor:'#F4F5F5',paddingTop:20}}>
               <Text style={{fontSize:30,fontWeight:'500',borderBottomWidth:1,borderBottomColor:'#F4F5F5',paddingBottom:20}}>
                   Terms of Use and Privacy Policy
@@ -104,8 +105,9 @@ const TopNavBar = () =>
 
    
           
-    </View>
+   
 </ScrollView>
+</View>
         
   );
 };
