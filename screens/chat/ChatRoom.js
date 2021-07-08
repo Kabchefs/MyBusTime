@@ -93,16 +93,14 @@ export default class ChatRoom extends React.Component {
         <View  style={{backgroundColor:'rgb(23, 157, 227)',marginTop:20,height:60,width:'95%',alignSelf:'center',borderRadius:40,justifyContent:'center'}}>
         <View style={{flexDirection:'row',alignSelf:'center',paddingTop:10,paddingLeft:'20%'}}>
           <Avatar.Image size={35} source={require('../../assets/images/profile.png')}   backgroundColor={'rgb(23, 157, 227)'}/>
-          <View style={{flex:1, flexDirection:'column',marginTop:3,paddingLeft:'10%'}}>
+          <View style={{flex:1, flexDirection:'column',marginTop:-14,paddingLeft:'10%'}}>
             <Text style={{color:'#fff'}}>...................</Text>
-            <Text style={{color:'#fff'}}>Connected</Text>
+            <Text style={{color:'#fff',fontSize:14,fontFamily:'Roboto-Regular'}}>Connected</Text>
+             <Text style={{color:'#fff',fontSize:14,fontFamily:'Roboto-Regular'}}>{moment().format('LL')}</Text>
           </View>
           <Avatar.Image size={35} source={require('../../assets/images/profile.png')}   backgroundColor={'rgb(23, 157, 227)'} style={{paddingRight:'40%'}}/>
-          {/* <Text style={{color:'#fff',width:'27%',marginLeft:15}}>Show Name/Hide Name</Text>
-          <Switch color={'#fff'} value={isSwitchOn} onValueChange={onToggleSwitch} /> */}
-  
+
         </View>
-        <Text style={{textAlign:'center'}}>{moment().format('LL')}</Text>
         </View>
   
       );
@@ -146,7 +144,7 @@ export default class ChatRoom extends React.Component {
                 <View style={cellStyle.textContainer}>
                   
                   <Text style={cellStyle.text}> {item.text} </Text>
-                  <Text style={{fontSize:10}}>{moment().format('LT')}</Text>
+                  <Text style={{fontSize:10,fontFamily:'Roboto-Regular',color:'#fff',textAlign:'right',paddingLeft:'auto'}}>{moment().format('LT')}</Text>
                 </View>
                
               </View>
