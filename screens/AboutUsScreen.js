@@ -34,7 +34,7 @@ const TopNavBar = () =>
       <ScrollView style={styles.routesBody}>
           <View style={styles.image}>
           <Image
-          style={{height:100,width:100,alignSelf:'center',marginBottom:-10}}
+          style={{height:110,width:110,alignSelf:'center',marginBottom:-15}}
          
           source={require("../assets/images/busLogo.png")}
         />
@@ -50,7 +50,7 @@ const TopNavBar = () =>
                 please do not use the products and services offered by Kabchef Labs
 
               </Paragraph>
-              <Text style={{fontFamily:'Roboto-Regular',fontSize:15,paddingLeft:10,paddingTop:20}}>About us Version 1.0</Text>  
+              <Text style={{fontFamily:'Roboto-Regular',fontSize:15,paddingLeft:10,paddingTop:20,textAlign:'center'}}>Version 1.0</Text>  
 
           </View>
 
@@ -94,13 +94,13 @@ const styles = StyleSheet.create({
  
   policyDetails:{
       paddingBottom:20,
-      paddingLeft:5,
-     paddingRight:5,
-     fontSize:16,
+      paddingLeft:'5%',
+     paddingRight:'5%',
+     fontSize:15,
      fontFamily:'Roboto-Regular',
-     textAlign:'center',
      borderBottomWidth:1,
      borderBottomColor:'#f1f1f9',
+    
 
 
 
