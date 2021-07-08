@@ -118,7 +118,7 @@ End Contact card  */}
                     <Text style={{fontSize:20,padding:10}}>{i}</Text>
                     <View style={{backgroundColor:'#f4f8f9',height:50,width:60,borderRadius:20,paddingLeft:20}}>
                     </View>
-                    <Text style={{padding:15,fontSize:17,fontFamily: 'Poppins',paddingLeft:50}}> {r.user?.name}</Text>
+                    <Text style={{padding:15,fontSize:17,fontFamily: 'Roboto-Regular',paddingLeft:50}}> {r.user?.name}</Text>
                     <Text style={{paddingTop:15,paddingLeft:30,fontSize:18}}>{r.total_count}</Text>                    
                 </View>))}
             

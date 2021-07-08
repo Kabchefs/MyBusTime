@@ -26,7 +26,7 @@ import LeaderBoardScreen from '../screens/LeaderBoardScreen';
 import SearchingScreen from '../screens/SearchingScreen';
 import Chat from '../screens/chat/Chat';
 import ChatRoom from '../screens/chat/ChatRoom';
-// import ChatScreen from '../screens/ChatScreen';
+import AboutUsScreen from '../screens/AboutUsScreen';
 
 
 
@@ -81,6 +81,7 @@ const MbtNavigator=createStackNavigator({
     StopDetails:StopDetailsScreen,
     RouteDetails:RouteDetailsScreen,    
     PrivacyPolicy:PrivacyPolicyScreen,
+    AboutUs:AboutUsScreen,
     Connect:ConnectScreen,
     LeaderBoard:LeaderBoardScreen,
     Searching:SearchingScreen,

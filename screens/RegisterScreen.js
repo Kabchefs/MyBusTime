@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "400",
     marginLeft: 30,
-    fontFamily: "Poppins",
+    fontFamily: "Roboto-Regular",
   },
 
   button: {
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     width: 315,
     fontSize: 14,
-    fontFamily: "Poppins",
+    fontFamily: "Roboto-Regular",
   },
   registerButton: {
     alignSelf: "center",
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     width: 315,
     height: 55,
     borderRadius: 5,
-    fontFamily: "Poppins-Medium",
+    fontFamily: "Roboto-Regular",
     fontSize: 14,
     justifyContent: "center",
     textAlign: "center",

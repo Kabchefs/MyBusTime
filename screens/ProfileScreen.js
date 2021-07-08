@@ -179,9 +179,9 @@ console.log("ranks jiiii",ranks);
                     </Button>
                     <View style={{ flex: 1, flexDirection: 'column' }}>
                         <Text style={styles.generalText}>About Us</Text>
-                        <Text style={styles.generalText2}>Terms of Use & Privacy Policy</Text>
+                        <Text style={styles.generalText2}>Click to know more about us</Text>
                     </View>
-                    <Button style={styles.greaterIcon} color={'#dddddd'} icon={() => <MaterialCommunityIcons name="greater-than" size={20} color="#dddddd" style={{marginRight:-15}} />} onPress={() => props.navigation.navigate({ routeName: "PrivacyPolicy" })} />
+                    <Button style={styles.greaterIcon} color={'#dddddd'} icon={() => <MaterialCommunityIcons name="greater-than" size={20} color="#dddddd" style={{marginRight:-15}} />} onPress={() => props.navigation.navigate({ routeName: "AboutUs" })} />
 
 
                 </View>

@@ -81,10 +81,10 @@ export default function OTPVerifyScreen(props) {
             </Button>
             <Text style={styles.verifyTxt}>Didn't recieve a verification code</Text>
             <View style={styles.buttonView}> 
-            <Button style={{ marginTop:10,flex:1,marginLeft:30,marginRight:-65,fontFamily:'Poppins'}} onPress={resendOtp}  color={'#179de3'} uppercase={false}   >
+            <Button style={{ marginTop:10,flex:1,marginLeft:30,marginRight:-65,fontFamily:'Roboto-Regular'}} onPress={resendOtp}  color={'#179de3'} uppercase={false}   >
                Resend Code{` |`}
             </Button>
-            <Button style={{ marginTop:10,flex:1,marginRight:40,fontFamily:'Poppins'}}  color={'#179de3'} uppercase={false}  >
+            <Button style={{ marginTop:10,flex:1,marginRight:40,fontFamily:'Roboto-Regular'}}  color={'#179de3'} uppercase={false}  >
                Change Number
             </Button>
             </View>
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     headText: {
         color: '#1d2029',
-        fontFamily: 'Poppins',
+        fontFamily: 'Roboto-Regular',
         fontSize: 24,
         fontWeight: '400',
         textAlign: 'center',
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
         width: 315,
         height: 55,
         borderRadius:5,
-        fontFamily: 'Poppins-Medium',
+        fontFamily: 'Roboto-Regular',
         fontSize: 14,
         justifyContent:'center',
         textAlign:'center',
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         marginTop:30,
         fontSize:14,
-        fontFamily:'Poppins',
+        fontFamily:'Roboto-Regular',
         color:'#abb4bd'
 
     },
