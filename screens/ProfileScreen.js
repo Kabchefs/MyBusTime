@@ -123,12 +123,12 @@ console.log("ranks jiiii",ranks);
                 <Text style={styles.name}>{user?.email}</Text>
 
                 
-                <View style={{ flex: 1, flexDirection: 'row',marginTop:10 }}>
-                    <View style={styles.badge}>
-                        <Text>Rank - {rank}</Text>
+                <View style={{ flex: 1, flexDirection: 'row',marginTop:15,alignSelf:'center' }}>
+                    <View style={styles.rank}>
+                        <Text style={{alignSelf:'center',fontFamily:'Roboto-Regular',fontSize:15}}>Rank - {rank}</Text>
                     </View>
                     <View style={styles.badge}>
-                    <Text>Cities - {r}</Text>
+                    <Text style={{alignSelf:'center',fontFamily:'Roboto-Regular',fontSize:15}} >Cities - {r}</Text>
                     </View>
 
                 </View>
@@ -313,16 +313,11 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     rank: {
-        width: 36,
-        height: 17,
-        color: '#179de3',
-        fontFamily:'Roboto-Regular',
-        fontSize: 13,
-        fontWeight: '400',
-        lineHeight: 17,
-        letterSpacing: 0.625,
-        marginLeft: 8,
-        marginTop: 10,
+        width: 69,
+        height: 75,
+        borderRadius: 12,
+        backgroundColor: '#f8f9f9',
+        justifyContent: 'center',
     },
     badge: {
 
