@@ -102,6 +102,7 @@ export default class ChatRoom extends React.Component {
           <Switch color={'#fff'} value={isSwitchOn} onValueChange={onToggleSwitch} /> */}
   
         </View>
+        <Text style={{textAlign:'center'}}>{moment().format('LL')}</Text>
         </View>
   
       );
@@ -139,11 +140,15 @@ export default class ChatRoom extends React.Component {
             }
             return (
               <View style={cellStyle.container}>
+                
                 {this._renderName(item.from)}
+               
                 <View style={cellStyle.textContainer}>
+                  
                   <Text style={cellStyle.text}> {item.text} </Text>
+                  <Text style={{fontSize:10}}>{moment().format('LT')}</Text>
                 </View>
-                <Text style={{fontSize:10}}>{moment().format('LT')}</Text>
+               
               </View>
             );
           }}

@@ -111,7 +111,7 @@ export default function SearchingScreen(props) {
 
             </Appbar.Header>
             <View>
-                <Text style={styles.text}>Please wait! Searching.....</Text>
+                <Text style={styles.text}>Please wait! We are looking for someone to join chat.....</Text>
                 <Image
                     source={require('../assets/images/radar.gif')}
                     style={{width:windowWidth,height:windowHeight/2,alignSelf:'center'}}

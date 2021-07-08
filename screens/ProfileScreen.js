@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { Ionicons } from '@expo/vector-icons';
+import { instance } from '../utils/axiosConfig';
 
 export default function ProfileScreen(props) {
     const TopNavBar = () =>
@@ -29,6 +30,9 @@ export default function ProfileScreen(props) {
     
     const [image, setImage] = useState(null);
     const [user,setUser]=useState({});
+    const [ranks,setRanks]=useState([]);
+    const [r,sr]=useState();
+    const [rank,setr]=useState();
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -50,6 +54,31 @@ export default function ProfileScreen(props) {
       setUser(res);
   });
 }, [])
+
+useEffect(()=>{
+    instance.get(`/rank?user=${user._id}`).then(res=>{
+      if(res.status==200){
+        let ranks=res.data.result;
+        ranks=ranks.sort((a, b) => {
+          return a.total_count - b.total_count;
+      });
+console.log("ranks jiiii",ranks);
+        setRanks(ranks);
+        getRank();
+      }
+    })
+  },[user])
+
+  const getRank=()=>{
+      if(ranks.length>0){
+          for(let i=0;i<ranks.length;i++){
+              if(ranks[i].user._id==user._id){
+                  sr(ranks[i].total_count);
+                  setr(i+1);
+              }
+          }
+      }
+  }
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -96,13 +125,10 @@ export default function ProfileScreen(props) {
                 
                 <View style={{ flex: 1, flexDirection: 'row',marginTop:10 }}>
                     <View style={styles.badge}>
-
+                        <Text>Rank - {rank}</Text>
                     </View>
                     <View style={styles.badge}>
-
-                    </View>
-                    <View style={styles.badge}>
-
+                    <Text>Cities - {r}</Text>
                     </View>
 
                 </View>
