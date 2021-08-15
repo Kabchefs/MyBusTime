@@ -1,0 +1,108 @@
+{
+    "LOGIN":{
+        "EMAIL_ID":"Email Id",
+        "PASSWORD":"Password",
+        "FACEBOOK":"Facebook",
+        "Google":"Google",
+        "FORGOT_PASSWORD":"Forgot Password",
+        "LOGIN":"Login",
+        "DONT_ACCOUNT_REGISTER":"Don't have an account? Register Now",
+        "SIGN_OUT":"Sign Out"
+
+    },
+    
+    "HOME":{
+        "HOME":"Home",
+        "ROUTE_DETAILS":"Route Details",
+        "SEARCH":"Search",
+        "FROM":"From",
+        "TO":"To",
+        "RECENTLY_VISITED_ROUTES":"Recently Visited Routes"
+    },
+    "PROFILE":{
+        "PROFILE":"Profile",
+        "ADMIN":"Admin",
+        "RANK":"Rank",
+        "CITIES":"Cities",
+        "SHARE_US":"Share Us",
+        "GENERAL":"General",
+        "PRIVACY":"Privacy",
+        "ABOUT_US":"About Us",
+        "RATE":"Rate",
+        "CHANGE_YOUR_PASSWORD":"Change Your Password",
+        "CLICK_MORE":"Click to know more abous us",
+        "RATE_US":"Rate Us"
+
+    },
+    "CONNECT":{
+        "CONNECT":"Connect",
+        "RANKING":"Ranking",
+        "SEE_ALL":"See All",
+        "CHAT":"Chat",
+        "CALL":"Call",
+        "REWARDS":"Rewards",
+        "CHAT_DETAILS":"With Annonmous MYBUSTIME User",
+        "YOUR_REWARDS":"Your Rewards",
+        "FRIEND_REQUEST":"Friend Request",
+        "FRIEND_DETAILS":"Share Your Rank With Friends",
+        "COMING_SOON":"Coming Soon"
+    },
+    "RESET":{
+        "RESET_PASSWORD":"Reset Password",
+        "RESET_DETAILS":"Please enter your the new password and confirm the password",
+        "NEW_PASSWORD":"New Password",
+        "CONFIRM_PASSWORD":"Confirm New Password",
+        "UPDATE":"Update"
+    },
+    "ABOUT":{
+        "ABOUT_DETAILS":" Buses are the most popular and convenient mode of transportation in India. More than 1.6 million buses  Buses are the most popular and convenient mode of transportation in India. More than 1.6 million buses are registered in India, and the public bus sector operates 170,000 buses carrying roughly 70 million people per day. But due to the decentralized system, passengers face lots of issues. They can not track  bus time table, live locations. They can not find a single platform for bus ticket reservations. MyBusTime provides solution for all these issue. Now you can find best bus routes for your destination. We will try to provide you a timetable and live location for all public and private buses."
+        
+    },
+
+    "EMAIL":{
+        "EMAIL":"EMAIL",
+        "CHECK_YOUR_EMAIL":"Check Your Email",
+        "EMAIL_DETAILS":"We have sent you a verify link\n on your registered email address.",
+        "GO_TO_EMAIL":"Go to Email"
+    },
+
+    "FORGOT":{
+        "FORGOT":"Forgot",
+         "FORGOT_PASSWORD":"Forgot Password",
+         "EMAIL":"Email",
+         "MOBILE_NUMBER":"Mobile Number",
+         "RECOVER_PASSWORD":"Recover Password",
+         "EMAIL_MOBILE":"Email / Mobile Number",
+         "FORGOT_DETAILS":"Please enter your registered email \n to reset your password"
+
+    },
+    "VERIFY":{
+        "VERIFY_DETAILS":"Enter 4 digit code sent\n to you at mail",
+        "VERIFY":"Verify",
+        "VERIFY_TEXT":"Didn't recieve a verification code",
+        "RESEND_CODE":"Resend Code",
+        "CHANGE_NUMBER":"Change Number"
+
+    },
+    "LANGUAGE":{
+        "LANGUAGE":"Language",
+        "CHOOSE_LANGUAGE":"Choose Language",
+        "ENGLISH":"English",
+        "HINDI":"Hindi",
+        "SUBMIT":"Submit"
+
+    },
+    "REGISTER":{
+        "REGISTER":"Register",
+        "REGISTER_TO":"Register To MBT",
+        "FULL_NAME":"Full Name"
+
+    },
+    
+    "POLICY":{
+        "POLICY":"Policy",
+        "PRIVACY_POLICY":"Privacy Policy"
+    }
+    
+
+}

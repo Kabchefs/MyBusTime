@@ -14,7 +14,7 @@ const StartupScreen = props => {
     const tryLogin = async () => {
       const userData = await AsyncStorage.getItem('user');
       if (!userData) {
-        props.navigation.navigate('Login');
+        props.navigation.navigate('Language');
         return;
       }
       const transformedData = JSON.parse(userData);

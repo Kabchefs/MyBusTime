@@ -5,12 +5,14 @@ import { Button } from 'react-native-paper';
 
 import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell, } from 'react-native-confirmation-code-field';
 import { instance } from '../utils/axiosConfig';
+import { Trans,useTranslation } from 'react-i18next';
 
 
 const CELL_COUNT = 4;
 
 
 export default function OTPVerifyScreen(props) {
+    const {t}=useTranslation();
     const [value, setValue] = useState('');
     const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
     const [propss, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -49,7 +51,7 @@ export default function OTPVerifyScreen(props) {
     }
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.headText}>{`Enter 4 digit code sent\n to you at mail`}</Text>
+            <Text style={styles.headText}>{t("VERIFY.VERIFY_DETAILS")}</Text>
             <CodeField
                 ref={ref}
                 {...propss}
@@ -77,15 +79,15 @@ export default function OTPVerifyScreen(props) {
                 style={styles.verifyButton}
                 onPress={Verify}
                 color={'#179de3'} uppercase={false}>
-                <Text style={{color: '#ffffff'}}>Verify</Text>
+                <Text style={{color: '#ffffff'}}>{t("VERIFY.VERIFY")}</Text>
             </Button>
-            <Text style={styles.verifyTxt}>Didn't recieve a verification code</Text>
+            <Text style={styles.verifyTxt}>{t("VERIFY.VERIFY_TEXT")}</Text>
             <View style={styles.buttonView}> 
             <Button style={{ marginTop:10,flex:1,marginLeft:30,marginRight:-65,fontFamily:'Roboto-Regular'}} onPress={resendOtp}  color={'#179de3'} uppercase={false}   >
-               Resend Code{` |`}
+            {t("VERIFY.RESEND_CODE")}{` |`}
             </Button>
             <Button style={{ marginTop:10,flex:1,marginRight:40,fontFamily:'Roboto-Regular'}}  color={'#179de3'} uppercase={false}  >
-               Change Number
+            {t("VERIFY.CHANGE_NUMBER")}
             </Button>
             </View>
         </ScrollView>

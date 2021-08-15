@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image,ScrollView,ToastAndroid} from 'react-native';
 import { Button, TextInput} from 'react-native-paper';
 import { instance } from '../utils/axiosConfig';
-
+import { useTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
 
 
 export default function ForgotPasswordScreen(props) {
     const [input, setInput] = useState('');
+    const {t}=useTranslation();
     
 
     const handleInput=(e)=>{
@@ -30,11 +32,11 @@ export default function ForgotPasswordScreen(props) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.headText}>Forgot Password</Text>         
-            <Text style={styles.detailText}>{`Please enter your registered email \n to reset your password`}</Text>
+            <Text style={styles.headText}><Trans i18nKey="FORGOT.FORGOT_PASSWORD">Forgot Password</Trans></Text>         
+            <Text style={styles.detailText}>{t("FORGOT.FORGOT_DETAILS")}</Text>
 
             <TextInput
-                label="Email / Mobile Number"
+                label={t("FORGOT.EMAIL_MOBILE")}
                 mode="flat"               
                 style={styles.input}
                 onChangeText={setInput}
@@ -49,7 +51,7 @@ export default function ForgotPasswordScreen(props) {
                 color={'#179de3'} uppercase={false}
                 onPress={handleInput}
                 >
-               <Text style={{color: '#ffffff'}}>Recover Password </Text>
+               <Text style={{color: '#ffffff'}}><Trans i18nKey="FORGOT.RECOVER_PASSWORD">Recover Password </Trans></Text>
             </Button>
             <Image
                 style={styles.image}

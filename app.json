@@ -10,7 +10,7 @@
       "ios"
     ],
     "splash": {
-      "image": "./assets/images/splash.gif",
+      "image": "./assets/images/splash.jpeg",
       "resizeMode": "contain",
       "backgroundColor": "#fff"
     },

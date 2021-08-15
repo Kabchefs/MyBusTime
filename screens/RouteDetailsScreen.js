@@ -6,6 +6,17 @@ import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { instance } from '../utils/axiosConfig';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+//const translate = require('google-translate-api');
+// const translate = require('google-translate-api');
+ 
+// translate('Ik spreek Engels', {to: 'en'}).then(res => {
+//     console.log(res.text);
+//     //=> I speak English
+//     console.log(res.from.language.iso);
+//     //=> nl
+// }).catch(err => {
+//     console.error(err);
+// });
 
 
 export default function RouteDetailsScreen (props){
@@ -47,7 +58,7 @@ setTO(to);
     })
   
   }, [])
-
+ 
   return (
     <View style={{flex:1}}>
       <TopNavBar />

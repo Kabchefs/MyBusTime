@@ -9,8 +9,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { Ionicons } from '@expo/vector-icons';
 import { instance } from '../utils/axiosConfig';
+import { Trans,useTranslation } from 'react-i18next';
 
 export default function ProfileScreen(props) {
+    const {t}=useTranslation();
     const TopNavBar = () =>
     {
     
@@ -104,7 +106,7 @@ console.log("ranks jiiii",ranks);
             <View style={styles.head}>
 
                 <View style={{ flexDirection: 'row', flex: 1 }}>
-                    <Text style={styles.profileText}>Profile</Text>
+                    <Text style={styles.profileText}><Trans i18nKey="PROFILE.PROFILE">Profile</Trans></Text>
 
                 </View>
 
@@ -125,17 +127,17 @@ console.log("ranks jiiii",ranks);
                 
                 <View style={{ flex: 1, flexDirection: 'row',marginTop:15,alignSelf:'center' }}>
                     <View style={styles.rank}>
-                        <Text style={{alignSelf:'center',fontFamily:'Roboto-Regular',fontSize:15}}>Rank - {rank}</Text>
+                        <Text style={{alignSelf:'center',fontFamily:'Roboto-Regular',fontSize:15}}>{t("PROFILE.RANK")} - {rank}</Text>
                     </View>
                     <View style={styles.badge}>
-                    <Text style={{alignSelf:'center',fontFamily:'Roboto-Regular',fontSize:15}} >Cities - {r}</Text>
+                    <Text style={{alignSelf:'center',fontFamily:'Roboto-Regular',fontSize:15}} >{t("PROFILE.CITIES")} - {r}</Text>
                     </View>
 
                 </View>
             </View>
 
             <View style={styles.secondCard}>
-                <Text style={styles.share}>Share Us</Text>
+                <Text style={styles.share}>{t("PROFILE.SHARE_US")}</Text>
                 <View  style={styles.socialButtonView}>
                     <View style={styles.badge}>
                         <TouchableOpacity onPress={()=>Linking.openURL(`https://www.facebook.com/sharer/sharer.php?quote=download mybus time`)}>
@@ -162,13 +164,13 @@ console.log("ranks jiiii",ranks);
 
 
             <View style={styles.thirdCard}>
-                <Text style={styles.general}>General</Text>
+                <Text style={styles.general}>{t("PROFILE.GENERAL")}</Text>
                 <View style={styles.generalSetting}>
                     <Button style={styles.generalIcon} color={'#179de3'} size={40} icon={() => <MaterialCommunityIcons name="security" size={22} color="#179de3" />}  >
                     </Button>
                     <View style={{ flex: 1, flexDirection: 'column' }}>
-                        <Text style={styles.generalText}>Privacy</Text>
-                        <Text style={styles.generalText2}>Change Your Password</Text>
+                        <Text style={styles.generalText}>{t("PROFILE.PRIVACY")}</Text>
+                        <Text style={styles.generalText2}>{t("PROFILE.CHANGE_YOUR_PASSWORD")}</Text>
                     </View>
                     <Button style={styles.greaterIcon} color={'#dddddd'} onPress={() => props.navigation.navigate({ routeName: "ResetPassword" })} > <MaterialCommunityIcons name="greater-than" size={20}  /></Button>
 
@@ -178,8 +180,8 @@ console.log("ranks jiiii",ranks);
                     <Button style={styles.generalIcon} color={'#179de3'} icon={() => <MaterialCommunityIcons name="information-outline" size={22} color="#179de3" />} color={'#179de3'} >
                     </Button>
                     <View style={{ flex: 1, flexDirection: 'column' }}>
-                        <Text style={styles.generalText}>About Us</Text>
-                        <Text style={styles.generalText2}>Click to know more about us</Text>
+                        <Text style={styles.generalText}>{t("PROFILE.ABOUT_US")}</Text>
+                        <Text style={styles.generalText2}>{t("PROFILE.CLICK_MORE")}</Text>
                     </View>
                     <Button style={styles.greaterIcon} color={'#dddddd'} icon={() => <MaterialCommunityIcons name="greater-than" size={20} color="#dddddd" style={{marginRight:-15}} />} onPress={() => props.navigation.navigate({ routeName: "AboutUs" })} />
 
@@ -189,8 +191,8 @@ console.log("ranks jiiii",ranks);
                     <Button style={styles.generalIcon} icon={() => <MaterialCommunityIcons name="star-outline" size={22} color="#179de3" />} color={'#179de3'}>
                     </Button>
                     <View style={{ flex: 1, flexDirection: 'column' }}>
-                        <Text style={styles.generalText}>Rate</Text>
-                        <Text style={styles.generalText2}>Rate Us</Text>
+                        <Text style={styles.generalText}>{t("PROFILE.RATE")}</Text>
+                        <Text style={styles.generalText2}>{t("PROFILE.RATE_US")}</Text>
                     </View>
                     <Button style={styles.greaterIcon} color={'#dddddd'} onPress={()=>Linking.openURL('market://details?id=com.whereismytrain.android')} >
                     <MaterialCommunityIcons name="greater-than"  size={20} type='evilicon'  /></Button>
