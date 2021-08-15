@@ -48,7 +48,7 @@ const HomePage = createMaterialBottomTabNavigator({
     }
   },
   Connect: {
-    screen: LanguageScreen, navigationOptions: {
+    screen: ConnectScreen, navigationOptions: {
       tabBarLabel: "Connect",
 
       tabBarIcon: (tabOp) => {
