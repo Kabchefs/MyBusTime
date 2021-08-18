@@ -7,6 +7,10 @@ import Modal from 'react-native-modal';
 import { useTranslation,Trans } from 'react-i18next';
 
 
+export const langFun=()=>{
+
+
+}
 
 export default function ContentComponent(props) {
 
