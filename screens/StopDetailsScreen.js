@@ -35,6 +35,7 @@ export default function StopDetailsScreen(props) {
   const [usrloc, setusrloc] = useState();
   const [index, setuserIndex] = useState();
   const [times, setTimeCheck] = useState(0);
+  const [loading,setLoading]=useState(false);
   useEffect(() => {
     // checkUserLoc();
   }, [loc, routes]);
@@ -127,9 +128,11 @@ export default function StopDetailsScreen(props) {
       from_stop_sequence: routes.from.stop_sequence,
       to_stop_sequence: routes.to.stop_sequence
     }
+    setLoading(true);
     instance.post('/delhi/route', obj).then(res => {
       setRoutes(res.data.result);
       console.log(res.data.result);
+      setLoading(false);
     })
     setFrom(from);
     setTO(to);
@@ -171,7 +174,7 @@ export default function StopDetailsScreen(props) {
               {route.stop_sequence == usrloc?.stop_sequence && <Avatar.Icon size={24} color="#ffa22d" icon={() => <MaterialCommunityIcons name="map-marker-outline" size={24} color="#ffa22d" />} style={{ backgroundColor: 'rgb(255, 255, 255)', marginRight: 10, marginTop: 10 }} />}
             </View>))}
           </View>
-
+          {loading && <Text>Please Wait...</Text>}
 
         </View>
       </ScrollView>

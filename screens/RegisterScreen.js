@@ -3,8 +3,10 @@ import { StyleSheet, Text, View, ScrollView, Alert ,ToastAndroid} from "react-na
 import { Button, TextInput } from "react-native-paper";
 import { instance } from '../utils/axiosConfig';
 import axios from 'axios';
+import { Trans,useTranslation } from 'react-i18next';
 
 export default function RegisterScreen(props) {
+  const {t}=useTranslation();
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState();
   const [name, setName] = useState();
@@ -90,10 +92,10 @@ export default function RegisterScreen(props) {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.headText}>Register to MBT</Text>
+      <Text style={styles.headText}>{t("REGISTER.REGISTER_TO")}</Text>
 
       <TextInput
-        label="Full Name"
+        label={t("REGISTER.FULL_NAME")}
         mode="flat"
         onChangeText={(email) => setName(email)}
         style={styles.input}
@@ -106,7 +108,7 @@ export default function RegisterScreen(props) {
         }}
       />
       <TextInput
-        label="Email"
+        label={t("EMAIL.EMAIL")}
         mode="flat"
         keyboardType="email-address"
         style={styles.input}
@@ -122,7 +124,7 @@ export default function RegisterScreen(props) {
       />
 
       <TextInput
-        label="Mobile Number"
+        label={t("FORGOT.MOBILE_NUMBER")}
         mode="flat"
         keyboardType="number-pad"
         onChangeText={(phone) => setPhone(phone)}
@@ -134,7 +136,7 @@ export default function RegisterScreen(props) {
         style={styles.input}
       />
      {!user && <TextInput
-        label="Password"
+        label={t("LOGIN.PASSWORD")}
         mode="flat"
         hidden={user}
         secureTextEntry={true}
@@ -147,7 +149,7 @@ export default function RegisterScreen(props) {
         }}
       />}
      {!user && <TextInput
-        label="Confirm Password"
+        label={t("RESET.CONFIRM_PASSWORD")}
         mode="flat"
         secureTextEntry={true}
         onChangeText={(email) => setcPassword(email)}
@@ -166,7 +168,7 @@ export default function RegisterScreen(props) {
         uppercase={false}
         onPress={register}
       >
-        <Text style={{ color: "#ffffff" }}>Register</Text>
+        <Text style={{ color: "#ffffff" }}>{t("REGISTER.REGISTER")}</Text>
       </Button>
     </ScrollView>
   );

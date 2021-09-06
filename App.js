@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import React,{useState} from 'react';
+import React,{useState,Suspense} from 'react';
 import  AppLoading  from 'expo-app-loading';
 import * as Font from 'expo-font';
 import { StyleSheet, Text, View } from 'react-native';
 import LoginScreen from './screens/LoginScreen';
 import MbtNavigator from './navigation/MbtNavigator';
+import './i18n';
+
 
 const fetchFonts=()=>{
   return Font.loadAsync({
@@ -26,10 +28,14 @@ export default function App() {
 
     if(!fontLoaded){
       return(
+        <Suspense fallback={null}>
        <AppLoading startAsync={fetchFonts} onFinish={()=>setfontLoade(true)} onError={(e)=>console.log(e)}/>
+       </Suspense>
       )
     }
   return (
+    <Suspense fallback={<Text>Loading....</Text>}>
     <MbtNavigator/>
+    </Suspense>
   );
 }

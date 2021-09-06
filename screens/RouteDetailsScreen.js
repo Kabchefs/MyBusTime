@@ -6,6 +6,17 @@ import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { instance } from '../utils/axiosConfig';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+//const translate = require('google-translate-api');
+// const translate = require('google-translate-api');
+ 
+// translate('Ik spreek Engels', {to: 'en'}).then(res => {
+//     console.log(res.text);
+//     //=> I speak English
+//     console.log(res.from.language.iso);
+//     //=> nl
+// }).catch(err => {
+//     console.error(err);
+// });
 
 
 export default function RouteDetailsScreen (props){
@@ -30,6 +41,7 @@ const TopNavBar = () =>
 const [buses,setBuse]=useState([]);
   const [from,setFrom]=useState('');
   const [to,setTO]=useState('');
+  const [loading,setLoading]=useState(false);
   useEffect(() => {
     let user=props.navigation.getParam('user');
     let to=props.navigation.getParam('to');
@@ -39,17 +51,19 @@ const [buses,setBuse]=useState([]);
 setFrom(from);
 setTO(to);
     // console.log(u);
+    setLoading(true)
     instance.post('/delhi',{to:to.stop_id,from:from.stop_id,user:user._id}).then(res=>{
       console.log(res.data.result);
       if(res.status==200){
         console.log(res.data.result)
         setBuse(res.data.result);
+        setLoading(false);
       }
       
     })
   
   }, [])
-
+ 
   return (
     <View style={{flex:1}}>
       <TopNavBar />
@@ -103,8 +117,8 @@ setTO(to);
               
             </View>
             </TouchableOpacity>))}
-
-            {!buses.length && <Text>No Direct Route Found, Try Again...</Text>}
+            {loading && <Text>Please Wait...</Text>}
+            {!buses.length && !loading && <Text>No Direct Route Found, Try Again...</Text>}
 
             {/* <View style={styles.route}>
             <Avatar.Icon size={60} color="rgb(23, 157, 227)" icon={() => <MaterialCommunityIcons name="bus" size={60} color="rgb(23, 157, 227)" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginTop:15,marginLeft:5 }}  />

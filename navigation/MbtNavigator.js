@@ -27,15 +27,18 @@ import SearchingScreen from '../screens/SearchingScreen';
 import Chat from '../screens/chat/Chat';
 import ChatRoom from '../screens/chat/ChatRoom';
 import AboutUsScreen from '../screens/AboutUsScreen';
-
+import ModalLanguage from '../screens/Modal';
+import { Trans ,useTranslation} from 'react-i18next';
+import LanguageScreen from '../screens/LanguageScreen';
 
 
 const windowWidth = Dimensions.get('window').width;
+//const {t}=useTranslation();
 
 const HomePage = createMaterialBottomTabNavigator({
   Main: {
     screen: HomeRoute, navigationOptions: {
-      tabBarLabel: 'Home',
+      tabBarLabel: <Trans i18nKey="HOME.HOME">Home</Trans>,
 
       tabBarIcon: (tabOp) => {
 
@@ -46,7 +49,7 @@ const HomePage = createMaterialBottomTabNavigator({
   },
   Connect: {
     screen: ConnectScreen, navigationOptions: {
-      tabBarLabel: 'Connect',
+      tabBarLabel: "Connect",
 
       tabBarIcon: (tabOp) => {
         return  <MaterialCommunityIcons name="comment-search" size={25}  color="white" />
@@ -70,6 +73,7 @@ const HomePage = createMaterialBottomTabNavigator({
 
 const MbtNavigator=createStackNavigator({
     Startup:StartupScreen,
+    Language:LanguageScreen,
     Login:LoginScreen,
     Register:RegisterScreen,
     OTPVerify:OTPVerifyScreen,
@@ -86,6 +90,7 @@ const MbtNavigator=createStackNavigator({
     LeaderBoard:LeaderBoardScreen,
     Searching:SearchingScreen,
     Chat:Chat,
+    ModalLanguage:ModalLanguage,
     // ChatScreen:ChatScreen,
  //   Merge:Merge
 })

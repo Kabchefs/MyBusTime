@@ -11,14 +11,15 @@ import { instance } from '../utils/axiosConfig';
 import { Keyboard } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import * as Location from 'expo-location';
+import { Trans ,useTranslation} from 'react-i18next';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
 
-export default function HomeRoute (props) 
-{
+export default function HomeRoute (props) {
+
   const TopNavBar = () =>
 {
 
@@ -38,6 +39,7 @@ export default function HomeRoute (props)
 
 const [source, setSource] = useState({});
 const [destination, setDestination] = useState({});
+const {t} =useTranslation();
 const [city,setCity] = useState('');
 const [cities,setCities] = useState([]);
 const [show,setShow]=useState(false);
@@ -133,14 +135,16 @@ const dlistClick =  (cityname)=>{
            <View style={styles.routesHeader}>
              <Paragraph>
               <Avatar.Icon size={30} color="#F73D84" icon={() => <MaterialCommunityIcons name="map-marker" size={24} color="#F73D84" />} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:20 }} />
-              <Paragraph style={{color:'#5ab7e6',paddingTop:8, fontFamily:'Roboto-Regular',fontSize:15}}>  Route Details </Paragraph>
+              <Paragraph style={{color:'#5ab7e6',paddingTop:8, fontFamily:'Roboto-Regular',fontSize:15}}><Trans i18nKey="HOME.ROUTE_DETAILS">Route Details</Trans>   </Paragraph>
             </Paragraph>
            </View>
 
            <View style={styles.routesBody}>
              <TextInput
-                   label="From:"
+                  
                    value={source.stop_name}
+                   label={<Trans i18nKey="HOME.FROM">From:</Trans>}
+                  
                    onChangeText={(text)=>fetchCities(text,'s')}
                   //  onChangeText={source => setSource(source)}
                    underlineColor='#5ab7e6'
@@ -169,8 +173,10 @@ const dlistClick =  (cityname)=>{
         keyExtractor={item=>item.stop_id}
         />}
                <TextInput
-                     label="To:"
+                    
                     value={destination.stop_name}
+                     label={<Trans i18nKey="HOME.TO">To:</Trans>}
+                    
                     onChangeText={(text)=>fetchCities(text,'d')}
                     //  onChangeText={destination => setDestination(destination)}
                      underlineColor='#5ab7e6'
@@ -202,7 +208,7 @@ const dlistClick =  (cityname)=>{
                style={{backgroundColor:'rgb(23, 157, 227)' ,marginBottom:10 , borderRadius:12}}
                disabled={!source && !destination}
                >
-                Search
+               <Trans i18nKey="HOME.SEARCH"> Search</Trans>
              </Button>
            </View>
 
@@ -214,21 +220,11 @@ const dlistClick =  (cityname)=>{
            <View style={styles.routesHeader}>
              <Paragraph>
               <Avatar.Icon size={30} color="rgb(23, 157, 227)" icon={() => <MaterialCommunityIcons name="flag" size={24}  color="#45ade3"/>} style={{ backgroundColor: 'rgb(255, 255, 255)',paddingTop:20 }} />
-            <Paragraph style={{color:'#5ab7e6',paddingTop:10,fontFamily:'Roboto-Regular',fontSize:15}}> Recently Visited Routes </Paragraph>
+            <Paragraph style={{color:'#5ab7e6',paddingTop:10,fontFamily:'Roboto-Regular',fontSize:15}}> <Trans i18nKey="HOME.RECENTLY_VISITED_ROUTES">Recently Visited Routes</Trans> </Paragraph>
             </Paragraph>
            </View>
 
            <View style={[styles.routesBody, {marginTop:5}]}>
-             {/* <DataTable  style={{width:'90%',height:'auto', backgroundColor:'#f6f6f6',borderRadius:12}} >
-              {recents?.map((rec,i)=>( <DataTable.Header  key={i} style={{height:60,justifyContent:'center',alignItems:'center'}} >
-                 <DataTable.Title   theme={{colors: {text: 'black', primary: 'rgb(23, 157, 227)',fontFamily:'Montserrat-Bold'}}} onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec.to_stop_name,from:rec.from_stop_name,user:user}})} style={{width:'40%',marginLeft:-5,fontFamily:'Poppins'}}>
-                 {rec.from_stop_name}      - 
-                 </DataTable.Title>
-                <DataTable.Title style={{ width:'40%',marginRight:'-5%',fontFamily:'Poppins'}}>{rec.to_stop_name}</DataTable.Title >
-               </DataTable.Header >))}
-             </DataTable> */}
-             
-
              <View style={{backgroundColor: '#f6f6f6',width:'99%',flex:1,flexDirection:'column',borderRadius:10,height:'auto'}}>
              {recents?.map((rec,i)=>(
                <TouchableOpacity key={i} onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec.to_stop_name,from:rec.from_stop_name,user:user}})}>

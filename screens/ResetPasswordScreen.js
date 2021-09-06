@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View,ToastAndroid,Alert } from 'react-native';
 import { Button, TextInput} from 'react-native-paper';
 import { instance } from '../utils/axiosConfig';
+import { Trans,useTranslation } from 'react-i18next';
 
 
 
 export default function ResetPasswordScreen(props) {
+    const {t}=useTranslation();
     const [password, setPass] = useState('');
     const [cpass,setCpass]=useState('');
 
@@ -38,11 +40,11 @@ export default function ResetPasswordScreen(props) {
     }
     return (
         <View style={styles.container}>
-            <Text style={styles.headText}>Reset Password</Text>         
-            <Text style={styles.detailText}>Please enter your the new password and confirm the password</Text>
+            <Text style={styles.headText}><Trans i18nKey="RESET.RESET_PASSWORD">Reset Password</Trans></Text>         
+            <Text style={styles.detailText}><Trans i18nKey="RESET.RESET_DETAILS">Please enter your the new password and confirm the password</Trans></Text>
 
             <TextInput
-                label="New Password"
+                label={<Trans i18nKey="RESET.NEW_PASSWORD">New Password</Trans>}
                 mode="flat"               
                 style={styles.input}
                 secureTextEntry={true}
@@ -53,7 +55,7 @@ export default function ResetPasswordScreen(props) {
                     
             />
            <TextInput
-                label="Confirm New Password"
+                label={<Trans i18nKey="RESET.CONFIRM_PASSWORD">Confirm New Password</Trans>}
                 mode="flat"               
                 style={styles.input}
                 secureTextEntry={true}
@@ -68,7 +70,7 @@ export default function ResetPasswordScreen(props) {
                 color={'#179de3'} uppercase={false}
                 onPress={resetPass}
                 >
-               <Text style={{color: '#ffffff'}}> Update</Text>
+               <Text style={{color: '#ffffff'}}><Trans i18nKey="RESET.UPDATE">Update</Trans></Text>
             </Button>
            
         

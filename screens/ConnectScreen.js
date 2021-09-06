@@ -22,8 +22,10 @@ import SearchBar from "react-native-searchbar";
 import * as Contacts from "expo-contacts";
 import ListItem from "../components/ListItem";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Trans,useTranslation } from "react-i18next";
 
 export default function ConnectScreen(props) {
+  const {t}=useTranslation();
   const _goBack = () => console.log("Went back");
 
   const _handleSearch = () => console.log("Searching");
@@ -36,7 +38,7 @@ export default function ConnectScreen(props) {
   const [number, setNumber] = useState([]);
   const [fromUserId, setfromuserid] = useState("");
   const [requests, setRequest] = useState([]);
-  const [ranks,setRanks]=useState([]);
+  const [ranks, setRanks] = useState([]);
 
   useEffect(()=>{
     instance.get(`/rank?user=${fromUserId}`).then(res=>{
@@ -49,7 +51,7 @@ console.log("ranks jiiii",ranks);
         setRanks(ranks);
       }
     })
-  },[fromUserId])
+  }, [fromUserId])
 
   useEffect(() => {
     fetchContacts();
@@ -165,7 +167,7 @@ console.log("ranks jiiii",ranks);
     <View style={{ flex: 1 }}>
       <Appbar.Header style={{ backgroundColor: "rgb(23, 157, 227)" }}>
         <Appbar.Action
-         onPress={()=>props.navigation.toggleDrawer()}
+          onPress={() => props.navigation.toggleDrawer()}
           icon={() => (
             <MaterialCommunityIcons
               name="format-align-left"
@@ -227,37 +229,37 @@ console.log("ranks jiiii",ranks);
       )}
 
       {/* end */}
-      
+
 
       <ScrollView style={styles.container}>
-      {cshow && (
-        <ScrollView style={{ flex: 1, zIndex: 9999}}>
-          {number?.map((contact) => {
-            console.log(contact?.name, contact?.id);
-            return (
-              <ListItem
-                keyboardShouldPersistTaps="always"
-                rightText={contact.friend ? "Send Request" : "Invite"}
-                key={contact?.id}
-                title={`${contact?.name}`}
-                data={contact.user}
-                from_user_id={fromUserId}
-                onPress={() =>
-                  Linking.openURL(
-                    `whatsapp://send?text=Welcome to My Bus Time. Download it!&phone=${contact?.phoneNumbers[0].number}`
-                  )
-                }
-                onDelete={() => console.log("delere")}
-                description={
-                  contact?.phoneNumbers
-                    ? contact.phoneNumbers[0].number
-                    : "No Number"
-                }
-              />
-            );
-          })}
-        </ScrollView>
-      )}
+        {cshow && (
+          <ScrollView style={{ flex: 1, zIndex: 9999 }}>
+            {number?.map((contact) => {
+              console.log(contact?.name, contact?.id);
+              return (
+                <ListItem
+                  keyboardShouldPersistTaps="always"
+                  rightText={contact.friend ? "Send Request" : "Invite"}
+                  key={contact?.id}
+                  title={`${contact?.name}`}
+                  data={contact.user}
+                  from_user_id={fromUserId}
+                  onPress={() =>
+                    Linking.openURL(
+                      `whatsapp://send?text=Welcome to My Bus Time. Download it!&phone=${contact?.phoneNumbers[0].number}`
+                    )
+                  }
+                  onDelete={() => console.log("delere")}
+                  description={
+                    contact?.phoneNumbers
+                      ? contact.phoneNumbers[0].number
+                      : "No Number"
+                  }
+                />
+              );
+            })}
+          </ScrollView>
+        )}
         <View style={styles.surface}>
           <View style={{ flex: 1, flexDirection: "row" }}>
             <Text
@@ -268,7 +270,7 @@ console.log("ranks jiiii",ranks);
                 fontFamily: "Roboto-Regular",
               }}
             >
-              Ranking
+              {t("CONNECT.RANKING")}
             </Text>
             <Text
               style={{
@@ -279,11 +281,11 @@ console.log("ranks jiiii",ranks);
                 fontFamily: "Roboto-Regular",
               }}
               onPress={() =>
-                props.navigation.navigate({ routeName: "LeaderBoard",params:{data:ranks}})
+                props.navigation.navigate({ routeName: "LeaderBoard", params: { data: ranks } })
               }
             >
               {" "}
-              See All
+              {t("CONNECT.SEE_ALL")}
             </Text>
           </View>
           <View style={{ flex: 1, flexDirection: "row" }}>
@@ -309,7 +311,7 @@ console.log("ranks jiiii",ranks);
                   fontFamily: "Roboto-Regular",
                 }}
               >
-                 {ranks[1]?.total_count}
+                {ranks[1]?.total_count}
               </Text>
             </View>
 
@@ -341,7 +343,7 @@ console.log("ranks jiiii",ranks);
                   fontFamily: "Roboto-Regular",
                 }}
               >
-                 {ranks[0]?.total_count}
+                {ranks[0]?.total_count}
               </Text>
             </View>
 
@@ -381,7 +383,7 @@ console.log("ranks jiiii",ranks);
               color="rgb(23, 157, 227)"
               style={{ paddingTop: 10, paddingLeft: 10, paddingRight: 5 }}
             />
-            <Text style={styles.chatButton}>Chat/Call</Text>
+            <Text style={styles.chatButton}>{t("CONNECT.CHAT")}/{t("CONNECT.CALL")}</Text>
             <Text
               style={{
                 paddingTop: 18,
@@ -390,7 +392,7 @@ console.log("ranks jiiii",ranks);
                 fontFamily: "Roboto-Regular",
               }}
             >
-              (With Annonmous MyBusTime User)
+              ({t("CONNECT.CHAT_DETAILS")})
             </Text>
           </View>
           <View
@@ -422,7 +424,7 @@ console.log("ranks jiiii",ranks);
               color="rgb(23, 157, 227)"
               style={{ paddingTop: 10, paddingLeft: 10, paddingRight: 5 }}
             />
-            <Text style={styles.chatButton}>Rewards</Text>
+            <Text style={styles.chatButton}>{t("CONNECT.REWARDS")}</Text>
             <Text
               style={{
                 paddingTop: 18,
@@ -431,19 +433,19 @@ console.log("ranks jiiii",ranks);
                 fontFamily: "Roboto-Regular",
               }}
             >
-              (your rewards)
+              ({t("CONNECT.YOUR_REWARDS")})
             </Text>
           </View>
           <View
             style={{
               borderBottomWidth: 1,
               borderBottomColor: "#f4f8f9",
-             marginTop:10
+              marginTop: 10
             }}
           ></View>
-          <Text style={{alignSelf:'center',fontSize:30,fontFamily:'Roboto-Regular',color:"rgb(23, 157, 227)",marginTop:20,paddingBottom:40}}>Coming Soon....</Text>
+          <Text style={{ alignSelf: 'center', fontSize: 30, fontFamily: 'Roboto-Regular', color: "rgb(23, 157, 227)", marginTop: 20, paddingBottom: 40 }}>{t("CONNECT.COMING_SOON")}....</Text>
 
-          
+
         </View>
 
         <View style={styles.requestBox}>
@@ -462,7 +464,7 @@ console.log("ranks jiiii",ranks);
                 color: "rgb(23, 157, 227)",
               }}
             >
-              Friend Request
+              {t("CONNECT.FRIEND_REQUEST")}
             </Text>
             <Text
               style={{
@@ -472,7 +474,7 @@ console.log("ranks jiiii",ranks);
                 color: "rgb(23, 157, 227)",
               }}
             >
-              (Share Your Rank With Friends)
+              ({t("CONNECT.FRIEND_DETAILS")})
             </Text>
           </View>
 

@@ -4,12 +4,14 @@ import { Platform, View, StyleSheet, ScrollView ,FlatList,Image} from "react-nat
 import {Button,DataTable, TextInput, Paragraph,Avatar, Surface,Appbar,StatusBar, BottomNavigation, Text ,Card,Drawer} from 'react-native-paper';
 import { Dimensions } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Trans ,useTranslation} from 'react-i18next';
 
 
 
 export default function AboutUsScreen (props) 
 {
  
+  const {t} =useTranslation();
 const TopNavBar = () =>
 {
 
@@ -42,13 +44,14 @@ const TopNavBar = () =>
           </View>
           <View style={{flex:1,flexDirection:'column'}}>
               <Paragraph style={styles.policyDetails}>
-              Please read these terms and conditions prior to using the products and services 
-              offered by Kabchef Labs Private Ltd. By using the product, you agree to be legally
-               bound by the terms and conditions, privacy policy and terms of services 
-               (including without limitations all disclaimers, exclusion of warranties and 
-               limitations of liability contained therein). If you do not agree with these terms,
-                please do not use the products and services offered by Kabchef Labs
-
+                <Trans i18nKey="ABOUT.ABOUT_DETAILS">
+              Buses are the most popular and convenient mode of transportation in India. More than 1.6 million buses
+               are registered in India, and the public bus sector operates 170,000 buses carrying roughly 70 million
+                people per day. But due to the decentralized system, passengers face lots of issues. They can not track
+                 bus time table, live locations. They can not find a single platform for bus ticket reservations.
+                  MyBusTime provides solution for all these issue. Now you can find best bus routes for your destination.
+                   We will try to provide you a timetable and live location for all public and private buses.
+                   </Trans>
               </Paragraph>
               <Text style={{fontFamily:'Roboto-Regular',fontSize:15,paddingLeft:10,paddingTop:20,textAlign:'center'}}>Version 1.0</Text>  
 

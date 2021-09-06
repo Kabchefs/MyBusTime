@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SocialIcon } from 'react-native-elements';
 import { instance } from '../utils/axiosConfig';
 import {Ionicons} from '@expo/vector-icons';
+import { Trans } from 'react-i18next';
 console.disableYellowBox = true;
 export default function LoginScreen(props) {
   const [email, setEmail] = useState("");
@@ -132,16 +133,16 @@ Facebook.initializeAsync({
       </View>
       <View style={styles.socialButton}>
       <SocialIcon
-        title="Facebook"
+        title={<Trans i18nKey="LOGIN.FACEBOOK">Facebook</Trans>}
         button
-        light
+        light 
         onPress={signWithFb}
         type='facebook'
         style={styles.socialBt}
       />
       
       <SocialIcon
-        title="Google"
+        title={<Trans i18nKey="LOGIN.GOOGLE">Google</Trans>}
         button
         light
         onPress={signWithGoogle}
@@ -155,7 +156,7 @@ Facebook.initializeAsync({
       </View>
 
       <TextInput
-        label="Email ID"
+        label={<Trans i18nKey="LOGIN.EMAIL_ID">Email Id</Trans>}
         mode="flat"
         value={email}
         onChangeText={(email) => setEmail(email)}
@@ -167,7 +168,7 @@ Facebook.initializeAsync({
         }}
       />
       <TextInput
-        label="Password"
+        label={<Trans i18nKey="LOGIN.PASSWORD">Password</Trans>}
         mode="flat"
         secureTextEntry={true}
         onChangeText={(p)=>setPass(p)}
@@ -181,7 +182,8 @@ Facebook.initializeAsync({
       <Text style={styles.forgot} uppercase={false}
         onPress={() => props.navigation.navigate({ routeName: "ForgotPassword" })}
       >
-        Forgot Password?
+        <Trans i18nKey="LOGIN.FORGOT_PASSWORD">
+        Forgot Password</Trans>?
       </Text>
       <Button
         mode="contained"
@@ -190,14 +192,15 @@ Facebook.initializeAsync({
         onPress={login}
         uppercase={false}
       >
-        <Text style={{ color: '#ffffff' }}>Login</Text>
+        <Text style={{ color: '#ffffff' }}>{<Trans i18nKey="LOGIN.LOGIN">Login</Trans>}</Text>
       </Button>
       <Text
         style={styles.register}
         uppercase={false}
         onPress={() => props.navigation.navigate({ routeName: "Register" })}
       >
-        Don't have an account?{" "}Register Now
+        <Trans i18nKey="LOGIN.DONT_ACCOUNT_REGISTER">Don't have an account?{" "}Register Now</Trans>
+       
       </Text>
     </ScrollView>
   );
