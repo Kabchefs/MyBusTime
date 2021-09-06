@@ -16,7 +16,7 @@ export default class Chat extends React.Component {
       isValid: false,
       pos:''
     }
-    this.socket = socketIOClient('https://mybustime.herokuapp.com', {
+    this.socket = socketIOClient('https://mybustime.azurewebsites.net/', {
       transports: ['websocket'],
       forceNew: true,
       upgrade: false,

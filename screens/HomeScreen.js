@@ -36,8 +36,8 @@ export default function HomeRoute (props)
   );
 };
 
-const [source, setSource] = useState('');
-const [destination, setDestination] = useState('');
+const [source, setSource] = useState({});
+const [destination, setDestination] = useState({});
 const [city,setCity] = useState('');
 const [cities,setCities] = useState([]);
 const [show,setShow]=useState(false);
@@ -70,7 +70,9 @@ const getResponse=async()=>{
     return;
   }else{
 
-  let location = await Location.getCurrentPositionAsync({});
+  let location = await Location.getCurrentPositionAsync({  //{accuracy:Location.Accuracy.High}
+    accuracy: 1,
+  }).catch(e=>console.log("loc error",e));
   console.log(location);
   if(user && location){
   let obj={
@@ -97,7 +99,7 @@ const fetchCities = (text,action)=>{
     dsetShow(true);
   }
   
-  fetch("https://mybustime.herokuapp.com/delhi?query="+text)
+  fetch("https://mybustime.azurewebsites.net/delhi?query="+text)
   .then(item=>item.json())
   .then(cityData=>{
     console.log(cityData.slice(0,5));
@@ -138,7 +140,7 @@ const dlistClick =  (cityname)=>{
            <View style={styles.routesBody}>
              <TextInput
                    label="From:"
-                   value={source}
+                   value={source.stop_name}
                    onChangeText={(text)=>fetchCities(text,'s')}
                   //  onChangeText={source => setSource(source)}
                    underlineColor='#5ab7e6'
@@ -153,7 +155,7 @@ const dlistClick =  (cityname)=>{
              
                 <Card 
                  style={{margin:2,padding:12}}
-                 onPress={()=>listClick(item.stop_name)}
+                 onPress={()=>listClick(item)}
                 > 
                  
                     <Text>{item.stop_name}</Text>
@@ -168,7 +170,7 @@ const dlistClick =  (cityname)=>{
         />}
                <TextInput
                      label="To:"
-                    value={destination}
+                    value={destination.stop_name}
                     onChangeText={(text)=>fetchCities(text,'d')}
                     //  onChangeText={destination => setDestination(destination)}
                      underlineColor='#5ab7e6'
@@ -183,7 +185,7 @@ const dlistClick =  (cityname)=>{
             return(
                 <Card 
                  style={{margin:2,padding:12}}
-                 onPress={()=>dlistClick(item.stop_name)}
+                 onPress={()=>dlistClick(item)}
                 >
                     <Text>{item.stop_name}</Text>
                 </Card>
@@ -229,10 +231,10 @@ const dlistClick =  (cityname)=>{
 
              <View style={{backgroundColor: '#f6f6f6',width:'99%',flex:1,flexDirection:'column',borderRadius:10,height:'auto'}}>
              {recents?.map((rec,i)=>(
-               <TouchableOpacity onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec.to_stop_name,from:rec.from_stop_name,user:user}})}>
+               <TouchableOpacity key={i} onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec.to_stop_name,from:rec.from_stop_name,user:user}})}>
                <View style={{borderBottomWidth:1,borderBottomColor:"rgb(23, 157, 227)",width:'90%',flex:1,flexDirection:'row',alignSelf:'center',marginBottom:12,paddingTop:10}}>
                  
-             <Text style={{ width:'45%',alignSelf:"center",fontFamily:'Roboto-Regular',marginLeft:-5,fontSize:13, textAlign: 'center'}} onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec.to_stop_name,from:rec.from_stop_name,user:user}})}>  {rec.from_stop_name} </Text>
+             <Text style={{ width:'45%',alignSelf:"center",fontFamily:'Roboto-Regular',marginLeft:-5,fontSize:13, textAlign: 'center'}} onPress={()=>props.navigation.navigate({ routeName: "RouteDetails" ,params:{to:rec?.to_stop_id,from:rec?.from_stop_id,user:user}})}>  {rec.from_stop_name} </Text>
              <Ionicons name="swap-horizontal-outline" size={18} color='rgb(23, 157, 227)'  style={{alignSelf:'center',paddingLeft:2,paddingRight:5}}/>
 
              <Text style={{width:'45%',alignSelf:'center',fontFamily:'Roboto-Regular',marginRight:10,fontSize:13,marginLeft:10,textAlign: 'center'}}>{rec.to_stop_name}</Text>

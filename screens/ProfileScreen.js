@@ -60,7 +60,7 @@ useEffect(()=>{
       if(res.status==200){
         let ranks=res.data.result;
         ranks=ranks.sort((a, b) => {
-          return a.total_count - b.total_count;
+          return a?.total_count - b?.total_count;
       });
 console.log("ranks jiiii",ranks);
         setRanks(ranks);
@@ -70,6 +70,7 @@ console.log("ranks jiiii",ranks);
   },[user])
 
   const getRank=()=>{
+      console.log("get rank called");
       if(ranks.length>0){
           for(let i=0;i<ranks.length;i++){
               if(ranks[i].user._id==user._id){

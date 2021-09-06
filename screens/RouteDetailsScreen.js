@@ -32,12 +32,14 @@ const [buses,setBuse]=useState([]);
   const [to,setTO]=useState('');
   useEffect(() => {
     let user=props.navigation.getParam('user');
-    var to=props.navigation.getParam('to');
-    var from=props.navigation.getParam('from');
+    let to=props.navigation.getParam('to');
+    let from=props.navigation.getParam('from');
+    console.log("to",to);
+    console.log("from",from);
 setFrom(from);
 setTO(to);
     // console.log(u);
-    instance.post('/delhi',{to:to,from:from,user:user._id}).then(res=>{
+    instance.post('/delhi',{to:to.stop_id,from:from.stop_id,user:user._id}).then(res=>{
       console.log(res.data.result);
       if(res.status==200){
         console.log(res.data.result)
@@ -72,18 +74,18 @@ setTO(to);
           <Paragraph style={{color:'#5ab7e6',fontSize:15,paddingTop:10,fontFamily:'Roboto-Regular'}}>  Route Details </Paragraph>
           </View>
           <View style={styles.cityNames} >
-            <Text style={styles.fromCityName}>{from}</Text>
+            <Text style={styles.fromCityName}>{from.stop_name}</Text>
             <View style={{flex:1,flexDirection:'column',width:'10%'}}>
             <Avatar.Icon size={18} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus-side" size={18} color="#4e80e9" />} style={{ backgroundColor: "rgb(23, 157, 227)",paddingTop:18,marginLeft:2, }}  />
               <Text style={{fontSize:12,color:'#ffffff',marginLeft:-10}}>------------</Text>
 
             </View>
 
-            <Text style={styles.toCityName}>{to}</Text>
+            <Text style={styles.toCityName}>{to.stop_name}</Text>
           </View>
 
           <View  style={styles.routeDetails}>
-            {buses?.map((bus,i)=>( <TouchableOpacity key={i}  onPress={()=>props.navigation.navigate({routeName:'StopDetails',params:{data:bus,from:from,to:to}})}>
+            {buses?.map((bus,i)=>( <TouchableOpacity key={i}  onPress={()=>props.navigation.navigate({routeName:'StopDetails',params:{data:bus,froms:from.stop_name,tos:to.stop_name}})}>
             <View style={styles.route}>
             <Avatar.Icon size={60} color="#4e80e9" icon={() => <MaterialCommunityIcons name="bus" size={60} color="rgb(23, 157, 227)" />} style={{ backgroundColor: 'rgb(255, 255, 255)',marginTop:15,marginLeft:15 }}  />
               <View style={{flex:1,flexDirection:'column', marginLeft:10}}>
@@ -91,7 +93,7 @@ setTO(to);
               <Text style={{marginRight:10,marginLeft:60,marginTop:10,fontSize:16,alignSelf:'center',fontFamily:'Roboto-Regular'}}>{bus.from.arrival_time.slice(0,5)}-</Text>
               <Text style={{marginLeft:-5,marginTop:10,marginRight:5,fontSize:16,alignSelf:'center',fontFamily:'Roboto-Regular'}}>{bus.to.departure_time.slice(0,5)}</Text>
               </View>
-              <Text style={{marginLeft:60,fontFamily:'Roboto-Light'}}>Via-{bus.via.city.stop_name}</Text>
+              <Text style={{marginLeft:60,fontFamily:'Roboto-Light'}}>Via-{bus?.via?.city?.stop_name}</Text>
              
               </View>
               {/* <View style={{flex:1,flexDirection:'column'}}>

@@ -43,7 +43,7 @@ export default function ConnectScreen(props) {
       if(res.status==200){
         let ranks=res.data.result;
         ranks=ranks.sort((a, b) => {
-          return a.total_count - b.total_count;
+          return a?.total_count - b?.total_count;
       });
 console.log("ranks jiiii",ranks);
         setRanks(ranks);
@@ -124,14 +124,14 @@ console.log("ranks jiiii",ranks);
   };
 
   const onResult = async (results) => {
-    console.log(results);
+    // console.log(results);
     setNumber(results);
     for (let a of results) {
       let userno = await getNumberInformat(a.phoneNumbers[0].number);
       console.log("number in mubee", userno);
       let user = await instance.get(`/friend?number=${userno}`);
       console.log("user matched", user.data.result);
-      if (user.status == 200) {
+      if (user.data.result.phone) {
         a.friend = true;
         a.user = user.data.result._id;
       }
@@ -200,7 +200,7 @@ console.log("ranks jiiii",ranks);
       {cshow && (
         <ScrollView style={{ flex: 1, zIndex: 9999 }}>
           {number?.map((contact) => {
-            console.log(contact?.name, contact?.id);
+            console.log(contact?.name, contact?.id,contact?.friend);
             return (
               <ListItem
                 keyboardShouldPersistTaps="always"
