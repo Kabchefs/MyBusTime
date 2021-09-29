@@ -1,9 +1,8 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "web": "expo start --web",
     "eject": "expo eject"
   },
@@ -30,7 +29,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-i18next": "^11.11.4",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
+    "react-native": "~0.63.4",
     "react-native-autocomplete-input": "^5.0.0",
     "react-native-confirmation-code-field": "^7.1.0",
     "react-native-contacts": "^7.0.0",
@@ -54,12 +53,15 @@
     "react-navigation-material-bottom-tabs": "^2.3.4",
     "react-navigation-stack": "^2.10.4",
     "react-navigation-tabs": "^2.11.1",
-    "socket.io-client": "^4.1.2"
+    "socket.io-client": "^4.1.2",
+    "react-native-unimodules": "~0.13.3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "metro-react-native-babel-preset": "^0.66.0",
     "react-native-dotenv": "^2.5.5"
   },
-  "private": true
+  "private": true,
+  "name": "MyBusTime",
+  "version": "1.0.0"
 }

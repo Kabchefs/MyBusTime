@@ -1,16 +1,17 @@
 {
+  
   "expo": {
     "name": "My BusTime",
     "slug": "mybustime",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/splash.jpeg",
+    "icon": "./assets/images/busLogo.png",
     "platforms":[
       "android",
       "ios"
     ],
     "splash": {
-      "image": "./assets/images/splash.jpeg",
+      "image": "./assets/images/busLogo.png",
       "resizeMode": "contain",
       "backgroundColor": "#fff"
     },
